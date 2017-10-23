@@ -2,18 +2,233 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title></title>
-    <script type="text/javascript">
-    	
-   		document.addEventListener('plusready', function(){
-   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
-   			
-   		});
-   		
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+ 	<script src="js/mui.js"></script>
+ 	<link href="css/mui.css" rel="stylesheet"/>
+    <link href="css/newstyle.css" rel="stylesheet" type="text/css" />
+    <link href="css/feng.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" charset="utf-8">
+    	mui.init();
     </script>
 </head>
 <body>
-	
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+	    <h1 class="mui-title main-color">登陆</h1>
+	</header>
+	<div class="mui-content">
+		<div class="login_con">
+			<ul>
+				<li id="liNormalLogin" class="hita">账号密码登录</li>
+				<li id="liMobileLogin">快捷免密登录</li>
+			</ul>
+			<div class="panes">
+				<div id="divNormalLogin" class="paneb" style="display:block;">
+					<form id="subForm">
+						<input type="hidden" name="loginType" value="1">
+						<div class="login_input">
+							<img src="img/user.gif" />
+							<input type="number" name="phone" id="phone" placeholder="请输入手机号" />
+						</div>
+						<div class="login_input">
+							<img src="img/password.gif" />
+							<input type="password" name="password" id="password" placeholder="请输入密码" />
+						</div>
+						<div class="login_btn">
+							<input type="button" name="button" id="btnLoginbtn" value="登录" />
+						</div>
+						<p class="pa_p"><span><a id="linkRegister" href="javascript:void(0);">立即注册</a></span><a id="linkFindPassword" href="javascript:void(0);">忘记密码</a></p>
+						<!--<?php if($adInfo[0]['img']){?>
+							<?php if($adInfo[0]['url']){?>
+								<a href="<?php echo $adInfo[0]['url']?>" target="_blank"><img style="margin-top:5px; width:100%;" src="<?php echo $adInfo[0]['img'];?>" /></a>
+							<?php }else{?>
+								<img style="margin-top:5px; width:100%;" src="<?php echo $adInfo[0]['img'];?>" />
+							<?php }?>
+						<?php }?>-->
+					</form>
+				</div>
+				<div id="divMobileLogin" class="paneb">
+					<form id="codeSub">
+						<input type="hidden" name="loginType" value="2">
+						<div class="login_input">
+							<div class="login_bleft">+86</div>
+							<input type="number" name="tel" id="tel" placeholder="请输入手机号"/>
+						</div>
+						<div class="login_input">
+							<div class="log_left">
+								<input type="text" name="code" id="code" placeholder="输入验证码" />
+							</div>
+							<div class="log_right">
+								<input id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" />
+							</div>
+						</div>
+						<div class="login_btna">
+							<input type="button" name="button" id="btnMobileLogin" value="登录" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="loginb-bg"></div>
+	</div>
+	<script type="text/javascript" src="js/constant.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript" src="js/codesms.js"></script>
+	<script type="text/javascript">
+		function ajaxNormalLogin(phone, password) {
+			mui.ajax(REQUEST_DOMAIN + 'member/login.php/index', {
+				data: {
+					phone: phone,
+					password: password
+				},
+				dataType:'json',
+				type:'POST',
+				timeout:5000,
+				beforeSend: function() {
+			        plus.nativeUI.showWaiting('登录中。。。',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+//			        mask.show();
+			    },
+			    complete: function() {
+			        plus.nativeUI.closeWaiting();
+//			        mask.close();
+			    },
+				success: function(data) {
+//					if (data.state == 1) {//登录成功 存储本地 跳转页面
+//						plus.storage.setItem('uid', data.userid.toString());
+//						plus.storage.setItem('tel', data.username.toString());
+//						plus.storage.setItem('pwd', data.password.toString());
+//						//跳转页面
+//						mui.openWindow({
+//							url: 'member/index.html',
+//				    		id: 'member',
+//				    		extras:{pageFrom:'lmogin'}
+//					 	});
+//					} else {//登录失败
+//						plus.nativeUI.toast('账号或密码错误！');
+//					}
+					console.log(JSON.stringify(data));
+					var result = data;
+					if (result.status == -1) {
+						mui.openWindow({url:'views/publisharticle/index.html', id:'memberIndex'});
+					} else {
+						plus.nativeUI.toast(result.data.message);
+					}
+					plus.nativeUI.closeWaiting();
+//		        	mask.close();
+				},
+				error: function(xhr,type,errorThrown) {
+					if (type == 'timeout') {//超时
+						console.log(JSON.stringify(type));
+						plus.nativeUI.toast('服务器超时，请稍后重试！');
+						plus.nativeUI.closeWaiting();
+//						mask.close();
+					} else {
+						console.log(JSON.stringify(errorThrown));
+						plus.nativeUI.toast('网络错误，请稍后重试！');
+						plus.nativeUI.closeWaiting();
+//						mask.close();
+					}
+				}
+			});	
+		}
+		
+		function ajaxMobileLogin(tel, code) {
+			mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'ajax.php', {
+				type: 'POST',
+				data: {
+					tel: tel,
+					code: code,
+					act: 'logincode'
+				},
+				success: function(data) {
+					if (data == "0") {
+//						$("#codeSub").submit();
+						mui.openWindow({
+							url:'views/member/index.html', 
+							id:'memberIndex'
+						});
+//						plus.nativeUI.toast('登陆中...');
+					} else if (data == "1") {
+						plus.nativeUI.toast('请输入正确的手机号');
+					} else if (data == "2") {
+						plus.nativeUI.toast('请输入验证码');
+					} else if (data == "3") {
+						plus.nativeUI.toast('验证码错误');
+					} else if (data == "4") {
+						plus.nativeUI.toast('验证码已过期,请重新获取');
+					} else {
+						plus.nativeUI.toast('未知错误,请稍后重试');
+					}
+				}
+			});
+		}
+		
+   		mui.plusReady(function() {
+   			//登陆界面转换
+			document.getElementById('liNormalLogin').addEventListener('tap', function() {
+  				document.getElementById('liNormalLogin').className = 'hita';
+  				document.getElementById('divNormalLogin').style.display = 'block';
+  				
+  				document.getElementById('liMobileLogin').className = '';
+  				document.getElementById('divMobileLogin').style.display = '';
+			});
+			
+			document.getElementById('liMobileLogin').addEventListener('tap', function() {
+  				document.getElementById('liNormalLogin').className = '';
+  				document.getElementById('divNormalLogin').style.display = '';
+  				
+  				document.getElementById('liMobileLogin').className = 'hita';
+  				document.getElementById('divMobileLogin').style.display = 'block';
+			});
+			
+			//普通登陆验证
+			document.getElementById('btnLoginbtn').addEventListener('tap', function() {
+				var phone = document.getElementById('phone').value;
+				var password = document.getElementById("password").value;
+				
+				if (phone == '') {
+					plus.nativeUI.toast('请输入手机号');
+				} else if (!phone.match(/^(((1[3|4|5|7|8][0-9]{1}))+\d{8})$/)) {
+					plus.nativeUI.toast('手机号格式错误');
+				} else if (password == '') {
+					plus.nativeUI.toast('请输入密码');
+				} else {
+					ajaxNormalLogin(phone, password);
+				}
+			});
+			
+			//快捷免密登陆验证
+			document.getElementById('btnMobileLogin').addEventListener('tap', function() {
+				var tel = document.getElementById('tel').value;
+				var code = document.getElementById("code").value;
+				
+				if (tel == '') {
+					plus.nativeUI.toast('请输入手机号');
+				} else if (!tel.match(/^(((1[3|4|5|7|8][0-9]{1}))+\d{8})$/)) {
+					plus.nativeUI.toast('手机号格式错误');
+				} else if(code == '') {
+					plus.nativeUI.toast('请输入验证码');
+				} else {
+					ajaxMobileLogin(tel, code);
+				}
+			});
+			
+			//忘记密码
+			document.getElementById('linkFindPassword').addEventListener('tap', function() {
+				mui.openWindow({
+					url: 'findpassword.html', 
+					id: 'findPassword'
+				});
+			});
+			
+			//立即注册
+			document.getElementById('linkRegister').addEventListener('tap', function() {
+				mui.openWindow({
+					url: 'register.html', 
+					id: 'register'
+				});
+			});
+   		});
+    </script>
 </body>
 </html>

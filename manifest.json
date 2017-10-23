@@ -1,7 +1,7 @@
-﻿{
+{
     "@platforms": ["android", "iPhone", "iPad"],
     "id": "H54404969",/*应用的标识，创建应用时自动生成，勿手动修改*/
-    "name": "mzhushou",/*应用名称，程序桌面图标名称*/
+    "name": "展业助手",/*应用名称，程序桌面图标名称*/
     "version": {
         "name": "1.0",/*应用版本名称*/
         "code": ""
@@ -10,7 +10,7 @@
     "icons": {
         "72": "icon.png"
     },
-    "launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "launch_path": "views/publisharticle/index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
     "developer": {
         "name": "",/*开发者名称*/
         "email": "",/*开发者邮箱地址*/
@@ -199,5 +199,101 @@
                 }
             }
         }
-    }
+    },
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/newstyle.css",
+					"js/public.js",
+					"js/codesms.js",
+					"css/app.css",
+					"img/password.gif",
+					"img/user.gif",
+					"js/alert.js",
+					"js/constant.js",
+					"js/mui.js",
+					"css/mui.css",
+					"fonts/mui.ttf",
+					"css/feng.css"
+				],
+				"refer": [
+					"views/member/index.html",
+					"findpassword.html",
+					"register.html",
+					"views/publisharticle/index.html"
+				],
+				"priority": 0
+			},
+			"findpassword.html": {
+				"resources": [
+					"js/mui.min.js",
+					"js/findsms.js",
+					"img/close_a.gif",
+					"css/mui.css",
+					"css/newstyle.css",
+					"css/feng.css"
+				],
+				"refer": [
+					"views/member/index.html"
+				],
+				"priority": 0
+			},
+			"register.html": {
+				"resources": [
+					"js/regsms.js",
+					"css/newstyle.css",
+					"css/feng.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/publisharticle/index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"img/yd.png",
+					"img/zf.png",
+					"img/1.png",
+					"img/6.png",
+					"img/7.png",
+					"img/8.png",
+					"views/publisharticle/index.html",
+					"img/select.gif",
+					"img/bg_a.gif",
+					"img/2.png",
+					"img/5.png",
+					"js/urlvalidate.js",
+					"img/ico_san.png",
+					"js/constant.js"
+				],
+				"refer": [
+					"views/publisharticle/template.html"
+				],
+				"priority": 0
+			},
+			"views/publisharticle/template.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/style.css",
+					"js/jq.js",
+					"js/index.js",
+					"js/arteditor/js/jq.js",
+					"js/arteditor/js/index.js",
+					"js/arteditor/js/index.min.js",
+					"js/mui.min.js",
+					"js/constant.js"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": []
+		}
+	}
 }

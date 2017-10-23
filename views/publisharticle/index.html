@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="index_top">
+    			<p class="top_p" style="font-size:16px;">发表文章</p>
+			    <p class="top_pa" style="margin-right:10px;">入驻天数:<span>245</span> </p>
+			    <p class="top_pa">已发文章数:<span>66</span> </p>
+			</div>
+			<div class="index_fz">
+    			<form id="subForm">
+        			<div class="index_fzinput">
+                        <select id="ddlAd">
+                    		<option value="0">选择广告</option>
+                    	</select>
+                        <div class="fb_s">广告模板</div>
+        			</div>
+			        <div class="index_fzinput">
+			            <input type="text" name="conUrl" id="conUrl" placeholder="请输入链接" />
+			            <div class="in_right">
+			                <a href="javascript:void(0);" id="goContent">导入链接</a>
+			            </div>
+			        </div>
+    			</form>
+    			<div class="fz_p" style="margin-top:10px;">声明：禁止发布黄赌毒以及违反任何国家相关法律法规的信息</div>
+				<div class="index_n">
+			        <ul>
+			            <li class="lin_x"><a href="index.php">热门</a></li>
+			            <li ><a href="?type=999">推荐</a></li>
+                        <li ><a href="?type=53">早报</a></li>
+                        <li ><a href="?type=52">互联网</a></li>
+                        <li ><a href="?type=51">旅行</a></li>
+                        <li ><a href="?type=50">辣妈</a></li>
+                        <li ><a href="?type=49">潮人</a></li>
+                        <li ><a href="?type=48">科技</a></li>
+                        <li ><a href="?type=47">财经</a></li>
+                        <li ><a href="?type=46">生活</a></li>
+                        <li ><a href="?type=45">八卦</a></li>
+                        <li ><a href="?type=44">私房</a></li>
+                        <li ><a href="?type=43">养生</a></li>
+            		</ul>
+				</div>
+			</div>
+			<div class="index_list">
+        		<div class="index_lista">
+    				<div class="index_listl">
+        				<p class="p_ll"><a href="content.php?id=2&uid=6">“互联网＋”时代中国开放大学的机遇与挑战</a></p>
+                        <p class="p_la"><a href="javascript:void(0);"><img src="../../img/zf.png" style="width:15px;height:15px;" /></a><span>27</span></p>
+            			<p class="p_la"><a href="javascript:void(0);"><img src="../../img/yd.png" style="width:15px;height:15px;" /></a><span>633</span></p>
+                    </div>
+    				<div class="index_listr">
+    					<a href="content.php?id=2&uid=6">
+    						<img src="../../img/yd.png" style="max-height:80px;max-width:160px;"/>
+    					</a>
+    				</div>
+				</div>
+            </div>
+			<input type="hidden" value="0" id="typeid">
+			<div class="jzgd" data-type="pc_0"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span>点击加载更多</span></a></div>
+			<div class="index_nav">
+			    <ul>
+			        <li class="nav_li">
+			            <img src="../../img/1.png" style="height:28px;"/>
+			            <p class="li_pp" style="font-size:12px;">发布文章</p>
+			        </li>
+			        <li>
+		                <img src="../../img/6.png" style="height:28px;" />
+		                <p style="font-size:12px;">个人空间</p>
+			        </li>
+			        <li>
+		                <img src="../../img/7.png" style="height:28px;"/>
+		                <p style="font-size:12px;">广告管理</p>
+			        </li>
+			        <li>
+		                <img src="../../img/8.png" style="height:28px;"/>
+		                <p style="font-size:12px;">会员服务</p>
+			        </li>
+			    </ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/urlvalidate.js"></script>
+		<script type="text/javascript" src="../../js/constant.js"></script>
+		<script type="text/javascript">
+			//获取屏显示头部信息
+			function ajaxLoadTopInfo() {
+				
+			}
+			
+			function renderTopInfo() {
+				
+			}
+			
+			//获取并显示广告模板
+			function ajaxLoadAds() {
+				mui.ajax('', {
+					data: {
+						phone: phone,
+						password: password
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderAds,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
+			}
+			
+			function renderAds() {
+				
+			}
+			
+			//获取并显示文章
+			function ajaxLoadArticles() {
+				mui.ajax('', {
+					data: {
+						phone: phone,
+						password: password
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderArticles,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
+			}
+			
+			function renderArticles() {
+				
+			}
+			
+			mui.plusReady(function() {
+				mui(document).on('tap', '.index_n li', function() {
+					mui('.index_n li').each(function() {
+						this.className = '';
+					});
+					this.className = 'lin_x';
+				});
+				
+				mui(document).on('tap', '#goContent', function() {
+					var ckShare = '';
+			        var num = '';
+			        var conUrl = document.getElementById('conUrl').value;
+			        var adTemplateId = document.getElementById('ddlAd').value;
+					
+//			        if (ckShare == 'on') {
+//			            layer.open({
+//			                content: '您还是普通用户，只可享受'+num+'条免费发布文章的机会',btn: '我知道了'
+//			            });
+//			            return false;
+//			        }
+			
+			        if (conUrl == '') {
+			            plus.nativeUI.toast('请输入文章链接');
+			            return false;
+			        }
+			
+			        var urlValidateResult = urlValidate(conUrl);
+			        if (!urlValidateResult) {
+			            plus.nativeUI.toast('错误得链接格式');
+			            return false;
+			        }
+			        
+			        localStorage.setItem(REQUEST_PATH, urlValidateResult);
+			        localStorage.setItem(AD_TEMPLATE_ID, adTemplateId);
+			        localStorage.setItem(CRAWLING_URL, conUrl);
+		            
+		            mui.openWindow({
+		            	url: '../../views/publisharticle/template.html',
+		            	id: 'publishArticleTemplate'
+		            });
+				});
+			});
+		</script>
+	</body>
+</html>
