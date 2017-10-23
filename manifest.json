@@ -10,7 +10,7 @@
     "icons": {
         "72": "icon.png"
     },
-    "launch_path": "views/publisharticle/index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "launch_path": "views/myzone/managearticle.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
     "developer": {
         "name": "",/*开发者名称*/
         "email": "",/*开发者邮箱地址*/
@@ -272,7 +272,10 @@
 					"js/constant.js"
 				],
 				"refer": [
-					"views/publisharticle/template.html"
+					"views/publisharticle/template.html",
+					"views/myzone/managearticle.html",
+					"views/managead/index.html",
+					"views/member/index.html"
 				],
 				"priority": 0
 			},
@@ -289,6 +292,75 @@
 					"js/constant.js"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"views/myzone/managearticle.html": {
+				"resources": [
+					"js/mui.min.js",
+					"js/zepto.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"img/gr_bg.gif",
+					"img/1.png",
+					"img/6.png",
+					"img/8.png",
+					"img/7.png",
+					"img/2.png",
+					"img/5.png",
+					"img/zf.png",
+					"img/yd.png"
+				],
+				"refer": [
+					"views/publisharticle/index.html",
+					"views/myzone/aboutme.html",
+					"views/myzone/contactme.html",
+					"views/managead/index.html",
+					"views/member/index.html"
+				],
+				"priority": 0
+			},
+			"views/myzone/aboutme.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/mui.min.js"
+				],
+				"refer": [
+					"views/myzone/managearticle.html",
+					"views/myzone/contactme.html"
+				],
+				"priority": 0
+			},
+			"views/myzone/contactme.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/tx/css/style.css",
+					"img/gr_1.gif",
+					"css/tx/js/jquery.min.js",
+					"css/tx/js/hammer.js",
+					"css/tx/js/iscroll-zoom.js",
+					"css/tx/js/jquery.photoClip.js",
+					"js/mui.min.js"
+				],
+				"refer": [
+					"views/myzone/managearticle.html",
+					"views/myzone/aboutme.html"
+				],
+				"priority": 0
+			},
+			"views/managead/index.html": {
+				"resources": [
+					"css/newstyle.css",
+					"css/mui.min.css",
+					"img/3.png",
+					"img/6.png",
+					"img/xg.png",
+					"img/duigou.png"
+				],
+				"refer": [
+					"views/myzone/managearticle.html",
+					"views/member/index.html",
+					"views/publisharticle/index.html"
+				],
 				"priority": 0
 			}
 		},

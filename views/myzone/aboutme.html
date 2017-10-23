@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="gr_top" style="height:100px;">
+			    <img src="../../img/1.png" style="margin-top: auto;"/>
+			    <p><b>用户名</b></p>
+			</div>
+			<div class="gr_con">
+				<ul>
+			        <li id="liFirst"><a href="javascript:void(0);" style="color:#333;">文章管理</a></li>
+			        <li id="liSecond" class="hit">关于我</li>
+			        <li id="liThird"><a href="javascript:void(0)" style="color:#333;">联系我</a></li>
+			    </ul>
+			    <div class="panes">
+			        <div class="pane" style="display:block;margin-bottom:0;">
+			            <div class="gr_js">
+			                <p class="gr_p">签名</p>
+			                <p class="gr_pp">
+			                	<input class="glist_right" style="border: 0 none;color: #666666;float: right;padding-right: 3%;text-align: left;width: 95%;" name="qianming" id="qianming" placeholder="这家伙很懒什么都没留下！" type="text">
+			                </p>
+			            </div>
+			            <div class="gr_js">
+			                <p class="gr_p">自我介绍</p>
+			                <p class="gr_pp">
+			                    <textarea class="glist_right glist_righta" style="border: 0 none;color: #666666;float: right;padding-right: 3%;text-align: left;width: 95%;height:200px;" name="jieshao" id="jieshao" cols="45" rows="10" placeholder="这家伙很懒什么都没留下！"></textarea>
+			                </p>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="wz_foot" style="position:fixed;bottom:0;">
+			    <ul>
+			        <li class="wz_fleft"><a href="javascript:void(0);" id="aFirst">取消</a></li>
+			        <li class="wz_fright"><a href="javascript:void(0);" id="aSave">保存</a></li>
+			    </ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function ajaxLoadAboutMe() {
+//				mui.ajax('', {
+//					data: {
+//						phone: phone,
+//						password: password
+//					},
+//					dataType:'json',
+//					type:'POST',
+//					timeout:5000,
+//					success: renderAboutMe,
+//					error: function(xhr,type,errorThrown) {
+//						if (type == 'timeout') {//超时
+//							plus.nativeUI.toast('服务器超时，请稍后重试！');
+//						} else {
+//							plus.nativeUI.toast('网络错误，请稍后重试！');
+//						}
+//					}
+//				});
+			}
+			
+			function renderAboutMe(result) {
+				
+			}
+			
+			mui.plusReady(function() {
+				ajaxLoadAboutMe();
+				
+				mui(document).on('tap', '#liFirst', function() {
+					mui.openWindow({
+						url: '../myzone/managearticle.html',
+						id: 'myZoneManagedArticle'
+					});
+				});
+				
+				mui(document).on('tap', '#liThird', function() {
+					mui.openWindow({
+						url: '../myzone/contactme.html',
+						id: 'myZoneContactMe'
+					});
+				});
+				
+				mui(document).on('tap', '#aFirst', function() {
+					mui.openWindow({
+						url: '../myzone/managearticle.html',
+						id: 'myZoneManageArticle'
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

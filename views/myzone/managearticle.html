@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="gr_top" style="height:100px;">
+			    <img src="../../img/1.png" style="margin-top: auto;"/>
+			    <p><b>用户名</b></p>
+			</div>
+			<div class="gr_con">
+				<ul>
+			        <li class="hit" id="liFirst">文章管理</li>
+			        <li id="liSecond"><a href="javascript:void(0);" style="color:#333;">关于我</a></li>
+			        <li id="liThird"><a href="javascript:void(0);" style="color:#333;">联系我</a></li>
+			    </ul>
+			    <div class="panes" id="loaddata">
+        			<div class="pane" style="display:block;margin-bottom:0;">
+        				<div class="gr_lista">
+	                        <p class="la_pp"><span>原创</span><a style="color:#333333;" href="u_detail.php?id=1678" target="_blank">给共享经济判个死刑</a></p>
+	                        <div class="la_d">
+	                            <p class="yd_p"><img src="../../img/zf.png" style="width:15px;height:15px;"><span>0</span></p>
+	                            <p class="yd_p"><img src="../../img/yd.png" style="width:15px;height:15px;"><span>0</span></p>
+	                            <a class="articleDel" href="javascript:void(0);" tid="1678">删除</a>
+	                        </div>
+	                    </div>
+    				</div>
+    			</div>
+			</div>
+			<div class="index_nav">
+			    <ul>
+			        <li id="liPublishArticle">
+			            <img src="../../img/5.png" style="height:28px;"/>
+			            <p style="font-size:12px;">发布文章</p>
+			        </li>
+			        <li id="liMyZone" class="nav_li">
+		                <img src="../../img/2.png" style="height:28px;" />
+		                <p class="li_pp" style="font-size:12px;">个人空间</p>
+			        </li>
+			        <li id="liManagedAd">
+		                <img src="../../img/7.png" style="height:28px;"/>
+		                <p style="font-size:12px;">广告管理</p>
+			        </li>
+			        <li id="liMember">
+		                <img src="../../img/8.png" style="height:28px;"/>
+		                <p style="font-size:12px;">会员服务</p>
+			        </li>
+			    </ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				mui(document).on('tap', '#liPublishArticle', function() {
+					mui.openWindow({
+						url: '../publisharticle/index.html',
+						id: 'publishArticleIndex'
+					});
+				});
+				
+				mui(document).on('tap', '#liManagedAd', function() {
+					mui.openWindow({
+						url: '../managead/index.html',
+						id: 'managedadIndex'
+					});
+				});
+				
+				mui(document).on('tap', '#liMember', function() {
+					mui.openWindow({
+						url: '../member/index.html',
+						id: 'memberIndex'
+					});
+				});
+				
+				mui(document).on('tap', '#liSecond', function() {
+					mui.openWindow({
+						url: '../myzone/aboutme.html',
+						id: 'myZoneAboutMe'
+					});
+				});
+				
+				mui(document).on('tap', '#liThird', function() {
+					mui.openWindow({
+						url: '../myzone/contactme.html',
+						id: 'myZoneContactMe'
+					});
+				});
+				
+				//加载文章
+				
+				//删除文章
+			});
+		</script>
+	</body>
+</html>

@@ -66,7 +66,10 @@
 		],
 		"refer": [
 			"views/publisharticle/index.html",
-			"views/publisharticle/template.html"
+			"views/publisharticle/template.html",
+			"views/myzone/managearticle.html",
+			"views/managead/index.html",
+			"views/member/index.html"
 		]
 	},
 	"views/publisharticle/template.html": {
@@ -80,6 +83,71 @@
 			"js/arteditor/js/index.min.js",
 			"js/mui.min.js",
 			"js/constant.js"
+		]
+	},
+	"views/myzone/managearticle.html": {
+		"resources": [
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"img/gr_bg.gif",
+			"img/1.png",
+			"img/6.png",
+			"img/8.png",
+			"img/7.png",
+			"img/2.png",
+			"img/5.png",
+			"img/zf.png",
+			"img/yd.png"
+		],
+		"refer": [
+			"views/publisharticle/index.html",
+			"views/myzone/aboutme.html",
+			"views/myzone/contactme.html",
+			"views/managead/index.html",
+			"views/member/index.html"
+		]
+	},
+	"views/myzone/aboutme.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"views/myzone/managearticle.html",
+			"views/myzone/contactme.html"
+		]
+	},
+	"views/myzone/contactme.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/tx/css/style.css",
+			"img/gr_1.gif",
+			"css/tx/js/jquery.min.js",
+			"css/tx/js/hammer.js",
+			"css/tx/js/iscroll-zoom.js",
+			"css/tx/js/jquery.photoClip.js",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"views/myzone/managearticle.html",
+			"views/myzone/aboutme.html"
+		]
+	},
+	"views/managead/index.html": {
+		"resources": [
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"img/3.png",
+			"img/6.png",
+			"img/xg.png",
+			"img/duigou.png"
+		],
+		"refer": [
+			"views/myzone/managearticle.html",
+			"views/member/index.html",
+			"views/publisharticle/index.html"
 		]
 	}
 }

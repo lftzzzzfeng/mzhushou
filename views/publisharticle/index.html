@@ -70,19 +70,19 @@
 			<div class="jzgd" data-type="pc_0"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span>点击加载更多</span></a></div>
 			<div class="index_nav">
 			    <ul>
-			        <li class="nav_li">
+			        <li class="nav_li" id="liPublishArticle">
 			            <img src="../../img/1.png" style="height:28px;"/>
 			            <p class="li_pp" style="font-size:12px;">发布文章</p>
 			        </li>
-			        <li>
+			        <li id="liMyZone">
 		                <img src="../../img/6.png" style="height:28px;" />
 		                <p style="font-size:12px;">个人空间</p>
 			        </li>
-			        <li>
+			        <li id="liManagedAd">
 		                <img src="../../img/7.png" style="height:28px;"/>
 		                <p style="font-size:12px;">广告管理</p>
 			        </li>
-			        <li>
+			        <li id="liMember">
 		                <img src="../../img/8.png" style="height:28px;"/>
 		                <p style="font-size:12px;">会员服务</p>
 			        </li>
@@ -152,6 +152,27 @@
 			}
 			
 			mui.plusReady(function() {
+				mui(document).on('tap', '#liMyZone', function() {
+					mui.openWindow({
+						url: '../myzone/managearticle.html',
+						id: 'myzoneManagedArticle'
+					});
+				});
+				
+				mui(document).on('tap', '#liManagedAd', function() {
+					mui.openWindow({
+						url: '../managead/index.html',
+						id: 'managedadIndex'
+					});
+				});
+				
+				mui(document).on('tap', '#liMember', function() {
+					mui.openWindow({
+						url: '../member/index.html',
+						id: 'memberIndex'
+					});
+				});
+				
 				mui(document).on('tap', '.index_n li', function() {
 					mui('.index_n li').each(function() {
 						this.className = '';

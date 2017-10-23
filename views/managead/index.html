@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="gg_top" style="height:50px;">
+			    <div style="margin-left: 60px;">广告列表 <sub style="float: right; margin-top: 30px; margin-right: 10px;">添加广告</sub></div>
+			</div>
+			<div class="quanxuan_top">
+			    <div class="xq">
+			        <input name="checkbox_ok" class="input_class" id="checkbox_ok" value="0" type="checkbox">
+			        <div class="checkboxborderc" id="quanxuanBtn" tid="1"></div><p>全选</p>
+			    </div>
+			    <div class="del"><a href="javascript:void(0);">删除</a></div>
+			</div>
+			<div class="gg_list">
+				<div class="gg_p" id="div237">
+			        <div class="gg_input">
+			            <input name="checkbox" tid="237" class="input_class" value="237" id="checkbox_237" type="checkbox">
+			            <div class="checkboxborderc" onclick="add_img(this,'checkbox_237')"></div>
+			        </div>
+			        <div class="gg_li">
+			            <img src="../../img/gr_bg.gif" style="max-height: 100px;">
+                        <div class="gg_lib">
+			                <p style="color:#fff;margin-left:2px;font-size:0.8rem;">百度哈哈哈</p>
+			                <a href="ad_edit.php?id=237"><div class="xg"><img src="../../img/xg.png">修改</div></a>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="gg_p" id="div237">
+			        <div class="gg_input">
+			            <input name="checkbox" tid="237" class="input_class" value="237" id="checkbox_237" type="checkbox">
+			            <div class="checkboxborderc" onclick="add_img(this,'checkbox_237')"></div>
+			        </div>
+			        <div class="gg_li">
+			            <img src="../../img/gr_bg.gif" style="max-height: 100px;">
+                        <div class="gg_lib">
+			                <p style="color:#fff;margin-left:2px;font-size:0.8rem;">百度哈哈哈</p>
+			                <a href="ad_edit.php?id=237"><div class="xg"><img src="../../img/xg.png">修改</div></a>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="index_nav">
+			    <ul>
+			        <li id="liPublishArticle">
+			            <img src="../../img/5.png" style="height:28px;"/>
+			            <p style="font-size:12px;">发布文章</p>
+			        </li>
+			        <li id="liMyZone">
+		                <img src="../../img/6.png" style="height:28px;" />
+		                <p style="font-size:12px;">个人空间</p>
+			        </li>
+			        <li id="liManagedAd" class="nav_li">
+		                <img src="../../img/3.png" style="height:28px;"/>
+		                <p class="li_pp" style="font-size:12px;">广告管理</p>
+			        </li>
+			        <li id="liMember">
+		                <img src="../../img/8.png" style="height:28px;"/>
+		                <p style="font-size:12px;">会员服务</p>
+			        </li>
+			    </ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+	        function add_img(obj,checkbox) {
+	            if (obj.style.background) {
+	                obj.style.background = "";
+	                obj.style.border = "1px solid #ccc";
+	                document.getElementById(checkbox).removeAttribute("checked");
+	            } else {
+	                obj.style.background = "url(../../img/duigou.png) center no-repeat";
+	                obj.style.border = "1px solid #e17211";
+	                document.getElementById(checkbox).setAttribute("checked", "true");
+	            }
+	        }
+	        
+	        mui.plusReady(function() {
+	        	mui(document).on('tap', '#liPublishArticle', function() {
+					mui.openWindow({
+						url: '../publisharticle/index.html',
+						id: 'publishArticleIndex'
+					});
+				});
+				
+				mui(document).on('tap', '#liMyZone', function() {
+					mui.openWindow({
+						url: '../myzone/managearticle.html',
+						id: 'myZoneManageArticle'
+					});
+				});
+				
+				mui(document).on('tap', '#liMember', function() {
+					mui.openWindow({
+						url: '../member/index.html',
+						id: 'memberIndex'
+					});
+				});
+	        });
+	    </script>
+	</body>
+</html>
