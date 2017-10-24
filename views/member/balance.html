@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+		    <h1 class="mui-title main-color">充值</h1>
+		</header>
+		<div class="mui-content">
+			<p style="line-height:60px; padding:0 15px;">请选择充值金额</p>
+			<div class="tabPanels">
+			    <ul>
+			        <li id="month" class="hitc topUpType">5元<br><span style="font-size:10px;">（月会员/次）</span></li>
+			        <li id="year" class="topUpType">25元<br><span style="font-size:10px;">(年会员/次)</span></li>
+			        <li id="yeard" class="topUpType">88元<br><span style="font-size:10px;">（代理或企业主/次）</span></li>
+			    </ul>
+			    <div class="panes">
+			        <div class="panec" style="display:block;">
+			            <div class="qt_je">
+			                <input type="text" name="money" id="money" placeholder="其他金额【最低充值1元】" />
+			            </div>
+			            <p class="fangshi">支付方式</p>
+			            <div class="fukuang">
+			                <img src="../../img/wx.png" style="height:50px;width:50px;"/>
+			                <span>微信支付</span>
+			                <input name="paytype" class="input_class" id="checkbox_2" value="1" type="checkbox">
+			                <div class="checkboxborderaa" style="border: 1px solid rgb(225, 114, 17); background: transparent url('../../img/duigou.png') no-repeat scroll center center;"></div>
+			            </div>
+			            <div class="fukuan_btn">
+			                <input type="submit" name="button" id="payBtn" value="立即支付" />
+			            </div>
+			        </div>
+			        <input type="hidden" id="paymoney" value="5" name="paymoney">
+			    </div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				mui(document).on('tap', '.topUpType', function() {
+					mui('.topUpType').each(function() {
+						this.className = 'topUpType';
+					});
+					
+					this.className = "hitc topUpType";
+				});
+				
+				mui(document).on('tap', '#payBtn', function() {
+					console.log('feng');
+				});
+			});
+		</script>
+	</body>
+</html>

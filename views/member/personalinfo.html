@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/tx/css/style.css" rel="stylesheet" type="text/css">
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+		    .gg_top{width:100%; height:50px; line-height:50px; text-align:center; position:relative; background:#ececee; border-bottom:1px solid #e5e5e5;}
+		    .gg_top p{ color:#ff4e00; font-size:1.2rem;}
+		    .gg_top .gg_right{ position:absolute; bottom:3px; right:10px;}
+		    .gg_top .gg_right a{ color:#ff4e00;}
+		    .gg_top .gg_left{position:absolute; bottom:3px; left:10px;border-bottom:0px;}
+		    .gg_top .gg_left img{ float:left; margin-top:16px; margin-right:1px; width:10px;}
+		    .gg_top .gg_left a{color:#ff4e00;}
+	    </style>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+		    <h1 class="mui-title main-color">个人信息</h1>
+		</header>
+		<div class="mui-content">
+			<div class="grxx_con">
+		        <div class="grxx_top" id="uploadImage">
+		            <img src="../../css/tx/images/userico.jpg" style="width:70px;height:70px;border-radius:50px;margin-left:20px;" id="touxiang" />
+		            <p>修改头像<img src="../../img/gr_2.gif"/></p>
+		        </div>
+	            <div class="top_tip">
+	                <p style="width: 100%; text-align: center;color: red;">请完善个人信息</p>
+	            </div>
+		        <div class="grxx_list">
+		            <p class="glist_left">昵称</p>
+		            <input class="glist_right" type="text" name="realname" id="realname" placeholder="这家伙很懒什么都没留下！" />
+		        </div>
+		        <div class="grxx_list">
+		            <p class="glist_left">手机号</p>
+		            <input class="glist_right" type="text" name="phone" id="phone" value="18631121750" />
+		        </div>
+		        <div class="grxx_list">
+		            <p class="glist_left">个性签名</p>
+		            <input class="glist_right" type="text" name="qianming" id="qianming" placeholder="这家伙很懒什么都没留下！" />
+		        </div>
+		        <div class="grxx_list">
+		            <p class="glist_left">公司名称</p>
+		            <input class="glist_right" type="text" name="company" id="company" placeholder="这家伙很懒什么都没留下！" />
+		        </div>
+		        <div class="grxx_list">
+		            <p class="glist_left">个人简介</p>
+		            <textarea class="glist_right glist_righta" name="jieshao" id="jieshao" cols="45" rows="5" placeholder="这家伙很懒什么都没留下！"></textarea>
+		        </div>
+		        <div class="grxx_wx">
+		            <div class="grxx_left">
+		                <p>微信二维码</p>
+		                <div class="erweima">
+		                    <div class="weiera" id="logoBox">
+		                    	<img src="../../img/gr_1.gif" id="bgl" />
+		                    </div>
+		                    <input type="hidden" name="erweima" id="erweima" value="">
+		                    <input type="hidden" name="touxiang" id="touxiang" value="">
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="wz_foot grxx">
+			    <ul>
+			        <li class="wz_fleft"><a href="javascript:void(0);">取消</a></li>
+			        <li class="wz_fright"><a href="javascript:void(0);" id="subInfo">保存</a></li>
+			    </ul>
+			</div>
+			
+			<div class="htmleaf-container">
+			    <div id="clipArea"></div>
+			    <div id="view"></div>
+			</div>
+			<div id="dpage">
+			    <a href="javascript:void(0);">
+			        <input type="button" name="quxiao" id="quxiao" class="button" value="取消">
+			    </a>
+			    <a href="javascript:void(0);">
+			        <input type="button" name="file" class="button" value="选取照片">
+			        <input id="file" type="file" onchange="javascript:setImagePreview();" accept="image/*" multiple />
+			    </a>
+			    <a href="javascript:void(0);" class="qx"><button id="clipBtn">截取图片</button></a>
+			</div>
+			
+			<div class="thtmleaf-container">
+			    <div id="tclipArea"></div>
+			    <div id="tview"></div>
+			</div>
+			<div id="tpage">
+			    <a href="javascript:void(0);">
+			        <input type="button" name="tquxiao" id="tquxiao" class="button" value="取消">
+			    </a>
+			    <a href="javascript:void(0);">
+			        <input type="button" name="file" class="button" value="选取照片">
+			        <input id="tfile" type="file" onchange="javascript:setImagePreview();" accept="image/*" multiple />
+			    </a>
+			    <a href="javascript:void(0);" class="qx"><button id="tclipBtn">截取图片</button></a>
+			</div>
+		</div>
+		<script src="../../css/tx/js/jquery.min.js" type="text/javascript"></script>
+		<script>window.jQuery || document.write('<script src="../../css/tx/js/jquery-2.1.1.min.js"><\/script>')</script>
+		<script src="../../css/tx/js/iscroll-zoom.js"></script>
+		<script src="../../css/tx/js/hammer.js"></script>
+		<script src="../../css/tx/js/jquery.photoClip.js?123"></script>
+		<script type="text/javascript">
+			var obUrl = ''
+		    $("#clipArea").photoClip({
+		        width: 280,
+		        height: 280,
+		        file: "#file",
+		        view: "#view",
+		        ok: "#clipBtn",
+		        loadStart: function() {
+		            console.log("照片读取中");
+		        },
+		        loadComplete: function() {
+		            console.log("照片读取完成");
+		        },
+		        clipFinish: function(dataURL) {
+		            console.log(dataURL);
+		        }
+		    });
+		    $("#tclipArea").photoClip({
+		        width: 280,
+		        height: 280,
+		        file: "#tfile",
+		        view: "#tview",
+		        ok: "#tclipBtn",
+		        loadStart: function() {
+		            console.log("照片读取中");
+		        },
+		        loadComplete: function() {
+		            console.log("照片读取完成");
+		        },
+		        clipFinish: function(dataURL) {
+		            console.log(dataURL);
+		        }
+		    });
+		    
+		    function setImagePreview() {
+		        var preview, img_txt, localImag, file_head = document.getElementById("file_head"),
+		            picture = file_head.value;
+		        if (!picture.match(/.jpg|.gif|.png|.jpeg|.bmp/i)) return alert("您上传的图片格式不正确，请重新选择！"),
+		            !1;
+		        if (preview = document.getElementById("preview"), file_head.files && file_head.files[0]) preview.style.display = "block",
+		            preview.style.width = "100px",
+		            preview.style.height = "100px",
+		            preview.src = window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1 ? window.webkitURL.createObjectURL(file_head.files[0]) : window.URL.createObjectURL(file_head.files[0]);
+		        else {
+		            file_head.select(),
+		                file_head.blur(),
+		                img_txt = document.selection.createRange().text,
+		                localImag = document.getElementById("localImag"),
+		                localImag.style.width = "100px",
+		                localImag.style.height = "100px";
+		            try {
+		                localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
+		                    localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
+		            } catch(f) {
+		                return alert("您上传的图片格式不正确，请重新选择！"),
+		                    !1
+		            }
+		            preview.style.display = "none",
+		                document.selection.empty()
+		        }
+		        return document.getElementById("DivUp").style.display = "block",
+		            !0
+		    }
+		</script>
+		<script>
+		    $(function(){
+		        $("#logoBox").click(function(){
+		            $(".htmleaf-container").fadeIn(300);
+		            $("#dpage").addClass("show");
+		        });
+		        $("#quxiao").click(function(){
+		            $(".htmleaf-container").hide();
+		            $("#dpage").removeClass("show");
+		        });
+		        $("#clipBtn").click(function(){
+		            $("#logoBox").empty();
+		            $('#logoBox').append('<img src="' + imgsource + '" align="absmiddle" style=" width:100%;margin-top:0;">');
+		            $('#erweima').val(imgsource);
+		            $(".htmleaf-container").hide();
+		            $("#dpage").removeClass("show");
+		        });
+		        $("#uploadImage").click(function(){
+		            $(".thtmleaf-container").fadeIn(300);
+		            $("#tpage").addClass("show");
+		        });
+		        $("#tquxiao").click(function(){
+		            $(".thtmleaf-container").hide();
+		            $("#tpage").removeClass("show");
+		        });
+		        $("#tclipBtn").click(function(){
+		            $("#uploadImage").empty();
+		            $('#uploadImage').append('<img src="' + imgsource + '" align="absmiddle" style="width:70px;height:70px;border-radius:50px;">');
+		            $('#touxiang').val(imgsource);
+		            $(".thtmleaf-container").hide();
+		            $("#tpage").removeClass("show");
+		        });
+		    });
+		</script>
+	</body>
+</html>

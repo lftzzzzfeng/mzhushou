@@ -10,7 +10,7 @@
     "icons": {
         "72": "icon.png"
     },
-    "launch_path": "views/myzone/managearticle.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "launch_path": "views/member/index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
     "developer": {
         "name": "",/*开发者名称*/
         "email": "",/*开发者邮箱地址*/
@@ -322,7 +322,8 @@
 			"views/myzone/aboutme.html": {
 				"resources": [
 					"css/mui.min.css",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"css/style.css"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
@@ -354,13 +355,173 @@
 					"img/3.png",
 					"img/6.png",
 					"img/xg.png",
-					"img/duigou.png"
+					"img/duigou.png",
+					"img/8.png"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
 					"views/member/index.html",
 					"views/publisharticle/index.html"
 				],
+				"priority": 0
+			},
+			"views/member/index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/newstyle.css",
+					"css/mui.min.css",
+					"css/tx/css/style.css",
+					"css/tx/images/userico.jpg",
+					"img/gr_bg.gif",
+					"img/gr_2.gif",
+					"img/help.gif",
+					"img/3.png",
+					"img/5.png",
+					"img/6.png",
+					"img/8.png",
+					"img/7.png",
+					"img/4.png"
+				],
+				"refer": [
+					"views/managead/index.html",
+					"views/publisharticle/index.html",
+					"views/myzone/managearticle.html",
+					"views/member/balance.html",
+					"views/member/personalinfo.html",
+					"views/member/course.html",
+					"views/member/customeservice.html",
+					"views/member/editpassword.html",
+					"views/member/addvip.html",
+					"views/member/memberlist.html",
+					"views/member/consumedetail.html",
+					"views/member/statistics.html",
+					"views/member/know.html"
+				],
+				"priority": 0
+			},
+			"views/member/balance.html": {
+				"resources": [
+					"img/wx.png",
+					"css/newstyle.css",
+					"css/mui.min.css",
+					"css/feng.css",
+					"img/duigou.png",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/personalinfo.html": {
+				"resources": [
+					"img/gr_1.gif",
+					"css/tx/js/jquery.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"css/tx/css/style.css",
+					"css/feng.css",
+					"css/tx/js/jquery.photoClip.js",
+					"css/tx/js/hammer.js",
+					"css/tx/js/iscroll-zoom.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/course.html": {
+				"resources": [
+					"img/20170301141809_76469.jpg",
+					"css/style.css",
+					"css/mui.min.css",
+					"css/feng.css",
+					"img/light.png",
+					"js/layer.js",
+					"fonts/mui.ttf",
+					"js/jq.js",
+					"js/skin/default/layer.css",
+					"img/20170221184042_74059.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/customeservice.html": {
+				"resources": [
+					"img/kefu.jpg",
+					"css/newstyle.css",
+					"css/mui.min.css",
+					"css/feng.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/editpassword.html": {
+				"resources": [
+					"js/findsms.js",
+					"img/close_a.gif",
+					"css/mui.css",
+					"js/constant.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/addvip.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/feng.css",
+					"fonts/mui.ttf",
+					"css/newstyle.css",
+					"img/yhy.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/memberlist.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/feng.css",
+					"css/newstyle.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/consumedetail.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/feng.css",
+					"fonts/mui.ttf",
+					"css/newstyle.css"
+				],
+				"refer": [
+					"views/managead/index.html"
+				],
+				"priority": 0
+			},
+			"views/member/statistics.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/feng.css"
+				],
+				"refer": [
+					"views/managead/index.html"
+				],
+				"priority": 0
+			},
+			"views/member/know.html": {
+				"resources": [
+					"img/lj_7.jpg",
+					"img/lj_4.jpg",
+					"img/lj_8.jpg",
+					"img/lj_6.jpg",
+					"img/lj_9.jpg",
+					"img/lj_5.jpg",
+					"img/lj_2.jpg",
+					"css/feng.css",
+					"img/lj_3.jpg",
+					"img/lj_1.jpg",
+					"css/mui.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

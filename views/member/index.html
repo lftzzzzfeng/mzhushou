@@ -4,15 +4,225 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<script src="../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/tx/css/style.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>
 	</head>
 	<body>
 		<div class="mui-content">
-			feng
+			<div class="gr_top">
+				<img src="../../css/tx/images/userico.jpg" />
+				<p>feng</p>
+				<span style="font-size:14px;">您还是普通用户，只可免费发布10条文章</span>
+			</div>
+			<div id="divBalance" class="num_gr">
+			    <a href="javascript:void(0);">
+			        <p>当前余额:</p>
+			        <span style="color: #ff4e00; float: right;">100<img style="margin-left:2px;" src="../../img/gr_2.gif"></span>
+			    </a>
+			</div>
+			<div id="divPersonalInfo" class="num_gr">
+			    <a href="u_info.php">
+			        <p>个人信息</p>
+			        <span style="float:right;font-size: 13px;color:#ff4e00;margin-right: 2px;">修改头像与资料<img style="margin-left:2px;" src="../../img/gr_2.gif"></span>
+			    </a>
+			</div>
+			<div id="divCourse" class="num_gr">
+			    <a href="javascript:void(0);" target="_blank">
+			        <p>使用教程</p>
+			        <img src="../../img/help.gif" />
+			    </a>
+			</div>
+			<div class="num_kf">
+			    <ul>
+			        <li id="liCustomService" class="kf_li">
+			            <a href="javascript:void(0);">
+			                <p>联系客服</p>
+			                <img src="../../img/gr_2.gif" />
+			            </a>
+			        </li>
+			        <li id="liChangePassword">
+			            <a href="javascript:void(0);">
+			                <p>修改密码</p>
+			                <img src="../../img/gr_2.gif" />
+			            </a>
+			        </li>
+			    </ul>
+			</div>
+			<div class="num_kf">
+			    <ul>
+			        <li id="liPurchaseMember" class="kf_li">
+			            <a href="javascript:void(0);">
+			                <p>添加会员&代理商</p>
+			            </a>
+			        </li>
+			        <li id="liMemberList" class="kf_li">
+			            <a href="/user/buyAgent.php">
+			                <p>会员列表</p>
+			            </a>
+			        </li>
+			        <li id="liConsumeDetail" class="kf_li">
+			            <a href="/user/buyAgent.php">
+			                <p>消费明细</p>
+			            </a>
+			        </li>
+			        <li id="liStatistic" class="kf_li">
+			            <a href="javascript:void(0)">
+			                <p>数据统计</p>
+			                <img src="../../img/gr_2.gif" />
+			            </a>
+			        </li>
+			        <li id="liKnowMember" class="kf_li">
+			            <a href="javascript:void(0);" target="_blank">
+			                <p>了解会员/代理</p>
+			                <img src="../../img/gr_2.gif" />
+			            </a>
+			        </li>
+			        <li id="liAboutUs">
+			            <a href="../about.html" target="_blank">
+			                <p>关于我们</p>
+			                <img src="../../img/gr_2.gif" />
+			            </a>
+			        </li>
+			    </ul>
+			</div>
 		</div>
+		<div id="divLogout" class="num_gr" style="margin-bottom:70px;">
+		    <a href="logout.php">
+		        <p>退出登录</p>
+		        <img src="../../img/gr_2.gif" />
+		    </a>
+		</div>
+		<div class="index_nav">
+		    <ul>
+		        <li id="liPublishArticle">
+		            <img src="../../img/5.png" style="height:28px;"/>
+		            <p style="font-size:12px;">发布文章</p>
+		        </li>
+		        <li id="liMyZone">
+	                <img src="../../img/6.png" style="height:28px;" />
+	                <p style="font-size:12px;">个人空间</p>
+		        </li>
+		        <li id="liManagedAd">
+	                <img src="../../img/7.png" style="height:28px;"/>
+	                <p style="font-size:12px;">广告管理</p>
+		        </li>
+		        <li id="liMember" class="nav_li">
+	                <img src="../../img/4.png" style="height:28px;"/>
+	                <p class="li_pp" style="font-size:12px;">会员服务</p>
+		        </li>
+		    </ul>
+		</div>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				//打开发布文章页面
+				mui(document).on('tap', '#liPublishArticle', function() {
+					mui.openWindow({
+						url: '../publisharticle/index.html',
+						id: 'publishArticleIndex'
+					});
+				});
+				
+				//打开个人空间页面	
+				mui(document).on('tap', '#liMyZone', function() {
+					mui.openWindow({
+						url: '../myzone/managearticle.html',
+						id: 'myZoneManageArticle'
+					});
+				});
+				
+				//打开广告管理页面
+				mui(document).on('tap', '#liManagedAd', function() {
+					mui.openWindow({
+						url: '../managead/index.html',
+						id: 'managedadIndex'
+					});
+				});
+				
+				//打开当前余额
+				mui(document).on('tap', '#divBalance', function() {
+					mui.openWindow({
+						url: 'balance.html',
+						id: 'memberBalance'
+					});
+				});
+				
+				//打开个人信息
+				mui(document).on('tap', '#divPersonalInfo', function() {
+					mui.openWindow({
+						url: 'personalinfo.html',
+						id: 'memberPersonalInfo'
+					});
+				});
+				
+				//打开使用教程
+				mui(document).on('tap', '#divCourse', function() {
+					mui.openWindow({
+						url: 'course.html',
+						id: 'memberCourse'
+					});
+				});
+				
+				//打开联系客服
+				mui(document).on('tap', '#liCustomService', function() {
+					mui.openWindow({
+						url: 'customeservice.html',
+						id: 'memberCourse'
+					});
+				});
+				
+				//打开修改密码
+				mui(document).on('tap', '#liChangePassword', function() {
+					mui.openWindow({
+						url: 'editpassword.html',
+						id: 'memberEditPassword'
+					});
+				});
+				
+				//打开添加会员与代理商
+				mui(document).on('tap', '#liPurchaseMember', function() {
+					mui.openWindow({
+						url: 'addvip.html',
+						id: 'memberAddVip'
+					});
+				});
+				
+				//打开会员列表
+				mui(document).on('tap', '#liMemberList', function() {
+					mui.openWindow({
+						url: 'memberlist.html',
+						id: 'memberMemberList'
+					});
+				});
+				
+				//打开消费明细
+				mui(document).on('tap', '#liConsumeDetail', function() {
+					mui.openWindow({
+						url: 'consumedetail.html',
+						id: 'memberConsumeDetail'
+					});
+				});
+				
+				//打开数据统计页面
+				mui(document).on('tap', '#liStatistic', function() {
+					mui.openWindow({
+						url: 'statistics.html',
+						id: 'memberStatistics'
+					});
+				});
+				
+				//打开了解会员/代理
+				mui(document).on('tap', '#liKnowMember', function() {
+					mui.openWindow({
+						url: 'know.html',
+						id: 'memberKnow'
+					});
+				});
+			});
+		</script>
 	</body>
 </html>

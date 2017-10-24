@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+		    <h1 class="mui-title main-color">数据统计</h1>
+		</header>
+		<div class="mui-content">
+			<div class="xf_list">
+			    <ul id="index_list">
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总发布文章数</span><span style="float: right;"><?php echo $row_user[0]['artNum']; ?></span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">现有文章数</span><span style="float: right;"><?php echo $rst[0]['article_number']; ?></span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总阅读数</span><span style="float: right;"><?php echo $rst[0]['pv_number']; ?></span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总分享数</span><span style="float: right;"><?php echo $rst[0]['share_number']; ?></span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总点赞数</span><span style="float: right;"><?php echo $rst[0]['zan_number']; ?></span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总广告点击数</span><span style="float: right;"><?php echo $rst[0]['advertisement_number']; ?></span></div>
+			        </li>
+			    </ul>
+			</div>
+			<div style="height: 100px;"></div>
+			<div class="index_nav">
+			    <ul>
+			        <li id="liPublishArticle">
+			            <img src="../../img/5.png" style="height:28px;"/>
+			            <p style="font-size:12px;">发布文章</p>
+			        </li>
+			        <li id="liMyZone">
+		                <img src="../../img/6.png" style="height:28px;" />
+		                <p style="font-size:12px;">个人空间</p>
+			        </li>
+			        <li id="liManagedAd">
+		                <img src="../../img/7.png" style="height:28px;"/>
+		                <p style="font-size:12px;">广告管理</p>
+			        </li>
+			        <li id="liMember" class="nav_li">
+		                <img src="../../img/4.png" style="height:28px;"/>
+		                <p class="li_pp" style="font-size:12px;">会员服务</p>
+			        </li>
+			    </ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				//打开发布文章页面
+				mui(document).on('tap', '#liPublishArticle', function() {
+					mui.openWindow({
+						url: '../publisharticle/index.html',
+						id: 'publishArticleIndex'
+					});
+				});
+				
+				//打开个人空间页面	
+				mui(document).on('tap', '#liMyZone', function() {
+					mui.openWindow({
+						url: '../myzone/managearticle.html',
+						id: 'myZoneManageArticle'
+					});
+				});
+				
+				//打开广告管理页面
+				mui(document).on('tap', '#liManagedAd', function() {
+					mui.openWindow({
+						url: '../managead/index.html',
+						id: 'managedadIndex'
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

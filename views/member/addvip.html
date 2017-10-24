@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+		    <h1 class="mui-title main-color">添加会员&代理商</h1>
+		</header>
+		<div class="mui-content">
+			<div class="tj_huiyuan">
+			    <div class="tj_name">
+			        <p><span>*</span>姓名</p>
+			        <input type="text" name="realname" id="realname" placeholder="请填写会员名称" />
+			    </div>
+			    <div class="tj_name">
+			        <p><span>*</span>手机号</p>
+			        <input type="text" name="phone" id="phone" placeholder="请填写会员电话，用于登陆" />
+			    </div>
+			    <div class="tj_name">
+			        <p><span>*</span>密码</p>
+			        <input type="password" name="pass" id="pass" placeholder="请设置六位及以上登陆密码，区分大小写" />
+			    </div>
+			    <div class="fangs" style="margin-left:20px; margin-bottom: 20px;">
+			        <p style="font-size:14px; text-align:center; margin-bottom:5px;">&nbsp;&nbsp;&nbsp;&nbsp;当前余额：10元</p>
+			        <div class="fs_left">
+			            <input name="viptype" class="input_class" value="1" id="checkbox_1" checked type="radio">
+			            <div class="checkboxborderab" onClick="add_img(this,'checkbox_1','5')" style="border: 1px solid rgb(225, 114, 17); background: transparent url('../../img/yhy.png') no-repeat scroll center center;"></div>
+			            月会员：5元
+			        </div>
+			        <div class="fs_left">
+			            <input name="viptype" class="input_class" value="2" id="checkbox_2" type="radio">
+			            <div class="checkboxborderab" onClick="add_img(this,'checkbox_2','25')"></div>
+	            		年会员：25元
+			        </div>
+			        <div class="fs_left">
+			            <input name="viptype" class="input_class" value="4" id="checkbox_3" type="radio">
+			            <div class="checkboxborderab" onClick="add_img(this,'checkbox_3','88')"></div>
+	            		代理：88元/年
+			        </div>
+			    </div>
+			    <div class="tja_btn">
+			        <input type="button" name="button" id="addVipBtn" value="提交" />
+			    </div>
+			</div>
+		</div>
+		<script>
+	        var ckNum = 0;
+	        function add_img(obj,checkbox,money){
+	        	mui('div[class=checkboxborderab]').each(function() {
+	        		this.style.background = "";
+	                this.style.border = "1px solid #d0d0d0";
+	        	});
+	        	
+	        	if (obj.style.background) {
+	                obj.style.background = "";
+	                obj.style.border = "1px solid #ccc";
+	                document.getElementById(checkbox).setAttribute('checked', false);
+	            } else {
+//	                if(ckNum < 4){
+//	                    var ckMoney = 0;
+//	                    if(parseInt(ckMoney) < parseInt(money)){
+//	                        ckNum++;
+//	                        layer.open({
+//	                            content: '余额不足是否马上去充值？'
+//	                            ,btn: ['是', '稍后']
+//	                            ,yes: function(index){
+//	                              window.location.href=sitepath+"/user/recharge.php";
+//	                              layer.close(index);
+//	                            }
+//	                        });
+//	                    }
+//	                }
+	                obj.style.background = "url(../../img/yhy.png) center no-repeat";
+	                obj.style.border = "1px solid #e17211";
+	                document.getElementById(checkbox).setAttribute('checked', true);
+	            }
+	        }
+    	</script>
+	</body>
+</html>

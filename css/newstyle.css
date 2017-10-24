@@ -300,9 +300,9 @@ p.p_la img {
 }
 
 .gr_top {
-	widrh: 100%;
+	width: 100%;
 	height: 150px;
-	background: url(../images/gr_bg.gif) no-repeat;
+	background: url(../img/gr_bg.gif) no-repeat;
 	background-size: 100% 100%;
 	text-align: center;
 }
@@ -1282,7 +1282,7 @@ p.p_la img {
 }
 
 .num_gr {
-	width: 94%;
+	width: 100%;
 	height: 50px;
 	line-height: 50px;
 	background: #fff;
@@ -2184,7 +2184,7 @@ p.lb_pp {
 
 .huiyuan_list {
 	width: 100%;
-	min-height: 500px;
+	min-height: 470px;
 	height: auto;
 	overflow: hidden;
 	margin-bottom: 0;
@@ -2225,7 +2225,7 @@ p.lb_pp {
 
 .xf_list {
 	width: 100%;
-	min-height: 500px;
+	min-height: 470px;
 	height: auto;
 	overflow: hidden;
 	margin-bottom: 0px;
@@ -2338,7 +2338,7 @@ p.lb_pp {
 	width: 90%;
 	height: 60px;
 	line-height: 25px;
-	margin: 10px auto 20px;
+	/*margin: 10px auto 20px;*/
 }
 
 .fs_left {
@@ -2606,7 +2606,7 @@ p.lb_pp {
 }
 
 .jzgd a span {
-	background: rgba(0, 0, 0, 0) url("../images/ico_san.png") no-repeat scroll right -272px;
+	background: rgba(0, 0, 0, 0) url("../../img/ico_san.png") no-repeat scroll right -272px;
 	display: inline-block;
 	padding-right: 12px;
 }
