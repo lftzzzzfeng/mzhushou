@@ -92,7 +92,7 @@
 			</div>
 		</div>
 		<div id="divLogout" class="num_gr" style="margin-bottom:70px;">
-		    <a href="logout.php">
+		    <a href="javascript:void(0);">
 		        <p>退出登录</p>
 		        <img src="../../img/gr_2.gif" />
 		    </a>
@@ -117,109 +117,135 @@
 		        </li>
 		    </ul>
 		</div>
+		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
 			mui.plusReady(function() {
 				//打开发布文章页面
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
-						url: '../publisharticle/index.html',
-						id: 'publishArticleIndex'
+						url: '../publisharticle/index.html'
 					});
 				});
 				
 				//打开个人空间页面	
 				mui(document).on('tap', '#liMyZone', function() {
 					mui.openWindow({
-						url: '../myzone/managearticle.html',
-						id: 'myZoneManageArticle'
+						url: '../myzone/managearticle.html'
 					});
 				});
 				
 				//打开广告管理页面
 				mui(document).on('tap', '#liManagedAd', function() {
 					mui.openWindow({
-						url: '../managead/index.html',
-						id: 'managedadIndex'
+						url: '../managead/index.html'
 					});
 				});
 				
 				//打开当前余额
 				mui(document).on('tap', '#divBalance', function() {
 					mui.openWindow({
-						url: 'balance.html',
-						id: 'memberBalance'
+						url: 'balance.html'
 					});
 				});
 				
 				//打开个人信息
 				mui(document).on('tap', '#divPersonalInfo', function() {
 					mui.openWindow({
-						url: 'personalinfo.html',
-						id: 'memberPersonalInfo'
+						url: 'personalinfo.html'
 					});
 				});
 				
 				//打开使用教程
 				mui(document).on('tap', '#divCourse', function() {
 					mui.openWindow({
-						url: 'course.html',
-						id: 'memberCourse'
+						url: 'course.html'
 					});
 				});
 				
 				//打开联系客服
 				mui(document).on('tap', '#liCustomService', function() {
 					mui.openWindow({
-						url: 'customeservice.html',
-						id: 'memberCourse'
+						url: 'customeservice.html'
 					});
 				});
 				
 				//打开修改密码
 				mui(document).on('tap', '#liChangePassword', function() {
 					mui.openWindow({
-						url: 'editpassword.html',
-						id: 'memberEditPassword'
+						url: 'editpassword.html'
 					});
 				});
 				
 				//打开添加会员与代理商
 				mui(document).on('tap', '#liPurchaseMember', function() {
 					mui.openWindow({
-						url: 'addvip.html',
-						id: 'memberAddVip'
+						url: 'addvip.html'
 					});
 				});
 				
 				//打开会员列表
 				mui(document).on('tap', '#liMemberList', function() {
 					mui.openWindow({
-						url: 'memberlist.html',
-						id: 'memberMemberList'
+						url: 'memberlist.html'
 					});
 				});
 				
 				//打开消费明细
 				mui(document).on('tap', '#liConsumeDetail', function() {
 					mui.openWindow({
-						url: 'consumedetail.html',
-						id: 'memberConsumeDetail'
+						url: 'consumedetail.html'
 					});
 				});
 				
 				//打开数据统计页面
 				mui(document).on('tap', '#liStatistic', function() {
 					mui.openWindow({
-						url: 'statistics.html',
-						id: 'memberStatistics'
+						url: 'statistics.html'
 					});
 				});
 				
 				//打开了解会员/代理
 				mui(document).on('tap', '#liKnowMember', function() {
 					mui.openWindow({
-						url: 'know.html',
-						id: 'memberKnow'
+						url: 'know.html'
+					});
+				});
+				
+				//退出登陆
+				mui(document).on('tap', '#divLogout', function() {
+					mui.ajax(REQUEST_DOMAIN + 'member/login.php/logout', {
+						type:'GET',
+						timeout:5000,
+						beforeSend: function() {
+					        plus.nativeUI.showWaiting('登出...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+					    },
+					    complete: function() {
+					        plus.nativeUI.closeWaiting();
+					    },
+						success: function(data) {
+							var result = data;
+							
+							if (result.status == -1) {
+								localStorage.removeItem(TOKEN);
+								mui.openWindow({
+									url:'../../index.html'
+								});
+							} else {
+								plus.nativeUI.toast(result.data.message);
+							}
+							plus.nativeUI.closeWaiting();
+						},
+						error: function(xhr,type,errorThrown) {
+							if (type == 'timeout') {//超时
+								console.log(JSON.stringify(type));
+								plus.nativeUI.toast('服务器超时，请稍后重试！');
+								plus.nativeUI.closeWaiting();
+							} else {
+								console.log(JSON.stringify(errorThrown));
+								plus.nativeUI.toast('网络错误，请稍后重试！');
+								plus.nativeUI.closeWaiting();
+							}
+						}
 					});
 				});
 			});

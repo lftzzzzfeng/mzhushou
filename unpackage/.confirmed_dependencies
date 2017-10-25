@@ -30,10 +30,12 @@
 			"img/close_a.gif",
 			"css/mui.css",
 			"css/newstyle.css",
-			"css/feng.css"
+			"css/feng.css",
+			"fonts/mui.ttf"
 		],
 		"refer": [
-			"views/member/index.html"
+			"views/member/index.html",
+			"index.html"
 		]
 	},
 	"register.html": {
@@ -41,7 +43,13 @@
 			"js/regsms.js",
 			"css/newstyle.css",
 			"css/feng.css",
-			"css/mui.css"
+			"css/mui.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"img/close_a.gif"
+		],
+		"refer": [
+			"views/member/index.html"
 		]
 	},
 	"views/publisharticle/index.html": {
@@ -182,7 +190,8 @@
 			"views/member/memberlist.html",
 			"views/member/consumedetail.html",
 			"views/member/statistics.html",
-			"views/member/know.html"
+			"views/member/know.html",
+			"index.html"
 		]
 	},
 	"views/member/balance.html": {

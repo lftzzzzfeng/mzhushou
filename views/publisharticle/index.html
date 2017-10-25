@@ -15,14 +15,13 @@
 		<div class="mui-content">
 			<div class="index_top">
     			<p class="top_p" style="font-size:16px;">发表文章</p>
-			    <p class="top_pa" style="margin-right:10px;">入驻天数:<span>245</span> </p>
-			    <p class="top_pa">已发文章数:<span>66</span> </p>
+			    <p class="top_pa" style="margin-right:10px;">入驻天数:<span id="spnRegisterDays"></span> </p>
+			    <p class="top_pa">已发文章数:<span id="spnArticleNumber"></span> </p>
 			</div>
 			<div class="index_fz">
     			<form id="subForm">
         			<div class="index_fzinput">
                         <select id="ddlAd">
-                    		<option value="0">选择广告</option>
                     	</select>
                         <div class="fb_s">广告模板</div>
         			</div>
@@ -35,24 +34,11 @@
     			</form>
     			<div class="fz_p" style="margin-top:10px;">声明：禁止发布黄赌毒以及违反任何国家相关法律法规的信息</div>
 				<div class="index_n">
-			        <ul>
-			            <li class="lin_x"><a href="index.php">热门</a></li>
-			            <li ><a href="?type=999">推荐</a></li>
-                        <li ><a href="?type=53">早报</a></li>
-                        <li ><a href="?type=52">互联网</a></li>
-                        <li ><a href="?type=51">旅行</a></li>
-                        <li ><a href="?type=50">辣妈</a></li>
-                        <li ><a href="?type=49">潮人</a></li>
-                        <li ><a href="?type=48">科技</a></li>
-                        <li ><a href="?type=47">财经</a></li>
-                        <li ><a href="?type=46">生活</a></li>
-                        <li ><a href="?type=45">八卦</a></li>
-                        <li ><a href="?type=44">私房</a></li>
-                        <li ><a href="?type=43">养生</a></li>
+			        <ul id="ulArticleTypes">
             		</ul>
 				</div>
 			</div>
-			<div class="index_list">
+			<div class="index_list" id="divArticles">
         		<div class="index_lista">
     				<div class="index_listl">
         				<p class="p_ll"><a href="content.php?id=2&uid=6">“互联网＋”时代中国开放大学的机遇与挑战</a></p>
@@ -67,7 +53,7 @@
 				</div>
             </div>
 			<input type="hidden" value="0" id="typeid">
-			<div class="jzgd" data-type="pc_0"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span>点击加载更多</span></a></div>
+			<div id="divMore" class="jzgd" data-type="pc_0"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span id="spnMore"></span></a></div>
 			<div class="index_nav">
 			    <ul>
 			        <li class="nav_li" id="liPublishArticle">
@@ -92,21 +78,44 @@
 		<script type="text/javascript" src="../../js/urlvalidate.js"></script>
 		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			var page = 0;
+			var typeId = 888;
+			var _content; //文章内容
+			
 			//获取屏显示头部信息
 			function ajaxLoadTopInfo() {
-				
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/indexUser', {
+					data: {
+						token: localStorage.getItem(TOKEN)
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderTopInfo,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
 			}
 			
-			function renderTopInfo() {
-				
+			function renderTopInfo(result) {
+				if (result.status == -1) {
+					document.getElementById('spnArticleNumber').innerText = result.data.artnum;
+					document.getElementById('spnRegisterDays').innerText = result.data.addtime;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
 			}
 			
 			//获取并显示广告模板
 			function ajaxLoadAds() {
-				mui.ajax('', {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/indexTop', {
 					data: {
-						phone: phone,
-						password: password
+						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
 					type:'POST',
@@ -122,21 +131,34 @@
 				});
 			}
 			
-			function renderAds() {
-				
+			function renderAds(result) {
+				if (result.status == -1) {
+					var target = document.getElementById('ddlAd');
+					
+					var content = '';
+					content += '<option value=\"0\">选择广告</option>';
+					for (var count = 0; count < result.data.adlist.length; count++) {
+						content += '<option value=\"'+result.data.adlist[count].id+'\">';
+						content += result.data.adlist[count].title;
+						content += '</option>';
+					}
+					
+					target.innerHTML = content;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
 			}
 			
-			//获取并显示文章
-			function ajaxLoadArticles() {
-				mui.ajax('', {
+			//获取文章分类
+			function ajaxLoadArticleTypes() {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/articleType', {
 					data: {
-						phone: phone,
-						password: password
+						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
 					type:'POST',
 					timeout:5000,
-					success: renderArticles,
+					success: renderArticleTypes,
 					error: function(xhr,type,errorThrown) {
 						if (type == 'timeout') {//超时
 							plus.nativeUI.toast('服务器超时，请稍后重试！');
@@ -147,29 +169,176 @@
 				});
 			}
 			
-			function renderArticles() {
-				
+			function renderArticleTypes(result) {
+				if (result.status == -1) {
+					var target = document.getElementById('ulArticleTypes');
+					var content = '';
+					var articleTypes = result.data.rows_type;
+					for (var i = 0; i < articleTypes.length; i++) {
+						if (i == 0) {
+							content += '<li class=\"lin_x\" data-type-id=\"'+articleTypes[i].id+'\"><a href="javascript:void(0);">'+articleTypes[i].name+'</a></li>';	
+						} else {
+							content += '<li data-type-id=\"'+articleTypes[i].id+'\"><a href=\"javascript:void(0);\">'+articleTypes[i].name+'</a></li>';	
+						}
+					}
+					target.innerHTML = content;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
+			}
+			
+			//获取并显示文章
+			function ajaxInitArticles(typeId) {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/article', {
+					data: {
+						id: typeId
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderInitArticles,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
+			}
+			
+			function renderInitArticles(result) {
+				if (result.status == -1) {
+					var target = document.getElementById('divArticles');
+					_content = '';
+					var articles = result.data.articles; 
+					
+					if (articles.length < 1) {
+						document.getElementById('divArticles').style.display = 'none';
+					} else {
+						document.getElementById('divArticles').style.display = 'block';
+					}
+					
+					for (var i = 0; i < articles.length; i++) {
+						_content += '<div class=\"index_lista\">';
+						_content += '<div class="index_listl">';
+						_content += '<p class=\"p_ll\">';
+						_content += '<a href=\"javascript:void(0);\">';
+						_content += articles[i].title;
+						_content += '</a>';
+						_content += '</p>';
+						_content += '<p class=\"p_la\"><a href=\"javascript:void(0);\"><img src=\"../../img/zf.png\" style=\"width:15px;height:15px;\" /></a><span>'+articles[i].share+'</span></p>';
+						_content += '<p class=\"p_la\"><a href=\"javascript:void(0);\"><img src=\"../../img/yd.png\" style=\"width:15px;height:15px;\" /></a><span>'+articles[i].pv+'</span></p>';
+						_content += '</div>';
+						_content += '<div class=\"index_listr\">';
+						_content += '<a href="javascript:void(0);">';
+						var path = articles[i].pic.replace('../', PREVIOUS_REQUEST_DOMAIN);
+						_content += '<img src=\"'+path+'\" style=\"max-height:80px;max-width:160px;\" />';
+						_content += '</a>';
+						_content += '</div>';
+						_content += '</div>';
+					}
+					
+					if (result.data.nums == 2) {
+						document.getElementById('spnMore').innerText = '没有更多信息';
+						document.getElementById('divMore').disabled = true;
+					} else {
+						document.getElementById('spnMore').innerText = '点击加载更多';
+						document.getElementById('divMore').disabled = false;
+					}
+					
+					target.innerHTML = _content;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
+			}
+			
+			function ajaxLoadMoreArticles(typeId, page) {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/articleMore', {
+					data: {
+						id: typeId,
+						page: page
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderMoreArticles,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
+			}
+			
+			function renderMoreArticles(result) {
+				if (result.status == -1) {
+					var target = document.getElementById('divArticles');
+					var articles = result.data.articles; 
+					
+					if (articles.length < 1) {
+						document.getElementById('divArticles').style.display = 'none';
+					} else {
+						document.getElementById('divArticles').style.display = 'block';
+					}
+					
+					for (var i = 0; i < articles.length; i++) {
+						_content += '<div class=\"index_lista\">';
+						_content += '<div class="index_listl">';
+						_content += '<p class=\"p_ll\">';
+						_content += '<a href=\"javascript:void(0);\">';
+						_content += articles[i].title;
+						_content += '</a>';
+						_content += '</p>';
+						_content += '<p class=\"p_la\"><a href=\"javascript:void(0);\"><img src=\"../../img/zf.png\" style=\"width:15px;height:15px;\" /></a><span>'+articles[i].share+'</span></p>';
+						_content += '<p class=\"p_la\"><a href=\"javascript:void(0);\"><img src=\"../../img/yd.png\" style=\"width:15px;height:15px;\" /></a><span>'+articles[i].pv+'</span></p>';
+						_content += '</div>';
+						_content += '<div class=\"index_listr\">';
+						_content += '<a href="javascript:void(0);">';
+						var path = articles[i].pic.replace('../', PREVIOUS_REQUEST_DOMAIN);
+						_content += '<img src=\"'+path+'\" style=\"max-height:80px;max-width:160px;\" />';
+						_content += '</a>';
+						_content += '</div>';
+						_content += '</div>';
+					}
+					
+					if (result.data.nums == 2) {
+						document.getElementById('spnMore').innerText = '没有更多信息';
+						document.getElementById('divMore').disabled = true;
+					} else {
+						document.getElementById('spnMore').innerText = '点击加载更多';
+						document.getElementById('divMore').disabled = false;
+					}
+					
+					target.innerHTML = _content;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
 			}
 			
 			mui.plusReady(function() {
+				ajaxLoadTopInfo();
+				ajaxLoadAds();
+				ajaxLoadArticleTypes();
+				ajaxInitArticles(888);
+				
 				mui(document).on('tap', '#liMyZone', function() {
 					mui.openWindow({
-						url: '../myzone/managearticle.html',
-						id: 'myzoneManagedArticle'
+						url: '../myzone/managearticle.html'
 					});
 				});
 				
 				mui(document).on('tap', '#liManagedAd', function() {
 					mui.openWindow({
-						url: '../managead/index.html',
-						id: 'managedadIndex'
+						url: '../managead/index.html'
 					});
 				});
 				
 				mui(document).on('tap', '#liMember', function() {
 					mui.openWindow({
-						url: '../member/index.html',
-						id: 'memberIndex'
+						url: '../member/index.html'
 					});
 				});
 				
@@ -178,6 +347,13 @@
 						this.className = '';
 					});
 					this.className = 'lin_x';
+					typeId = this.getAttribute('data-type-id');
+					ajaxInitArticles(typeId);
+				});
+				
+				mui(document).on('tap', '#divMore', function() {
+					page++;
+					ajaxLoadMoreArticles(typeId, page);
 				});
 				
 				mui(document).on('tap', '#goContent', function() {

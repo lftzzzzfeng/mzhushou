@@ -8,3 +8,5 @@ var REQUEST_PATH = 'requestPath';
 
 var RETURN_TYPE_HTML = 1;
 var RETURN_TYPE_JSON = 2;
+
+var TOKEN = 'token';

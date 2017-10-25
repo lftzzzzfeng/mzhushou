@@ -31,6 +31,8 @@ function sendMessage() {
 						plus.nativeUI.toast('超过当天短信发送限制,请联系客服');
 			   		} else if(data == 5) {
 						plus.nativeUI.toast('该手机号已存在');
+			   		} else {
+			   			plus.nativeUI.toast('发送成功');
 			   		}
 			   }
 		   });

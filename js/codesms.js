@@ -31,6 +31,8 @@ function sendMessage() {
 						plus.nativeUI.toast('未知错误，请稍后');
 			   		} else if (data == 4) {
 						plus.nativeUI.toast('超过当天短信发送限制,请联系客服!');
+			   		} else {
+			   			plus.nativeUI.toast('发送成功 ');
 			   		}
 				},
 				error: function(xhr,type,errorThrown) {
