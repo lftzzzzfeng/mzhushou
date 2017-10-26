@@ -15,14 +15,14 @@
 	<body>
 		<div class="mui-content">
 			<div class="gr_top">
-				<img src="../../css/tx/images/userico.jpg" />
-				<p>feng</p>
-				<span style="font-size:14px;">您还是普通用户，只可免费发布10条文章</span>
+				<img src="../../css/tx/images/userico.jpg" id="imgs"/>
+				<p id="tel">feng</p>
+				<span style="font-size:14px;" id="vip">您还是普通用户，只可免费发布10条文章</span>
 			</div>
 			<div id="divBalance" class="num_gr">
 			    <a href="javascript:void(0);">
 			        <p>当前余额:</p>
-			        <span style="color: #ff4e00; float: right;">100<img style="margin-left:2px;" src="../../img/gr_2.gif"></span>
+			        <span style="color: #ff4e00; float: right;" id="money">100<img style="margin-left:2px;" src="../../img/gr_2.gif"></span>
 			    </a>
 			</div>
 			<div id="divPersonalInfo" class="num_gr">
@@ -119,7 +119,55 @@
 		</div>
 		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			//获取屏显示头部信息
+			function ajaxLoadServices() {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/services', {
+					data: {
+						token: localStorage.getItem(TOKEN)
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderServices,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
+			}
+			
+			function renderServices(result) {
+				if (result.status == -1) {
+					document.getElementById('imgs').src = PREVIOUS_REQUEST_DOMAIN+result.data.img;
+					if(result.data.tel == 0){
+						document.getElementById('tel').innerText = result.data.phone;
+					}else{
+						document.getElementById('tel').innerText = result.data.tel;
+					}
+					if(result.data.vip == 0){
+						document.getElementById('divBalance').style.display = 'none';
+					}else if(result.data.vip == 1){
+						document.getElementById('vip').innerText = '月会员:'+result.data.vips+' - '+result.data.vipe;
+						document.getElementById('divBalance').style.display = 'none';
+					}else if(result.data.vip == 2){
+						document.getElementById('vip').innerText = '年会员:'+result.data.vips+' - '+result.data.vipe;
+						document.getElementById('divBalance').style.display = 'none';
+					}else if(result.data.vip == 3){
+						document.getElementById('vip').innerText = '企业版:'+result.data.vips+' - '+result.data.vipe;
+						document.getElementById('money').innerText = result.data.money;
+					}else if(result.data.vip == 4){
+						document.getElementById('vip').innerText = '代理商:'+result.data.vips+' - '+result.data.vipe;
+						document.getElementById('money').innerText = result.data.money;
+					}
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
+			}
 			mui.plusReady(function() {
+				ajaxLoadServices();
 				//打开发布文章页面
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
@@ -214,7 +262,7 @@
 				//退出登陆
 				mui(document).on('tap', '#divLogout', function() {
 					mui.ajax(REQUEST_DOMAIN + 'member/login.php/logout', {
-						type:'GET',
+						type:'POST',
 						timeout:5000,
 						beforeSend: function() {
 					        plus.nativeUI.showWaiting('登出...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});

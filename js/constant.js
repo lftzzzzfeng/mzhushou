@@ -1,6 +1,6 @@
 //var REQUEST_DOMAIN = 'http://localhost/zhushou/api/';
-var REQUEST_DOMAIN = 'http://192.168.199.192/zhushou/api/';
-var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.199.192/zhushou/';
+var REQUEST_DOMAIN = 'http://192.168.199.108/zhanyezhushou/api/';
+var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.199.108/zhanyezhushou/';
 
 var AD_TEMPLATE_ID = 0;
 var CRAWLING_URL = 'crawlingUrl';
