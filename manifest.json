@@ -101,7 +101,10 @@
         },
         "NativeObj":{
         	"description": "原生对象"
-        }
+        },
+        "Share": {
+			"description": "分享"
+		},"OAuth":{}
     },
     "plus": {
         "splashscreen": {
@@ -111,7 +114,7 @@
         "popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
         "runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
         "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-        "distribute": {
+        "distribute": {"plugins":{"oauth":{"weixin":{"appid":"wx5ae5be7ae8e3111f","appsecret":"0fb89e6279a500c09420b0a1b2c7c262"}}},
             "apple": {
                 "appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
                 "mobileprovision": "",/*iOS应用打包配置文件*/
@@ -282,7 +285,8 @@
 					"views/publisharticle/template.html",
 					"views/myzone/managearticle.html",
 					"views/managead/index.html",
-					"views/member/index.html"
+					"views/member/index.html",
+					"views/publisharticle/content.html"
 				],
 				"priority": 0
 			},
@@ -298,7 +302,9 @@
 					"js/mui.min.js",
 					"js/constant.js"
 				],
-				"refer": [],
+				"refer": [
+					"views/publisharticle/postdetail.html"
+				],
 				"priority": 0
 			},
 			"views/myzone/managearticle.html": {
@@ -528,6 +534,34 @@
 					"img/lj_3.jpg",
 					"img/lj_1.jpg",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/publisharticle/content.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/style.css",
+					"img/zan.png",
+					"js/mui.min.js",
+					"js/constant.js",
+					"img/light.png",
+					"css/feng.css"
+				],
+				"refer": [
+					"views/publisharticle/index.html"
+				],
+				"priority": 0
+			},
+			"views/publisharticle/postdetail.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"css/feng.css",
+					"js/constant.js",
+					"img/light.png",
+					"img/zan.png"
 				],
 				"refer": [],
 				"priority": 0

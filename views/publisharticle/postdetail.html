@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+			.wz_cona img {
+				width:100%;
+			}
+		</style>
+		<style type="text/css">
+			.gg_img img{width:95%;}
+			.sm_p{ width:100%; height:auto; overflow:hidden; margin:15px auto; line-height:25px; background:#fff;}
+			.sm_p p{ border: 1px solid #f5f5f5;margin: 0 auto;padding: 10px 1%;width: 93%; color: rgb(136, 136, 136); font-size: 12px;}
+			.nr_wx{width:100%;height:auto; overflow:hidden; }
+			.nr_wx .nr_wx_con{ width:90%; margin:0 auto; padding:15px 0; }
+			.nr_wx .nr_wx_con img{ width:45%;float:left;}
+			.nr_time1{ width:95%; color:#8c8c8c; font-size:1rem; clear:both; margin:20px auto;line-height: 25px;}
+			.nr_time1 p{ float:left;}
+			i.zz{ background:url(../../img/zan.png) 0 0px no-repeat; width:14px; height:14px; float:left; background-size:100%;  margin:4px 3px 0 8px;}
+			i.zzh{ background:url(../../img/zan.png) 0 -19px no-repeat; width:14px; height:14px; float:left; background-size:100%;  margin:4px 3px 0 8px;}
+			.nr_time1 a{ color:#666;}
+			i.zza{background:url(../../img/zan.png) 0 0px no-repeat; width:14px; height:14px; float:left; background-size:100%; margin:0 2px;margin-top:3px;}
+		</style>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<body style="background:#fff;" id="bodyContent">
+		
+	</body>
+	<script type="text/javascript" src="../../js/constant.js"></script>
+	<script type="text/javascript">
+		function addNumber(id, url) {
+//			window.location.href="http://"+url;
+			mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'u_detial.php', {
+				type: 'post',
+				data: {
+					id: localStorage.getItem('postArticleId')
+				},
+				cache: false,
+				success: function(data) {
+//					plus.nativeUI.toast('成功');
+				}
+			});
+		}
+		
+		function ajaxInit() {
+			mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/articleInfo', {
+	            type: 'POST',
+	            dataType: 'json',
+	            data: {
+	                id: localStorage.getItem('postArticleId'),
+	                token: localStorage.getItem(TOKEN)
+	            },
+	            success: rendorInit,
+	            error: function(xhr, type, errorThrown) {
+					plus.nativeUI.toast('服务器超时，请稍后重试！');
+				}
+	        });
+		}
+		
+		function rendorInit(result) {
+			console.log(JSON.stringify(result));
+			if (result.status == -1) {
+				var userInfo = JSON.parse(localStorage.getItem(USER_INFO));
+				var adsShowCk = result.data.adsShowCk;
+				var adsInfo = result.data.adsInfo;
+				var data = result.data;
+				var zan = result.data.zan;
+				var adInfo = result.data.adInfo;
+				var contentlist = result.data.contenlist;
+				var advertisement = result.data.advertisement;
+				
+				var content = '';
+				content += '<div id=\"divContent\">';
+				
+				if (adsInfo.length > 0) {
+					adsInfo = adsInfo[0];
+					if (adsInfo['top'] == 1) {
+						content += '<div style=\"width:100%\" id=\"divTopAd\">';
+						adsInfo['img'] = adsInfo['img'].replace('./', PREVIOUS_REQUEST_DOMAIN);
+						console.log(adsInfo['img']);
+						if (adsInfo['src']) {
+							content += '<a href=\"http://'+adsInfo['src']+'\" target=\"_blank\" onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
+							content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%;\" title=\"'+adsInfo['title']+'\">';
+							content += '</a>';
+						} else {
+							content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%;\" title=\"'+adsInfo['title']+'\">';
+						}
+						content += '</div>';
+					} else if (adsInfo['top'] == 2) {
+						userInfo['img'] = PREVIOUS_REQUEST_DOMAIN + userInfo['img'];
+						content += '<div class="wz_top" id=\"divTopAd\">';
+						
+						content += '<div class=\"wz_topleft\">';
+						content += '<div class=\"wz_img\">';
+						content += '<img src=\"'+userInfo['img']+'\" style=\"width:50px;border-radius:50px;\"/>';
+						content += '</div>';
+						content += '<div class=\"wz_ir\">';
+						content += '<p style=\"color:#fff;height: 25px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;\">';
+						content += userInfo['realname'];
+						if (userInfo['company']) {
+							content += '| ' + userInfo['company'];						
+						}
+						content += '</p>';
+						if (userInfo['tel']) {
+							content += '<p style=\"color:#fff; height:25px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;\">'+userInfo['tel']+'</p>';
+						} else {
+							content += '<p style=\"color:#fff; height:25px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;\">'+userInfo['phone']+'</p>';
+						}
+						content += '</div>';
+						content += '</div>';
+						
+						content += '<div class="wz_topright">';
+						if (userInfo['tel']) {
+							content += '<a href=\"tel:'+userInfo['tel']+'\">';
+							content += '<img src=\"../../img/phone.gif\" style=\"width:45px; border-radius:50px; margin-top:3px;\" />';
+							content += '</a>';
+						} else {
+							content += '<a href=\"tel:'+userInfo['phone']+'\">';
+							content += '<img src=\"../../img/phone.gif\" style=\"width:45px; border-radius:50px; margin-top:3px;\" />';
+							content += '</a>';
+						}
+						content += '</div>';
+						
+						content += '</div>';
+						
+						content += '<div style=\"background#fff none repeat scroll 0 0;border-top:1px dashed #dedede;\"></div>';
+					}
+				}
+				
+				
+				content += '<div class=\"article\" id="divArticleTop">';
+				content += '<h1>'+data['title']+'</h1>';
+				content += '<p style=\"color:#8c8c8c; margin-left:5%; font-size:16px; padding-bottom:18px;\">';
+				content += data['putdate'];
+				content += '<span style=\"padding:0 15px; color:#8c8c8c;\">';
+				content += '<a href=\"javascript:void(0);\" style=\"color:#8c8c8c;\">';
+				content += data['putuser'];
+				content += '</a>';
+				content += '</span>';
+				content += '</p>';
+				content += '<div id=\"tConArt\" class=\"art_co sau\">';
+				content += '<div class=\"rich_media_content\" id=\"js_content\">';
+				content += '<div id=\"neirong\">';
+				data['content'] = data['content'].replace(new RegExp('./uploads', 'g'), PREVIOUS_REQUEST_DOMAIN + 'uploads');
+				content += data['content'];
+				content += '</div>';
+				content += '</div>';
+				content += '</div>';
+				content += '</div>';
+				
+				if (data['url'] != '0') {
+					content += '<p style="padding: 0px 5%;margin-top:20px;"><a href="'+data['url']+'" target=\"_blank\" style=\"color:#8c8c8c;\">阅读原文</a></p>';
+				}
+				
+				content += '<div class=\"sm_p\">';
+				content += '<p>版权属于原作者，若涉及版权问题，敬请及时联系我们。<br/>微信公众号：媒介匣展业助手。</p>';
+				content += '<input type=\"hidden\" id=\"zanNum\" value=\"'+data['zan']+'\">';
+				content += '<input type=\"hidden\" id=\"zanId\" value=\"'+localStorage.getItem('postArticleId')+'\">';
+				content += '</div>';
+				
+				content += '<div class=\"nr_wx\">';
+				content += '<div class=\"nr_time1\">';
+				content += '<p style=\"margin-right:10px;\"><span>阅读  '+(data['pv'])+'</span></p>';
+				if (data['zan']) {
+					if (zan == 1) {
+						content += '<i class=\"zzh\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\"><p style=\"float:right;\">投诉</p></a>';
+					} else {
+						content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href="javascript:void(0);" style=\"color:#8c8c8c;\"><p style=\"float:right;\">投诉</p></a>';
+					}
+				} else {
+					content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">赞</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\"><p style=\"float:right;\">投诉</p></a>';
+				}
+				content += '</div>';
+				content += '</div>';
+				
+				if (adsInfo.length > 0) {
+					adsInfo = adsInfo[0];
+					if (adsInfo['bottom'] == 13) {
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:0px;\">';
+					} else if (adsInfo['bottom'] == 11) {
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:80px;\">';
+					} else if (adsInfo['bottom'] == 12) {
+						content += '<div class=\"wz_gg\">';
+					} else {
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:0px;\">';
+					}
+					
+					if ((adInfo['img'] && userInfo['vip']==0) || userInfo['state'] == 1) {
+						content += '<p class=\"wzgg_p\" style=\"background:#f3f3f3 none repeat scroll 0 0;color:#929292;\">广告</p>';
+						content += '<div class=\"gg_img\" id=\"showImg\" style=\"background:#f3f3f3 none repeat scroll 0 0;\">';
+						content += '<a href=\"'+adInfo['url']+'\">';
+						adInfo['img'] = PREVIOUS_REQUEST_DOMAIN + adInfo['img'];
+						content += '<img src=\"'+adInfo['img']+'\" title=\"'+adInfo['title']+'\">';
+						content += '</a>';
+						content += '</div>';
+					}	
+				}
+				
+				
+				if (advertisement) {
+					advertisement = advertisement[0];
+					if (advertisement['img']) {
+						content += '<p class=\"wzgg_p\" style=\"background:#f3f3f3 none repeat scroll 0 0;color:#929292;\">广告</p>';
+						content += '<div class=\"gg_img\" id=\"showImg\" style=\"background:#f3f3f3 none repeat scroll 0 0;\">';
+						content += '<a onclick=\"'+addNumber(localStorage.getItem('postArticleId'), advertisement[0]['src'])+'\">';
+						adInfo['img'] = PREVIOUS_REQUEST_DOMAIN + adInfo['img'];
+						content += '<img src=\"'+advertisement[0]['img']+'\">';
+						content += '</a>';
+						content += '</div>';
+					}	
+				}
+				
+				content += '</div>';
+				
+				if (contentlist) {
+					content += '<p class=\"wzgg_pp\" style=\"background:#f3f3f3 none repeat scroll 0 0;line-height:38px;\">';
+					content += '<span style=\"border-bottom:3px solid #ff0000; color:#929292; font-size:1rem; padding:8px;\">相关阅读</span>';
+					content += '</p>';
+					
+					for (var i = 0; i < contentlist.length; i++) {
+						var row_pic = contentlist[i]['pic'].replace('[weixin]', IMG_URL + '?url=');
+						
+						if (i == 0) {
+							content += '<div class=\"gr_list gg_left relateArticles\" data-article-id=\"'+contentlist[i]['id']+'\" style=\"border-top:1px solid #e5e5e5;\">';
+						} else {
+							content += '<div class=\"gr_list gg_left relateArticles\" data-article-id=\"'+contentlist[i]['id']+'\">';
+						}
+						
+						content += '<div class=\"index_listl\">';
+						content += '<p class=\"p_ll\">';
+						content += '<a href=\"javascript:void(0);\">'+contentlist[i]['title']+'</a>';
+						content += '</p>';
+						if (QIAN_QUAN_SHOW) {
+							content += '<p class=\"p_la\">';
+							content += '<a href=\"javascript:void(0);\"><img src="../../img/zf.png" style=\"width:12px; height:12px;\"/></a><span>'+contentlist[i]['share']+'</span>';
+							content += '</p>';
+							content += '<p class=\"p_la\">';
+							content += '<a href=\"javascript:void(0);\"><img src=\"../../img/yd.png\" style=\"width:12px; height:12px;\"/></a><span>'+contentlist[i]['pv']+'</span>';
+							content += '</p>';
+						}
+						content += '</div>';
+						
+						content += '<div class=\"index_listr\">';
+						content += '<a href=\"javascript:void(0)\">';
+						content += '<img src=\"'+row_pic+'" style=\"max-height:80px;max-width:150px;\"/>';
+						content += '</a>';
+						content += '</div>';
+						
+						content += '</div>';
+					}
+					
+					content += '<div data-article-type=\"'+data['type']+'\" class=\"wz_more\" style=\"width:98%; height:40px; text-align:center;margin-left:1%;margin-top:5px;\">';
+					content += '<p><a href=\"javascript:void(0);\">查看更多>></a></p>';
+					content += '</div>';
+				}
+				
+				if (adsInfo['bottom'] == 11) {
+					content += '<div style=\"bottom:-5px; position:fixed; width:100%; border-bottom:1px solid #e5e5e5; border-top:1px solid #e5e5e5;\">';
+					if (adsInfo['src']) {
+						content += '<a onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
+						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo['title']+'\"/>';
+						content += '</a>';
+					} else {
+						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo['title']+'\"/>';
+					}
+					content += '</div>';
+				} else if (adsInfo['bottom'] == 12) {
+					content += '<div class="gg_fiexd">';
+					
+					content += '<div class=\"gg_fiexdleft\">';
+					content += '<img src=\"'+userInfo['img']+'\" style=\"width:50px; border-radius:50px;\"/>';
+					content += '<div class=\"f_left\">';
+					content += '<p class=\"fiexd_p\">'+userInfo['realname']+'</p>';
+					if (userInfo['qianming']) {
+						content += '<p class=\"fleft_p\">'+userInfo['qianming']+'</p>';
+					}
+					content += '</div>';
+					content += '</div>';
+					
+					content += '<div class=\"gg_fiexdright\" style=\"position:relative;\">';
+					content += '<ul>';
+					content += '<li>';
+					if (userInfo['tel']) {
+						content += '<a href=\"tel:'+userInfo['tel']+'\">';
+					} else {
+						content += '<a href=\"tel:'+userInfo['phone']+'\">';
+					}
+					content += '<img src=\"../../img/nav_phone.gif\" style=\"height:25px; margin-bottom:2px; margin-top:2px;\"/><br>';
+					content += '联系我';
+					content += '</a>';
+					content += '</li>';
+					content += '<li id=\"meimg\">';
+					content += '<a href=\"javascript:void(0);\">';
+					content += '<img src=\"../../img/nav_weixin.gif\" style=\"height:25px;margin-bottom:2px;margin-top:2px;\" /><br>';
+					content += '加我微信';
+					content += '</a>';
+					content += '</li>';
+					content += '<li>';
+					content += '<a href=\"javascript:void(0);\">';
+					content += '<img src=\"../../img/nav_home.gif\" style=\"height:25px;margin-bottom:2px;margin-top:2px;\" /><br>';
+					content += '我的微站';
+					content += '</a>';
+					content += '</li>';
+					content += '</ul>';
+					content += '<div class=\"we\">';
+					content += '<img src=\"'+userInfo['erweima']+'\" style=\"width:120px;\"/>';
+					content += '</div>';
+					content += '</div>';
+					
+					content += '</div>';
+				}
+				
+				content += '</div>';
+				
+				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
+					content += '<div class=\"light_e\">';
+					content += '<div class=\"light\"><img src="../../img/light.png" /></div>';
+					content += '</div>';
+					content += '<div class=\"share_e\" id="divShare" data-article-title=\"'+data['title']+'\">';
+					content += '<div class=\"share\">分享</div>';
+					content += '</div>';
+					content += '<div id=\"tipsImg\" style=\"display:none; position:fixed; top:26%; left:10%; width:300px; height:300px;\">';
+//					console.log(PREVIOUS_REQUEST_DOMAIN + WEIXIN_BJ);
+					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN + WEIXIN_BJ+'\" style=\"width:100%;\"/>';
+					content += '</div>';
+				}
+				
+				document.getElementById('bodyContent').innerHTML = content;
+			} else {
+				plus.nativeUI.toast(result.message);
+			}
+		}
+		
+		function shareSystem(articleTitle) {
+			plus.share.getServices(function(s){
+				shares = s;
+				for (var i in s) {
+					if ('weixin' == s[i].id) {
+						sharewx = s[i];
+					}
+				}
+				sharewx.send({
+					content: articleTitle,
+					href: PREVIOUS_REQUEST_DOMAIN + 'u_detail.php?id=' + localStorage.getItem('postArticleId'),
+					thumbs: [
+						'http://zs.meijiexia.cn/uploads/image/20171009/d8dd473226e9bdecdfede9b263c04e47.jpg'
+					],
+					extra: {
+						scene: "WXSceneTimeline"
+					}
+				}, function() {
+					plus.nativeUI.toast("分享成功！");
+				}, function(e) {
+					plus.nativeUI.toast("分享失败：" + e.message);
+				});
+			}, function(e) {
+				console.log("获取分享服务列表失败：" + e.message );
+			});
+		}
+		
+		mui.plusReady(function() {
+			ajaxInit();
+			
+			mui(document).on('tap', '.light', function() {
+				if (document.getElementById('tipsImg').style.display == 'none') {
+					document.getElementById('tipsImg').style.display = 'block';
+					document.getElementById('divContent').style.opacity = 0.2;
+				} else if (document.getElementById('tipsImg').style.display == 'block') {
+					document.getElementById('tipsImg').style.display = 'none';
+					document.getElementById('divContent').style.opacity = 1;
+				}
+			});
+			
+			mui(document).on('tap', '#divContent', function() {
+				if (document.getElementById('tipsImg').style.display == 'block') {
+					document.getElementById('tipsImg').style.display = 'none';
+					document.getElementById('divContent').style.opacity = 1;
+				}
+			});
+			
+			mui(document).on('tap', '#divShare', function() {
+				shareSystem(document.getElementById('divShare').getAttribute('data-article-title'));
+			});
+			
+			mui(document).on('tap', '.relateArticles', function() {
+				var articleId = this.getAttribute('data-article-id');
+				localStorage.setItem('postArticleId', articleId);
+				plus.webview.currentWebview().reload();
+			});
+			
+			mui(document).on('tap', '.zz', function() {
+				var num = document.getElementById('zanNum').value;
+        		var zanId = document.getElementById('zanId').value;
+        		
+        		mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'ajax.php', {
+		          	type: 'POST',
+		          	data: {
+		          		act:'zanChange',
+		          		id:zanId
+		          	},
+		          	success:function(data) {
+		            	if (data) {
+		            		document.getElementById('zanShow').className = 'zzh';
+		            		document.getElementById('zanChange').innerHTML = parseInt(num)+1;
+			            }
+		          	}
+		        });
+			});
+		});
+	</script>
+</html>

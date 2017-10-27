@@ -67,6 +67,8 @@
 		<script type="text/javascript" src="../../js/arteditor/js/index.min.js"></script>
 		<script type="text/javascript" src="../../js/arteditor/js/index.js"></script>
 		<script type="text/javascript">
+			var mask = mui.createMask();
+			
 			function crawling() {
 				mui.ajax(PREVIOUS_REQUEST_DOMAIN + localStorage.getItem(REQUEST_PATH), {
 		            type: 'POST',
@@ -76,12 +78,22 @@
 		                crawlingUrl: localStorage.getItem(CRAWLING_URL),
 		                returnType: RETURN_TYPE_JSON
 		            },
-		            success: crawlingSuccess
+		            beforeSend: function() {
+				        plus.nativeUI.showWaiting('玩命加载中...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+				    },
+				    complete: function() {
+				        plus.nativeUI.closeWaiting();
+				    },
+		            success: crawlingSuccess,
+		            error: function(xhr, type, errorThrown) {
+		            	plus.nativeUI.toast('服务器超时，请稍后重试！');
+		            }
 		        });
 		    }
 			
 		    function crawlingSuccess(result) {
-		        if (result.status == -1) {
+		    	console.log(JSON.stringify(result))
+		    	if (result.status == -1) {
 		            var title = result.data.title;
 		            var date = result.data.date;
 		            var author = result.data.author;
@@ -126,18 +138,41 @@
 		                        adselect: adselect,
 		                        act: 'template'
 		                    },
+		                    beforeSend: function() {
+						        plus.nativeUI.showWaiting('正在玩命提交...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+						        mask.show();
+						    },
+						    complete: function() {
+						        plus.nativeUI.closeWaiting();
+						        mask.close();
+						    },
 		                    success: function (data) {
-		                        if (data == "1") {
+		                    	if (data == "1") {
 		                            plus.nativeUI.toast('免费会员只能发布10天信息');
 		                        } else if (data == "2") {
 		                            plus.nativeUI.toast('未知错误,请稍后重试');
 		                        } else if (data == "3") {
 		                            plus.nativeUI.toast('相同的文章已存在');
 		                        } else {
-		                        	console.log('上传成功');
-//		                            window.location.href = 'u_detail.php?id='+data;
+		                        	localStorage.setItem('postArticleId', data);
+		                        	mui.openWindow({
+		                        		url: 'postdetail.html'
+		                        	});
 		                        }
-		                    }
+		                        plus.nativeUI.closeWaiting();
+					        	mask.close();
+		                    },
+		                    error: function(xhr,type,errorThrown) {
+								if (type == 'timeout') {//超时
+									plus.nativeUI.toast('服务器超时，请稍后重试！');
+									plus.nativeUI.closeWaiting();
+									mask.close();
+								} else {
+									plus.nativeUI.toast('网络错误，请稍后重试！');
+									plus.nativeUI.closeWaiting();
+									mask.close();
+								}
+							}
 		                });
 		            }
 				});

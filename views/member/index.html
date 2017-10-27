@@ -227,6 +227,9 @@
 							
 							if (result.status == -1) {
 								localStorage.removeItem(TOKEN);
+								localStorage.removeItem('isShowArticleType');
+								localStorage.removeItem('articleType');
+								
 								mui.openWindow({
 									url:'../../index.html'
 								});
