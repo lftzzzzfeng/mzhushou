@@ -47,29 +47,34 @@
 			    </ul>
 			</div>
 		</div>
+		<script src="../../js/constant.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			function ajaxLoadAboutMe() {
-//				mui.ajax('', {
-//					data: {
-//						phone: phone,
-//						password: password
-//					},
-//					dataType:'json',
-//					type:'POST',
-//					timeout:5000,
-//					success: renderAboutMe,
-//					error: function(xhr,type,errorThrown) {
-//						if (type == 'timeout') {//超时
-//							plus.nativeUI.toast('服务器超时，请稍后重试！');
-//						} else {
-//							plus.nativeUI.toast('网络错误，请稍后重试！');
-//						}
-//					}
-//				});
+				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/about', {
+					data: {
+						token: localStorage.getItem(TOKEN)
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderAboutMe,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
 			}
 			
 			function renderAboutMe(result) {
-				
+				if (result.status == -1) {
+					document.getElementById('qianming').value = result.data.userinfo.qianming;
+					document.getElementById('jieshao').value = result.data.userinfo.jieshao;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
 			}
 			
 			mui.plusReady(function() {
@@ -93,6 +98,33 @@
 					mui.openWindow({
 						url: '../myzone/managearticle.html',
 						id: 'myZoneManageArticle'
+					});
+				});
+				
+				mui(document).on('tap', '#aSave', function() {
+					var qianming = document.getElementById('qianming').value;
+					var jieshao = document.getElementById('jieshao').value;
+					
+					mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/aboutEdit', {
+						data: {
+							token: localStorage.getItem(TOKEN),
+							qianming: qianming,
+							jieshao: jieshao
+						},
+						dataType:'json',
+						type:'POST',
+						timeout:5000,
+						success: function(result) {
+							plus.nativeUI.toast(result.message);
+							plus.webview.currentWebview().reload();
+						},
+						error: function(xhr,type,errorThrown) {
+							if (type == 'timeout') {//超时
+								plus.nativeUI.toast('服务器超时，请稍后重试！');
+							} else {
+								plus.nativeUI.toast('网络错误，请稍后重试！');
+							}
+						}
 					});
 				});
 			});

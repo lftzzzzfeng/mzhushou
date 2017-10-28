@@ -321,14 +321,16 @@
 					"img/2.png",
 					"img/5.png",
 					"img/zf.png",
-					"img/yd.png"
+					"img/yd.png",
+					"js/constant.js"
 				],
 				"refer": [
 					"views/publisharticle/index.html",
 					"views/myzone/aboutme.html",
 					"views/myzone/contactme.html",
 					"views/managead/index.html",
-					"views/member/index.html"
+					"views/member/index.html",
+					"views/publisharticle/postdetail.html"
 				],
 				"priority": 0
 			},
@@ -336,7 +338,8 @@
 				"resources": [
 					"css/mui.min.css",
 					"js/mui.min.js",
-					"css/style.css"
+					"css/style.css",
+					"js/constant.js"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
@@ -353,7 +356,9 @@
 					"css/tx/js/hammer.js",
 					"css/tx/js/iscroll-zoom.js",
 					"css/tx/js/jquery.photoClip.js",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"js/constant.js",
+					"css/style.css"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
@@ -369,7 +374,9 @@
 					"img/6.png",
 					"img/xg.png",
 					"img/duigou.png",
-					"img/8.png"
+					"img/8.png",
+					"img/5.png",
+					"img/gr_bg.gif"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
@@ -563,7 +570,9 @@
 					"img/light.png",
 					"img/zan.png"
 				],
-				"refer": [],
+				"refer": [
+					"views/myzone/managearticle.html"
+				],
 				"priority": 0
 			}
 		},

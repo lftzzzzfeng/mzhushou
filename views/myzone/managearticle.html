@@ -8,11 +8,82 @@
 		<link href="../../css/style.css" rel="stylesheet" type="text/css" />
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			var page = 1;
+			var content = '';
+			
+			mui.init({
+			  	pullRefresh: {
+				    container:'#loaddata',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+				    up:{
+				      	height:50,
+				      	auto:false,
+				      	contentrefresh:"正在加载...",
+				      	callback: loadUserArticles
+				    }
+			  	}
+			});
+			
+			function loadUserArticles() {
+				page++;
+				
+				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/articleMore', {
+					data:{
+						token: localStorage.getItem(TOKEN),
+						page: page
+					},
+					dataType:'json',
+					type:'POST',
+					success:renderLoadMore,
+					error:function(xhr, type, errorThrown) {
+						console.log(JSON.stringify(errorThrown));
+					}
+				});
+//				
+//				setTimeout(function() {
+//					console.log(page);
+//					
+//					mui('#loaddata').pullRefresh().endPullup();
+//					if (page > 2) {
+////						mui('#loaddata').pullRefresh().disablePullupToRefresh();
+//						mui('#loaddata').pullRefresh().contentnomore = '没有更多了';
+//					}
+//    			}, 300);
+			}
+			
+			function renderLoadMore(result) {
+				if (result.status == -1) {
+					if (result.data.nums == 1) {
+						var userArticles = result.data.articles;
+						
+						for (var i = 0; i < userArticles.length; i++) {
+							content += '<div class=\"gr_lista\">';
+							content += '<p class=\"la_pp\">';
+							content += '<span>原创</span>';
+							content += '<a class=\"articles\" style="color:#333333;" href="javascript:void(0);" data-article-id=\"'+userArticles[i].id+'\">';
+							content += userArticles[i].title;
+							content += '</a>';
+							content += '</p>';
+							content += '<div class=\"la_d\">';
+							content += '<p class=\"yd_p\"><img src=\"../../img/zf.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].share+'</span></p>';
+							content += '<p class=\"yd_p\"><img src=\"../../img/yd.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].pv+'</span></p>';
+							content += '<a class=\"articleDel\" href=\"javascript:void(0);\" data-article-id=\"'+userArticles[i].id+'\">删除</a>';
+							content += '</div>';
+							content += '</div>';
+						}
+						
+						document.getElementById('divArticles').innerHTML = content;
+						mui('#loaddata').pullRefresh().endPullup();
+					} else if (result.data.nums == 2) {
+						mui('#loaddata').pullRefresh().disablePullupToRefresh();
+					}
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
+			}
 		</script>
 	</head>
 	<body>
-		<div class="mui-content">
+		<div class="mui-content" id="divContent">
 			<div class="gr_top" style="height:100px;">
 			    <img src="../../img/1.png" style="margin-top: auto;"/>
 			    <p><b>用户名</b></p>
@@ -24,7 +95,7 @@
 			        <li id="liThird"><a href="javascript:void(0);" style="color:#333;">联系我</a></li>
 			    </ul>
 			    <div class="panes" id="loaddata">
-        			<div class="pane" style="display:block;margin-bottom:0;">
+        			<div class="pane" id="divArticles" style="display:block;margin-bottom:0;">
         				<div class="gr_lista">
 	                        <p class="la_pp"><span>原创</span><a style="color:#333333;" href="u_detail.php?id=1678" target="_blank">给共享经济判个死刑</a></p>
 	                        <div class="la_d">
@@ -58,26 +129,73 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			function initLoad() {
+				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/articleList', {
+					data:{
+						token: localStorage.getItem(TOKEN)
+					},
+					dataType:'json',
+					type:'POST',
+					success:initRender,
+					error:function(xhr, type, errorThrown) {
+						console.log(JSON.stringify(errorThrown));
+					}
+				});
+			}
+			
+			function initRender(result) {
+				if (result.status == -1) {
+					var userArticles = result.data.articles;
+					
+					for (var i = 0; i < userArticles.length; i++) {
+						content += '<div class=\"gr_lista\">';
+						content += '<p class=\"la_pp\">';
+						content += '<span>原创</span>';
+						content += '<a class=\"articles\" style="color:#333333;" href="javascript:void(0);" data-article-id=\"'+userArticles[i].id+'\">';
+						content += userArticles[i].title;
+						content += '</a>';
+						content += '</p>';
+						content += '<div class=\"la_d\">';
+						content += '<p class=\"yd_p\"><img src=\"../../img/zf.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].share+'</span></p>';
+						content += '<p class=\"yd_p\"><img src=\"../../img/yd.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].pv+'</span></p>';
+						content += '<a class=\"articleDel\" href=\"javascript:void(0);\" data-article-id=\"'+userArticles[i].id+'\">删除</a>';
+						content += '</div>';
+						content += '</div>';
+					}
+					
+					document.getElementById('divArticles').innerHTML = content;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
+			}
+			
 			mui.plusReady(function() {
+				initLoad();
+				
+				//打开发布文章
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
 						url: '../publisharticle/index.html'
 					});
 				});
 				
+				//打开广告管理
 				mui(document).on('tap', '#liManagedAd', function() {
 					mui.openWindow({
 						url: '../managead/index.html'
 					});
 				});
 				
+				//打开会员服务
 				mui(document).on('tap', '#liMember', function() {
 					mui.openWindow({
 						url: '../member/index.html'
 					});
 				});
 				
+				//打开关于我
 				mui(document).on('tap', '#liSecond', function() {
 					mui.openWindow({
 						url: '../myzone/aboutme.html',
@@ -85,6 +203,7 @@
 					});
 				});
 				
+				//打开联系我
 				mui(document).on('tap', '#liThird', function() {
 					mui.openWindow({
 						url: '../myzone/contactme.html',
@@ -92,9 +211,44 @@
 					});
 				});
 				
-				//加载文章
-				
 				//删除文章
+				mui(document).on('tap', '.articleDel', function() {
+					var articleId = this.getAttribute('data-article-id');
+					mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'ajax.php', {
+						data: {
+							id: articleId,
+							act: 'artDel'
+						},
+						dataType:'json',
+						type:'POST',
+						timeout:5000,
+						success: function(data) { 
+							if (data == 1) {
+								plus.nativeUI.toast('删除成功');
+								plus.webview.currentWebview().reload();
+							} else {
+								plus.nativeUI.toast('删除失败');
+							}
+						},
+						error: function(xhr,type,errorThrown) {
+							if (type == 'timeout') {//超时
+								plus.nativeUI.toast('服务器超时，请稍后重试！');
+							} else {
+								plus.nativeUI.toast('网络错误，请稍后重试！');
+							}
+						}
+					});
+				});
+				
+				//显示文章
+				mui(document).on('tap', '.articles', function() {
+					var articleId = this.getAttribute('data-article-id');
+					localStorage.setItem('postArticleId', articleId);
+					mui.openWindow({
+						url: '../publisharticle/postdetail.html',
+						createNew:true
+					});
+				});
 			});
 		</script>
 	</body>
