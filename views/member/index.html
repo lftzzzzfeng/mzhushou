@@ -3,20 +3,19 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-
+
+scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
 		<link href="../../css/tx/css/style.css" rel="stylesheet" type="text/css" />
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
 	</head>
-	<body>
+	<body id='pullrefresh'>
 		<div class="mui-content">
 			<div class="gr_top">
 				<img src="../../css/tx/images/userico.jpg" id="imgs"/>
-				<p id="tel">feng</p>
+				<p id="tel">媒介匣</p>
 				<span style="font-size:14px;" id="vip">您还是普通用户，只可免费发布10条文章</span>
 			</div>
 			<div id="divBalance" class="num_gr">
@@ -54,15 +53,30 @@
 			    </ul>
 			</div>
 			<div class="num_kf">
-			    <ul>
+			    <ul id="ul_id">
+			    	<li id="buyingMembers" class="kf_li">
+			            <a href="javascript:void(0);">
+			                <p>购买会员</p>
+			            </a>
+			        </li>
+			        <li id="purchasingAgent" class="kf_li">
+			            <a href="javascript:void(0);">
+			                <p>购买代理</p>
+			            </a>
+			        </li>
 			        <li id="liPurchaseMember" class="kf_li">
 			            <a href="javascript:void(0);">
 			                <p>添加会员&代理商</p>
 			            </a>
 			        </li>
+			        <li id="liPurchaseemployee" class="kf_li">
+			            <a href="javascript:void(0);">
+			                <p>添加员工</p>
+			            </a>
+			        </li>
 			        <li id="liMemberList" class="kf_li">
 			            <a href="/user/buyAgent.php">
-			                <p>会员列表</p>
+			                <p id="member">会员列表</p>
 			            </a>
 			        </li>
 			        <li id="liConsumeDetail" class="kf_li">
@@ -76,13 +90,19 @@
 			                <img src="../../img/gr_2.gif" />
 			            </a>
 			        </li>
+			        <li id="advertisingPromotion" class="kf_li">
+			            <a href="javascript:void(0)">
+			                <p>广告推广</p>
+			                <img src="../../img/gr_2.gif" />
+			            </a>
+			        </li>
 			        <li id="liKnowMember" class="kf_li">
 			            <a href="javascript:void(0);" target="_blank">
 			                <p>了解会员/代理</p>
 			                <img src="../../img/gr_2.gif" />
 			            </a>
 			        </li>
-			        <li id="liAboutUs">
+			        <li id="liAboutUs" class="kf_li">
 			            <a href="../about.html" target="_blank">
 			                <p>关于我们</p>
 			                <img src="../../img/gr_2.gif" />
@@ -92,10 +112,10 @@
 			</div>
 		</div>
 		<div id="divLogout" class="num_gr" style="margin-bottom:70px;">
-		    <a href="javascript:void(0);">
-		        <p>退出登录</p>
-		        <img src="../../img/gr_2.gif" />
-		    </a>
+			<a href="javascript:void(0);">
+			    <p>退出登录</p>
+			    <img src="../../img/gr_2.gif" />
+			</a>
 		</div>
 		<div class="index_nav">
 		    <ul>
@@ -119,7 +139,28 @@
 		</div>
 		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
-			//获取屏显示头部信息
+			mui.init({				
+				pullRefresh: {  
+                	container: '#pullrefresh',  
+                  	down: { 
+                  		style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					    color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
+					    height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					    range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					    offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					    auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                      	callback: pulldownRefresh  
+                  	},
+              	}  
+			})
+			
+			function pulldownRefresh() {  
+              setTimeout(function () {  
+                  ajaxLoadServices();  
+                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              }, 1500);  
+          	} 
+			//获取会员服务用户信息
 			function ajaxLoadServices() {
 				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/services', {
 					data: {
@@ -140,27 +181,53 @@
 			}
 			
 			function renderServices(result) {
+//				console.log(JSON.stringify(result));
 				if (result.status == -1) {
 					document.getElementById('imgs').src = PREVIOUS_REQUEST_DOMAIN+result.data.img;
-					if(result.data.tel == 0){
-						document.getElementById('tel').innerText = result.data.phone;
+					if(result.data.realname != 0){
+						document.getElementById('tel').innerText = result.data.realname;
 					}else{
-						document.getElementById('tel').innerText = result.data.tel;
+						if(result.data.tel == 0){
+							document.getElementById('tel').innerText = result.data.phone;
+						}else{
+							document.getElementById('tel').innerText = result.data.tel;
+						}
 					}
 					if(result.data.vip == 0){
 						document.getElementById('divBalance').style.display = 'none';
+						document.getElementById('liPurchaseMember').style.display = 'none';
+						document.getElementById('liPurchaseemployee').style.display = 'none';
+						document.getElementById('liMemberList').style.display = 'none';
+						document.getElementById('liConsumeDetail').style.display = 'none';
+						document.getElementById('advertisingPromotion').style.display = 'none';
 					}else if(result.data.vip == 1){
 						document.getElementById('vip').innerText = '月会员:'+result.data.vips+' - '+result.data.vipe;
 						document.getElementById('divBalance').style.display = 'none';
+						document.getElementById('liPurchaseMember').style.display = 'none';
+						document.getElementById('liPurchaseemployee').style.display = 'none';
+						document.getElementById('liMemberList').style.display = 'none';
+						document.getElementById('liConsumeDetail').style.display = 'none';
+						document.getElementById('advertisingPromotion').style.display = 'none';
 					}else if(result.data.vip == 2){
 						document.getElementById('vip').innerText = '年会员:'+result.data.vips+' - '+result.data.vipe;
 						document.getElementById('divBalance').style.display = 'none';
+						document.getElementById('liPurchaseMember').style.display = 'none';
+						document.getElementById('liPurchaseemployee').style.display = 'none';
+						document.getElementById('liMemberList').style.display = 'none';
+						document.getElementById('liConsumeDetail').style.display = 'none';
+						document.getElementById('advertisingPromotion').style.display = 'none';
 					}else if(result.data.vip == 3){
 						document.getElementById('vip').innerText = '企业版:'+result.data.vips+' - '+result.data.vipe;
 						document.getElementById('money').innerText = result.data.money;
+						document.getElementById('buyingMembers').style.display = 'none';
+						document.getElementById('purchasingAgent').style.display = 'none';
+						document.getElementById('liPurchaseMember').style.display = 'none';
+						document.getElementById('member').innerText = '员工列表';
 					}else if(result.data.vip == 4){
 						document.getElementById('vip').innerText = '代理商:'+result.data.vips+' - '+result.data.vipe;
 						document.getElementById('money').innerText = result.data.money;
+						document.getElementById('liPurchaseemployee').style.display = 'none';
+						document.getElementById('advertisingPromotion').style.display = 'none';
 					}
 				} else {
 					plus.nativeUI.toast(result.message);

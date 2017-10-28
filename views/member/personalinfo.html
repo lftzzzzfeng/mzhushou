@@ -18,11 +18,8 @@
 		    .gg_top .gg_left a{color:#ff4e00;}
 	    </style>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
 	</head>
-	<body>
+	<body id="pullrefresh">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
 		    <h1 class="mui-title main-color">个人信息</h1>
@@ -38,30 +35,30 @@
 	            </div>
 		        <div class="grxx_list">
 		            <p class="glist_left">昵称</p>
-		            <input class="glist_right" type="text" name="realname" id="realname" placeholder="这家伙很懒什么都没留下！" />
+		            <input class="glist_right" id='realname' type="text" value="" name="realname" placeholder="这家伙很懒什么都没留下！" />
 		        </div>
 		        <div class="grxx_list">
 		            <p class="glist_left">手机号</p>
-		            <input class="glist_right" type="text" name="phone" id="phone" value="18631121750" />
+		            <input class="glist_right" id="tel" type="text" value="" name="phone" placeholder="这家伙很懒什么都没留下！" />
 		        </div>
 		        <div class="grxx_list">
 		            <p class="glist_left">个性签名</p>
-		            <input class="glist_right" type="text" name="qianming" id="qianming" placeholder="这家伙很懒什么都没留下！" />
+		            <input class="glist_right" id="qianming" type="text" value="" name="qianming" placeholder="这家伙很懒什么都没留下！" />
 		        </div>
 		        <div class="grxx_list">
 		            <p class="glist_left">公司名称</p>
-		            <input class="glist_right" type="text" name="company" id="company" placeholder="这家伙很懒什么都没留下！" />
+		            <input class="glist_right" id="company" type="text" value="" name="company" placeholder="这家伙很懒什么都没留下！" />
 		        </div>
 		        <div class="grxx_list">
 		            <p class="glist_left">个人简介</p>
-		            <textarea class="glist_right glist_righta" name="jieshao" id="jieshao" cols="45" rows="5" placeholder="这家伙很懒什么都没留下！"></textarea>
+		            <textarea class="glist_right glist_righta" id="jieshao" name="jieshao" value="" cols="45" rows="5" placeholder="这家伙很懒什么都没留下！"></textarea>
 		        </div>
 		        <div class="grxx_wx">
 		            <div class="grxx_left">
 		                <p>微信二维码</p>
 		                <div class="erweima">
 		                    <div class="weiera" id="logoBox">
-		                    	<img src="../../img/gr_1.gif" id="bgl" />
+		                    	<img src="../../img/gr_1.gif" id="bgl" style="width:100%;height: 100%;margin: 0px;"/>
 		                    </div>
 		                    <input type="hidden" name="erweima" id="erweima" value="">
 		                    <input type="hidden" name="touxiang" id="touxiang" value="">
@@ -111,7 +108,126 @@
 		<script src="../../css/tx/js/iscroll-zoom.js"></script>
 		<script src="../../css/tx/js/hammer.js"></script>
 		<script src="../../css/tx/js/jquery.photoClip.js?123"></script>
+		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			mui.init({				
+				pullRefresh: {  
+                	container: '#pullrefresh',  
+                  	down: { 
+                  		style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					    color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
+					    height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					    range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					    offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					    auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                      	callback: pulldownRefresh  
+                  	},
+              	}  
+			})
+			
+			function pulldownRefresh() {  
+              setTimeout(function () {  
+                  ajaxLoadUserInfo(); 
+                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              }, 1500);  
+          	} 
+          	
+          	//获取会员服务用户信息
+			function ajaxLoadUserInfo() {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/personalData', {
+					data: {
+						token: localStorage.getItem(TOKEN)
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: renderUserInfo,
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
+			}
+			
+			function renderUserInfo(result) {
+				console.log(JSON.stringify(result));
+				if (result.status == -1) {
+					document.getElementById('touxiang').src = PREVIOUS_REQUEST_DOMAIN+result.data.img;
+					if(result.data.realname != 0){
+						document.getElementById('realname').value = result.data.realname;
+					}
+					if(result.data.tel != 0){
+						document.getElementById('tel').value = result.data.tel;
+					}
+					if(result.data.qianming != 0){
+						document.getElementById('qianming').value = result.data.qianming;
+					}
+					if(result.data.company != 0){
+						document.getElementById('company').value = result.data.company;
+					}
+					if(result.data.jieshao){
+						document.getElementById('jieshao').value = result.data.jieshao;
+					}
+					if(result.data.erweima != 0){
+						document.getElementById('bgl').src = PREVIOUS_REQUEST_DOMAIN+result.data.erweima;
+					}
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
+			}
+			
+			//调用修改数据接口
+			function ajaxUser(touxiang,realname, phone, qianming,company,jieshao) {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/personalEdit', {
+					type: 'POST',
+					data: {
+						token: localStorage.getItem(TOKEN),
+						touxiang:touxiang,
+						realname:realname,
+						phone:phone,
+						qianming:qianming,
+						company:company,
+						jieshao:jieshao,
+					},
+					success: function(result) {
+						console.log(JSON.stringify(result));
+						if (result.status == -1) {
+							plus.nativeUI.toast('保存成功');
+							mui.openWindow({
+								url:'./index.html',
+							});
+						} else {
+							plus.nativeUI.toast(result.message);
+						}
+					}
+				});
+			}
+			
+          	mui.plusReady(function() {
+				ajaxLoadUserInfo();
+				//提交数据
+				document.getElementById('subInfo').addEventListener('tap', function() {
+					var realname = document.getElementById('realname').value;
+					var phone = document.getElementById('tel').value;
+					var qianming = document.getElementById("qianming").value;
+					var company = document.getElementById('company').value;
+					var jieshao = document.getElementById('jieshao').value;
+					if (phone != '') {
+						if (!phone.match(/^(((1[3|4|5|7|8][0-9]{1}))+\d{8})$/)) {
+							plus.nativeUI.toast('手机号格式错误');
+						}else{
+							ajaxUser(imgData,realname, phone, qianming,company,jieshao);
+						}
+					}else{
+						ajaxUser(imgData,realname, phone, qianming,company,jieshao);
+					}
+						
+				});
+			});
+          	
 			var obUrl = ''
 		    $("#clipArea").photoClip({
 		        width: 280,
