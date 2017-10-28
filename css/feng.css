@@ -1,3 +1,21 @@
 .main-color {
 	color: #ff6c00
 }
+
+.share_e {
+	width: 100px;
+	height: 145px;
+	position: fixed;
+	right: 5px;
+	top: 150px;
+	text-align: center;
+}
+
+.share {
+	text-align: center;
+	width: 45px;
+	height: 20px;
+	position: relative;
+	float: right;
+	border: 1px blue dotted;
+}

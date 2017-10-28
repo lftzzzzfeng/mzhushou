@@ -342,6 +342,9 @@ scale=1,maximum-scale=1,user-scalable=no" />
 							
 							if (result.status == -1) {
 								localStorage.removeItem(TOKEN);
+								localStorage.removeItem('isShowArticleType');
+								localStorage.removeItem('articleType');
+								
 								mui.openWindow({
 									url:'../../index.html'
 								});

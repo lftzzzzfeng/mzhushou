@@ -1,6 +1,8 @@
 //var REQUEST_DOMAIN = 'http://localhost/zhushou/api/';
-var REQUEST_DOMAIN = 'http://192.168.199.108/zhanyezhushou/api/';
-var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.199.108/zhanyezhushou/';
+var REQUEST_DOMAIN = 'http://192.168.199.192/zhushou/api/';
+//var REQUEST_DOMAIN = 'http://192.168.1.103/zhushou/api/';
+var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.199.192/zhushou/';
+//var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.1.103/zhushou/';
 
 var AD_TEMPLATE_ID = 0;
 var CRAWLING_URL = 'crawlingUrl';
@@ -10,3 +12,8 @@ var RETURN_TYPE_HTML = 1;
 var RETURN_TYPE_JSON = 2;
 
 var TOKEN = 'token';
+var USER_INFO = 'userInfo';
+
+var IMG_URL = 'http://192.168.199.192/zhushou/img0.php';
+var QIAN_QUAN_SHOW = 1;
+var WEIXIN_BJ = '/editor/attached/image/20170221/20170221175856_40586.jpg';

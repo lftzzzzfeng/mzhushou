@@ -77,7 +77,8 @@
 			"views/publisharticle/template.html",
 			"views/myzone/managearticle.html",
 			"views/managead/index.html",
-			"views/member/index.html"
+			"views/member/index.html",
+			"views/publisharticle/content.html"
 		]
 	},
 	"views/publisharticle/template.html": {
@@ -91,6 +92,9 @@
 			"js/arteditor/js/index.min.js",
 			"js/mui.min.js",
 			"js/constant.js"
+		],
+		"refer": [
+			"views/publisharticle/postdetail.html"
 		]
 	},
 	"views/myzone/managearticle.html": {
@@ -202,7 +206,8 @@
 			"css/feng.css",
 			"img/duigou.png",
 			"fonts/mui.ttf"
-		]
+		],
+		"refer": []
 	},
 	"views/member/personalinfo.html": {
 		"resources": [
@@ -216,7 +221,8 @@
 			"css/tx/js/hammer.js",
 			"css/tx/js/iscroll-zoom.js",
 			"fonts/mui.ttf"
-		]
+		],
+		"refer": []
 	},
 	"views/member/course.html": {
 		"resources": [
@@ -230,7 +236,8 @@
 			"js/jq.js",
 			"js/skin/default/layer.css",
 			"img/20170221184042_74059.jpg"
-		]
+		],
+		"refer": []
 	},
 	"views/member/customeservice.html": {
 		"resources": [
@@ -239,7 +246,8 @@
 			"css/mui.min.css",
 			"css/feng.css",
 			"fonts/mui.ttf"
-		]
+		],
+		"refer": []
 	},
 	"views/member/editpassword.html": {
 		"resources": [
@@ -247,7 +255,8 @@
 			"img/close_a.gif",
 			"css/mui.css",
 			"js/constant.js"
-		]
+		],
+		"refer": []
 	},
 	"views/member/addvip.html": {
 		"resources": [
@@ -256,7 +265,8 @@
 			"fonts/mui.ttf",
 			"css/newstyle.css",
 			"img/yhy.png"
-		]
+		],
+		"refer": []
 	},
 	"views/member/memberlist.html": {
 		"resources": [
@@ -264,7 +274,8 @@
 			"css/mui.min.css",
 			"css/feng.css",
 			"css/newstyle.css"
-		]
+		],
+		"refer": []
 	},
 	"views/member/consumedetail.html": {
 		"resources": [
@@ -299,6 +310,32 @@
 			"img/lj_3.jpg",
 			"img/lj_1.jpg",
 			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"views/publisharticle/content.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"img/zan.png",
+			"js/mui.min.js",
+			"js/constant.js",
+			"img/light.png",
+			"css/feng.css"
+		],
+		"refer": [
+			"views/publisharticle/index.html"
+		]
+	},
+	"views/publisharticle/postdetail.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"css/feng.css",
+			"js/constant.js",
+			"img/light.png",
+			"img/zan.png"
 		]
 	}
 }

@@ -40,20 +40,11 @@
 			</div>
 			<div class="index_list" id="divArticles">
         		<div class="index_lista">
-    				<div class="index_listl">
-        				<p class="p_ll"><a href="content.php?id=2&uid=6">“互联网＋”时代中国开放大学的机遇与挑战</a></p>
-                        <p class="p_la"><a href="javascript:void(0);"><img src="../../img/zf.png" style="width:15px;height:15px;" /></a><span>27</span></p>
-            			<p class="p_la"><a href="javascript:void(0);"><img src="../../img/yd.png" style="width:15px;height:15px;" /></a><span>633</span></p>
-                    </div>
-    				<div class="index_listr">
-    					<a href="content.php?id=2&uid=6">
-    						<img src="../../img/yd.png" style="max-height:80px;max-width:160px;"/>
-    					</a>
-    				</div>
+    				
 				</div>
             </div>
 			<input type="hidden" value="0" id="typeid">
-			<div id="divMore" class="jzgd" data-type="pc_0"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span id="spnMore"></span></a></div>
+			<div id="divMore" class="jzgd" data-type="pc_0"><a href="javascript:void(0);"><span id="spnMore"></span></a></div>
 			<div class="index_nav">
 			    <ul>
 			        <li class="nav_li" id="liPublishArticle">
@@ -84,6 +75,11 @@
 			
 			//获取屏显示头部信息
 			function ajaxLoadTopInfo() {
+				var string = '<p class="img-center-box"><img src="./uploads/image/20171027/3439c5458fcdb47fe1bf0d8e5cfbeb4a.jpg" width="353" height="615" style="width: 353px; height: 615px;"></p>';
+				string += '<p class="img-center-box"><img src="./uploads/image/20171027/3439c5458fcdb47fe1bf0d8e5cfbeb4a.jpg" width="353" height="615" style="width: 353px; height: 615px;"></p>';
+				
+				string = string.replace(new RegExp('./uploads', 'g'), PREVIOUS_REQUEST_DOMAIN + 'uploads');
+				console.log(string);
 				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/indexUser', {
 					data: {
 						token: localStorage.getItem(TOKEN)
@@ -174,8 +170,15 @@
 					var target = document.getElementById('ulArticleTypes');
 					var content = '';
 					var articleTypes = result.data.rows_type;
+					
 					for (var i = 0; i < articleTypes.length; i++) {
-						if (i == 0) {
+						if (localStorage.getItem('isShowArticleType')) {
+							var articleType = localStorage.getItem('articleType');
+						} else {
+							var articleType = 888;
+						}
+						
+						if (articleTypes[i].id == articleType) {
 							content += '<li class=\"lin_x\" data-type-id=\"'+articleTypes[i].id+'\"><a href="javascript:void(0);">'+articleTypes[i].name+'</a></li>';	
 						} else {
 							content += '<li data-type-id=\"'+articleTypes[i].id+'\"><a href=\"javascript:void(0);\">'+articleTypes[i].name+'</a></li>';	
@@ -189,9 +192,15 @@
 			
 			//获取并显示文章
 			function ajaxInitArticles(typeId) {
+				if (localStorage.getItem('isShowArticleType') == true) {
+					var articleType = localStorage.getItem('articleType');
+				} else {
+					var articleType = typeId;
+				}
+				
 				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/article', {
 					data: {
-						id: typeId
+						id: articleType
 					},
 					dataType:'json',
 					type:'POST',
@@ -220,7 +229,7 @@
 					}
 					
 					for (var i = 0; i < articles.length; i++) {
-						_content += '<div class=\"index_lista\">';
+						_content += '<div class=\"index_lista\" data-article-id=\"'+articles[i].id+'\">';
 						_content += '<div class="index_listl">';
 						_content += '<p class=\"p_ll\">';
 						_content += '<a href=\"javascript:void(0);\">';
@@ -285,7 +294,7 @@
 					}
 					
 					for (var i = 0; i < articles.length; i++) {
-						_content += '<div class=\"index_lista\">';
+						_content += '<div class=\"index_lista\" data-article-id=\"'+articles[i].id+'\">';
 						_content += '<div class="index_listl">';
 						_content += '<p class=\"p_ll\">';
 						_content += '<a href=\"javascript:void(0);\">';
@@ -301,7 +310,7 @@
 						_content += '<img src=\"'+path+'\" style=\"max-height:80px;max-width:160px;\" />';
 						_content += '</a>';
 						_content += '</div>';
-						_content += '</div>';
+						_content += '</div>'; 
 					}
 					
 					if (result.data.nums == 2) {
@@ -318,11 +327,34 @@
 				}
 			}
 			
+			function ajaxGetUserInfo() {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/personalData', {
+		            type: 'POST',
+		            dataType: 'json',
+		            data: {
+		                token: localStorage.getItem(TOKEN)
+		            },
+		            success: function(result) {
+		            	console.log(localStorage.getItem(TOKEN));
+		            	console.log(JSON.stringify(result));
+		            	if (result.status == -1) {
+		            		localStorage.setItem(USER_INFO, JSON.stringify(result.data));
+		            	} else {
+		            		plus.nativeUI.toast(result.message);
+		            	}
+		            },
+		            error: function(xhr, type, errorThrown) {
+						plus.nativeUI.toast('服务器超时，请稍后重试！');
+					}
+		        });
+			}
+			
 			mui.plusReady(function() {
 				ajaxLoadTopInfo();
 				ajaxLoadAds();
 				ajaxLoadArticleTypes();
-				ajaxInitArticles(888);
+				ajaxInitArticles(typeId);
+				ajaxGetUserInfo();
 				
 				mui(document).on('tap', '#liMyZone', function() {
 					mui.openWindow({
@@ -343,6 +375,9 @@
 				});
 				
 				mui(document).on('tap', '.index_n li', function() {
+					localStorage.removeItem('isShowArticleType');
+					localStorage.removeItem('articleType');
+					
 					mui('.index_n li').each(function() {
 						this.className = '';
 					});
@@ -354,6 +389,15 @@
 				mui(document).on('tap', '#divMore', function() {
 					page++;
 					ajaxLoadMoreArticles(typeId, page);
+				});
+				
+				mui(document).on('tap', '.index_lista', function() {
+					var articleId = this.getAttribute('data-article-id');
+					localStorage.setItem('articleId', articleId);
+					
+					mui.openWindow({
+						url: 'content.html'	
+					});
 				});
 				
 				mui(document).on('tap', '#goContent', function() {
@@ -385,8 +429,7 @@
 			        localStorage.setItem(CRAWLING_URL, conUrl);
 		            
 		            mui.openWindow({
-		            	url: '../../views/publisharticle/template.html',
-		            	id: 'publishArticleTemplate'
+		            	url: '../../views/publisharticle/template.html'
 		            });
 				});
 			});
