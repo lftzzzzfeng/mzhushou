@@ -21,31 +21,31 @@
 			<div class="tj_huiyuan">
 			    <div class="tj_name">
 			        <p><span>*</span>姓名</p>
-			        <input type="text" name="realname" id="realname" placeholder="请填写会员名称" />
+			        <input type="text" name="realname" value="" id="realname" placeholder="请填写会员名称" />
 			    </div>
 			    <div class="tj_name">
 			        <p><span>*</span>手机号</p>
-			        <input type="text" name="phone" id="phone" placeholder="请填写会员电话，用于登陆" />
+			        <input type="text" name="phone" value="" id="phone" placeholder="请填写会员电话，用于登陆" />
 			    </div>
 			    <div class="tj_name">
 			        <p><span>*</span>密码</p>
-			        <input type="password" name="pass" id="pass" placeholder="请设置六位及以上登陆密码，区分大小写" />
+			        <input type="password" name="pass" value="" id="pass" placeholder="请设置六位及以上登陆密码，区分大小写" />
 			    </div>
 			    <div class="fangs" style="margin-left:20px; margin-bottom: 20px;">
 			        <p style="font-size:14px; text-align:center; margin-bottom:5px;">&nbsp;&nbsp;&nbsp;&nbsp;当前余额：10元</p>
 			        <div class="fs_left">
-			            <input name="viptype" class="input_class" value="1" id="checkbox_1" checked type="radio">
-			            <div class="checkboxborderab" onClick="add_img(this,'checkbox_1','5')" style="border: 1px solid rgb(225, 114, 17); background: transparent url('../../img/yhy.png') no-repeat scroll center center;"></div>
+			            <input name="viptype" value="1" id="checkbox_1" checked type="radio">
+			            <!--<div class="checkboxborderab" onClick="add_img(this,'checkbox_1','5')" style="border: 1px solid rgb(225, 114, 17); background: transparent url('../../img/yhy.png') no-repeat scroll center center;"></div>-->
 			            月会员：5元
 			        </div>
 			        <div class="fs_left">
-			            <input name="viptype" class="input_class" value="2" id="checkbox_2" type="radio">
-			            <div class="checkboxborderab" onClick="add_img(this,'checkbox_2','25')"></div>
+			            <input name="viptype" value="2" id="checkbox_2" type="radio">
+			            <!--<div class="checkboxborderab" onClick="add_img(this,'checkbox_2','25')"></div>-->
 	            		年会员：25元
 			        </div>
 			        <div class="fs_left">
-			            <input name="viptype" class="input_class" value="4" id="checkbox_3" type="radio">
-			            <div class="checkboxborderab" onClick="add_img(this,'checkbox_3','88')"></div>
+			            <input name="viptype" value="4" id="checkbox_3" type="radio">
+			            <!--<div class="checkboxborderab" onClick="add_img(this,'checkbox_3','88')"></div>-->
 	            		代理：88元/年
 			        </div>
 			    </div>
@@ -54,6 +54,7 @@
 			    </div>
 			</div>
 		</div>
+		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script>
 	        var ckNum = 0;
 	        function add_img(obj,checkbox,money){
@@ -67,25 +68,78 @@
 	                obj.style.border = "1px solid #ccc";
 	                document.getElementById(checkbox).setAttribute('checked', false);
 	            } else {
-//	                if(ckNum < 4){
-//	                    var ckMoney = 0;
-//	                    if(parseInt(ckMoney) < parseInt(money)){
-//	                        ckNum++;
-//	                        layer.open({
-//	                            content: '余额不足是否马上去充值？'
-//	                            ,btn: ['是', '稍后']
-//	                            ,yes: function(index){
-//	                              window.location.href=sitepath+"/user/recharge.php";
-//	                              layer.close(index);
-//	                            }
-//	                        });
-//	                    }
-//	                }
+	                if(ckNum < 4){
+	                    var ckMoney = 0;
+	                    if(parseInt(ckMoney) < parseInt(money)){
+	                        ckNum++;
+	                        layer.open({
+	                            content: '余额不足是否马上去充值？'
+	                            ,btn: ['是', '稍后']
+	                            ,yes: function(index){
+	                              window.location.href=sitepath+"/user/recharge.php";
+	                              layer.close(index);
+	                            }
+	                        });
+	                    }
+	                }
 	                obj.style.background = "url(../../img/yhy.png) center no-repeat";
 	                obj.style.border = "1px solid #e17211";
 	                document.getElementById(checkbox).setAttribute('checked', true);
 	            }
 	        }
+	        
+	        function ajaxAddMember(realname,phone,pass,viptype) {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/addMember', {
+					type: 'POST',
+					data: {
+						token: localStorage.getItem(TOKEN),
+						realname:realname,
+						phone:phone,
+						pass:pass,
+						viptype:viptype
+					},
+					success: function(result) {
+//						console.log(JSON.stringify(result));
+						if (result.status == -1) {
+							mui.openWindow({
+								url: 'index.html'
+							});
+						}else{
+							plus.nativeUI.toast(result.message);
+						}
+					}
+				});
+			}
+	        
+	        mui.plusReady(function() {
+				//输入验证
+				document.getElementById('addVipBtn').addEventListener('tap', function() {
+					var realname = document.getElementById('realname').value;
+					var phone = document.getElementById('phone').value;
+					var pass = document.getElementById("pass").value;
+					var radio=document.getElementsByName("viptype");
+		            var viptype=null;   
+		            for(var i=0;i<radio.length;i++){
+		                if(radio[i].checked==true) {
+		                    viptype=radio[i].value;
+		                    break;
+		                }
+		            }
+					if (phone == '') {
+						plus.nativeUI.toast('请输入手机号');
+					} else if (!phone.match(/^(((1[3|4|5|7|8][0-9]{1}))+\d{8})$/)) {
+						plus.nativeUI.toast('手机号格式错误');
+					} else if(realname == '') {
+						plus.nativeUI.toast('请输入名称');
+					} else if(pass == '') {
+						plus.nativeUI.toast('请输入密码');
+					} else if(pass.length < 6) {
+						plus.nativeUI.toast('请输入不小于6位的密码');
+					} else {
+						ajaxAddMember(realname,phone, pass,viptype);
+					}
+				});
+			});
     	</script>
 	</body>
 </html>

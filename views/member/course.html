@@ -14,7 +14,7 @@
 	</head>
 	<body style="background:#fff;">
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+			<p class="mui-action-back mui-icon mui-pull-left main-color"><</p>
 		    <h1 class="mui-title main-color">使用教程</h1>
 		</header>
 		<div class="mui-content">
@@ -41,7 +41,7 @@
 							<p>
 								<img style="width: 16px; height: 12px;" src="http://zs.meijiexia.com/img0.php?url=http://zs.meijiexia.com/img0.php?url=http://zs.meijiexia.cn/img0.php?url=http://mmbiz.qpic.cn/mmbiz_png/1wDeEvUgsvA878mcHBd6FHj7eJZc9qEibTPGnrwZzQdoLLrsKP6KUqSGT96R25IJf4PdNicAic7jLSjZR0rNhvTfg/0?wx_fmt=png"><a href="http://zs.meijiexia.com/user/kf.php" target="_blank" style="line-height:1.6;">有问题咨询客服MM</a> 
 							</p>
-							<p>
+							<p id="content" >
 								<img src="../../img/20170301141809_76469.jpg" alt=""> 
 							</p>
 						</div>
@@ -60,7 +60,9 @@
 				<div class="light"><img src="../../img/light.png" /></div>
 			</div>
 		</div>
+		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			mui('body').on('tap','a',function(){document.location.href=this.href;});
 			mui.plusReady(function() {
 				mui(document).on('tap', '.light', function() {
 					if (document.getElementById('divLight').style.display == 'none') {
@@ -78,6 +80,7 @@
 						document.getElementById('divContent').style.opacity = 1;
 					}
 				});
+				
 			});
 		</script>
 	</body>
