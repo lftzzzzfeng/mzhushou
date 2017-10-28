@@ -258,7 +258,7 @@
 					}
 					
 					content += '<div data-article-type=\"'+data['type']+'\" class=\"wz_more\" style=\"width:98%; height:40px; text-align:center;margin-left:1%;margin-top:5px;\">';
-					content += '<p><a href=\"javascript:void(0);\">查看更多>></a></p>';
+					content += '<p><a href=\"javascript:void(0);\" id=\"aLookMore\">查看更多>></a></p>';
 					content += '</div>';
 				}
 				
@@ -413,6 +413,13 @@
 			            }
 		          	}
 		        });
+			});
+			
+			mui(document).on('tap', '#aLookMore', function() {
+				mui.openWindow({
+					url: '../myzone/managearticle.html',
+					createNew: true
+				});
 			});
 		});
 	</script>
