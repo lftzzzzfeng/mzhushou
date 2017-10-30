@@ -79,7 +79,7 @@
 							var _content = '';
 							var articles = result.data.userList; 
 							for (var i = 0; i < articles.length; i++) {
-								_content +='<a href="javascript:void(0);"><li><img style="width:60px;" src=\"'+PREVIOUS_REQUEST_DOMAIN+articles[i].img+'\" /><p class="li_ps">'+articles[i].realname+'<br><span>'+articles[i].phone+'</span></p><p class="li_d">';
+								_content +='<a href="javascript:void(0);" onclick="statistics('+articles[i].id+')"><li><img style="width:60px;" src=\"'+PREVIOUS_REQUEST_DOMAIN+articles[i].img+'\" /><p class="li_ps">'+articles[i].realname+'<br><span>'+articles[i].phone+'</span></p><p class="li_d">';
 								if(articles[i].vip == 1){
 									_content += '月会员</p></li></a>';
 								}else if(articles[i].vip == 2){
@@ -103,6 +103,17 @@
 							plus.nativeUI.toast(result.message);
 						}
 					}
+				});
+			}
+			
+			//会员数据统计
+			function statistics(id){
+				mui.openWindow({
+					url: 'statistics.html',
+					id:'statistics.html',
+				    extras:{
+				        mid:id
+				    }
 				});
 			}
 			
