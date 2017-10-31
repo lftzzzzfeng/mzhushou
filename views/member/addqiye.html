@@ -8,14 +8,11 @@
 		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
 		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
 	</head>
-	<body>
+	<body id="pullrefresh">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
-		    <h1 class="mui-title main-color">添加会员&代理商</h1>
+		    <h1 class="mui-title main-color">添加员工</h1>
 		</header>
 		<div class="mui-content">
 			<div class="tj_huiyuan">
@@ -32,30 +29,39 @@
 			        <input type="password" name="pass" value="" id="pass" placeholder="请设置六位及以上登陆密码，区分大小写" />
 			    </div>
 			    <div class="fangs" style="margin-left:20px; margin-bottom: 20px;">
-			        <p style="font-size:14px; text-align:center; margin-bottom:5px;">&nbsp;&nbsp;&nbsp;&nbsp;当前余额：10元</p>
-			        <div class="fs_left">
-			            <input name="viptype" value="1" id="checkbox_1" checked type="radio">
-			            <!--<div class="checkboxborderab" onClick="add_img(this,'checkbox_1','5')" style="border: 1px solid rgb(225, 114, 17); background: transparent url('../../img/yhy.png') no-repeat scroll center center;"></div>-->
-			            月会员：5元
-			        </div>
-			        <div class="fs_left">
-			            <input name="viptype" value="2" id="checkbox_2" type="radio">
-			            <!--<div class="checkboxborderab" onClick="add_img(this,'checkbox_2','25')"></div>-->
-	            		年会员：25元
-			        </div>
-			        <div class="fs_left">
-			            <input name="viptype" value="4" id="checkbox_3" type="radio">
-			            <!--<div class="checkboxborderab" onClick="add_img(this,'checkbox_3','88')"></div>-->
-	            		代理：88元/年
+			        <p style="font-size:14px; text-align:center; margin-bottom:5px;">&nbsp;&nbsp;&nbsp;&nbsp;当前余额：<span id="money">0.00</span></p>
+			        <div class="fs_left" style="width:200px;margin-left:30%;">
+			            <input name="viptype" value="2" id="checkbox_3" checked="checked" type="radio">企业会员：66元/年
 			        </div>
 			    </div>
 			    <div class="tja_btn">
-			        <input type="button" name="button" id="addVipBtn" value="提交" />
+			        <input type="button" name="button" id="addqiye" value="提交" />
 			    </div>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script>
+			mui.init({				
+				pullRefresh: {  
+                	container: '#pullrefresh',  
+                  	down: { 
+                  		style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					    color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
+					    height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					    range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					    offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					    auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                      	callback: pulldownRefresh  
+                  	},
+              	}  
+			})
+			
+			function pulldownRefresh() {  
+              setTimeout(function () {  
+                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              }, 1500);  
+          	} 
+          	
 	        var ckNum = 0;
 	        function add_img(obj,checkbox,money){
 	        	mui('div[class=checkboxborderab]').each(function() {
@@ -88,8 +94,8 @@
 	            }
 	        }
 	        
-	        function ajaxAddMember(realname,phone,pass,viptype) {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/addMember', {
+	        function addEmployees(realname,phone,pass,viptype) {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/addEmployees', {
 					type: 'POST',
 					data: {
 						token: localStorage.getItem(TOKEN),
@@ -99,10 +105,10 @@
 						viptype:viptype
 					},
 					success: function(result) {
-//						console.log(JSON.stringify(result));
+						console.log(JSON.stringify(result));
 						if (result.status == -1) {
 							mui.openWindow({
-								url: 'index.html'
+								url: 'memberlist.html'
 							});
 						}else{
 							plus.nativeUI.toast(result.message);
@@ -112,8 +118,11 @@
 			}
 	        
 	        mui.plusReady(function() {
+	        	var self = plus.webview.currentWebview();
+				var money = self.money;
+				document.getElementById('money').innerText = money;
 				//输入验证
-				document.getElementById('addVipBtn').addEventListener('tap', function() {
+				document.getElementById('addqiye').addEventListener('tap', function() {
 					var realname = document.getElementById('realname').value;
 					var phone = document.getElementById('phone').value;
 					var pass = document.getElementById("pass").value;
@@ -136,7 +145,7 @@
 					} else if(pass.length < 6) {
 						plus.nativeUI.toast('请输入不小于6位的密码');
 					} else {
-						ajaxAddMember(realname,phone, pass,viptype);
+						addEmployees(realname,phone, pass,viptype);
 					}
 				});
 			});

@@ -9,36 +9,18 @@
 		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
 		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
 	</head>
 
-	<body>
+	<body id="pullrefresh">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
 		    <h1 class="mui-title main-color">会员列表</h1>
 		</header>
 		<div class="mui-content">
 			<div class="huiyuan_list">
-			    <ul id="index_list">
-	                <a href="javascript:void(0);">
-	                    <li>
-	                        <img style="width:60px;" src="../../css/tx/images/userico.jpg" />
-	                        <p class="li_ps">姓名<br><span>电话</span></p>
-	                        <p class="li_d">会员vip</p>
-	                    </li>
-	                </a>
-	                <a href="javascript:void(0);">
-	                    <li>
-	                        <img style="width:60px;" src="../../css/tx/images/userico.jpg" />
-	                        <p class="li_ps">姓名<br><span>电话</span></p>
-	                        <p class="li_d">会员vip</p>
-	                    </li>
-	                </a>
-			    </ul>
+			    <ul id="index_list"></ul>
 			</div>
-			<div class="jzgd" data-type="pc_0"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span>点击加载更多</span></a></div>
+			<div class="jzgd" data-type="pc_0"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span id="spnMore">点击加载更多</span></a></div>
 			<div class="index_nav">
 			    <ul>
 			        <li id="liPublishArticle">
@@ -60,8 +42,83 @@
 			    </ul>
 			</div>
 		</div>
+		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			mui.init({				
+				pullRefresh: {  
+                	container: '#pullrefresh',  
+                  	down: { 
+                  		style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					    color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
+					    height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					    range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					    offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					    auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                      	callback: pulldownRefresh  
+                  	},
+              	}  
+			})
+			
+			function pulldownRefresh() {  
+              setTimeout(function () {  
+                  ajaxmemberList();  
+                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              }, 1500);  
+          	} 
+			
+			//会员列表接口
+			function ajaxmemberList() {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/memberList', {
+					type: 'POST',
+					data: {
+						token: localStorage.getItem(TOKEN)
+					},
+					success: function(result) {
+						console.log(JSON.stringify(result));
+						if (result.status == -1) {
+							var _content = '';
+							var articles = result.data.userList; 
+							for (var i = 0; i < articles.length; i++) {
+								_content +='<a href="javascript:void(0);" onclick="statistics('+articles[i].id+')"><li><img style="width:60px;" src=\"'+PREVIOUS_REQUEST_DOMAIN+articles[i].img+'\" /><p class="li_ps">'+articles[i].realname+'<br><span>'+articles[i].phone+'</span></p><p class="li_d">';
+								if(articles[i].vip == 1){
+									_content += '月会员</p></li></a>';
+								}else if(articles[i].vip == 2){
+									_content += '年会员</p></li></a>';
+								}else if(articles[i].vip == 3){
+									_content += '企业主</p></li></a>';
+								}else if(articles[i].vip == 4){
+									_content += '代理商</p></li></a>';
+								}
+								
+							}
+							document.getElementById('index_list').innerHTML = _content;
+							if (result.data.num == 2) {
+								document.getElementById('spnMore').innerText = '没有更多信息';
+//								document.getElementById('divMore').disabled = true;
+							} else {
+								document.getElementById('spnMore').innerText = '点击加载更多';
+//								document.getElementById('divMore').disabled = false;
+							}
+						}else{
+							plus.nativeUI.toast(result.message);
+						}
+					}
+				});
+			}
+			
+			//会员数据统计
+			function statistics(id){
+				mui.openWindow({
+					url: 'statistics.html',
+					id:'statistics.html',
+				    extras:{
+				        mid:id
+				    }
+				});
+			}
+			
 			mui.plusReady(function() {
+				ajaxmemberList();
 				//打开发布文章页面
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({

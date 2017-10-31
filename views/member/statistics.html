@@ -8,11 +8,8 @@
 		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
 		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init();
-		</script>
 	</head>
-	<body>
+	<body id="pullrefresh">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
 		    <h1 class="mui-title main-color">数据统计</h1>
@@ -21,22 +18,22 @@
 			<div class="xf_list">
 			    <ul id="index_list">
 			        <li>
-			            <div style="margin-top:2%;"><span style="float: left;">总发布文章数</span><span style="float: right;"><?php echo $row_user[0]['artNum']; ?></span></div>
+			            <div style="margin-top:2%;"><span style="float: left;">总发布文章数</span><span style="float: right;" id="artNum">0</span></div>
 			        </li>
 			        <li>
-			            <div style="margin-top:2%;"><span style="float: left;">现有文章数</span><span style="float: right;"><?php echo $rst[0]['article_number']; ?></span></div>
+			            <div style="margin-top:2%;"><span style="float: left;">现有文章数</span><span style="float: right;" id="article_number">0</span></div>
 			        </li>
 			        <li>
-			            <div style="margin-top:2%;"><span style="float: left;">总阅读数</span><span style="float: right;"><?php echo $rst[0]['pv_number']; ?></span></div>
+			            <div style="margin-top:2%;"><span style="float: left;">总阅读数</span><span style="float: right;" id="pv_number">0</span></div>
 			        </li>
 			        <li>
-			            <div style="margin-top:2%;"><span style="float: left;">总分享数</span><span style="float: right;"><?php echo $rst[0]['share_number']; ?></span></div>
+			            <div style="margin-top:2%;"><span style="float: left;">总分享数</span><span style="float: right;" id="share_number">0</span></div>
 			        </li>
 			        <li>
-			            <div style="margin-top:2%;"><span style="float: left;">总点赞数</span><span style="float: right;"><?php echo $rst[0]['zan_number']; ?></span></div>
+			            <div style="margin-top:2%;"><span style="float: left;">总点赞数</span><span style="float: right;" id="zan_number">0</span></div>
 			        </li>
 			        <li>
-			            <div style="margin-top:2%;"><span style="float: left;">总广告点击数</span><span style="float: right;"><?php echo $rst[0]['advertisement_number']; ?></span></div>
+			            <div style="margin-top:2%;"><span style="float: left;">总广告点击数</span><span style="float: right;" id="advertisement_number">0</span></div>
 			        </li>
 			    </ul>
 			</div>
@@ -62,8 +59,59 @@
 			    </ul>
 			</div>
 		</div>
+		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			mui.init({				
+				pullRefresh: {  
+                	container: '#pullrefresh',  
+                  	down: { 
+                  		style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					    color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
+					    height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					    range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					    offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					    auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                      	callback: pulldownRefresh  
+                  	},
+              	}  
+			})
+			
+			function pulldownRefresh() {  
+              setTimeout(function () {  
+                  ajaxdataStatistics();  
+                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              }, 1500);  
+          	} 
+			
+			function ajaxdataStatistics() {
+				var self = plus.webview.currentWebview();
+				var id = self.mid;
+				if(!id){
+					id = 0;
+				}
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/dataStatistics', {
+					type: 'POST',
+					data: {
+						token: localStorage.getItem(TOKEN),
+						id:id
+					},
+					success: function(result) {
+						console.log(JSON.stringify(result));
+						if(result.status == -1){
+							document.getElementById('artNum').innerText = result.data.artNum;
+							document.getElementById('article_number').innerText = result.data.article_number;
+							document.getElementById('pv_number').innerText = result.data.pv_number;
+							document.getElementById('share_number').innerText = result.data.share_number;
+							document.getElementById('zan_number').innerText = result.data.zan_number;
+							document.getElementById('advertisement_number').innerText = result.data.advertisement_number;
+						}else{
+							plus.nativeUI.toast(result.message);
+						}
+					}
+				});
+			}
 			mui.plusReady(function() {
+				ajaxdataStatistics();
 				//打开发布文章页面
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({

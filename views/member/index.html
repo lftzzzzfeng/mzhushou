@@ -19,7 +19,7 @@
 			<div id="divBalance" class="num_gr">
 			    <a href="javascript:void(0);">
 			        <p>当前余额:</p>
-			        <span style="color: #ff4e00; float: right;" id="money">100<img style="margin-left:2px;" src="../../img/gr_2.gif"></span>
+			        <img style="margin-left:2px;float: right;" src="../../img/gr_2.gif"><span style="color: #ff4e00; float: right;" id="money">0.00</span>
 			    </a>
 			</div>
 			<div id="divPersonalInfo" class="num_gr">
@@ -321,6 +321,33 @@
 				mui(document).on('tap', '#liKnowMember', function() {
 					mui.openWindow({
 						url: 'know.html'
+					});
+				});
+				
+				//打开企业版添加员工
+				mui(document).on('tap', '#liPurchaseemployee', function() {
+					money = document.getElementById('money').innerText;
+					mui.openWindow({
+						url: 'addqiye.html',
+						money:'addqiye.html',
+					    extras:{
+					        money:money
+					    }
+					});
+				});
+				
+				//打开企业版广告推广
+				mui(document).on('tap', '#advertisingPromotion', function() {
+					money = document.getElementById('money').innerText;
+					mui.openWindow({
+						url: 'advertisingPromotion.html'
+					});
+				});
+				
+				//打开关于我们
+				mui(document).on('tap', '#liAboutUs', function() {
+					mui.openWindow({
+						url: 'about.html'
 					});
 				});
 				

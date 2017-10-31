@@ -164,9 +164,9 @@
 			function renderInit(result) {
 				if (result.status == -1) {
 					document.getElementById('phone').value = result.data.tel;
-//					document.getElementById('bgl').src = PREVIOUS_REQUEST_DOMAIN + result.data.erweima;
-					var src = result.data.erweima.replace('../../', PREVIOUS_REQUEST_DOMAIN);
-					document.getElementById('bgl').src = src;
+					document.getElementById('bgl').src = PREVIOUS_REQUEST_DOMAIN + result.data.erweima;
+//					var src = result.data.erweima.replace('../../', PREVIOUS_REQUEST_DOMAIN);
+//					document.getElementById('bgl').src = src;
 				} else {
 					plus.nativeUI.toast(result.message);
 				}

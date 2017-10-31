@@ -26,10 +26,29 @@
 				<p class="kf_ppp">请看使用教程或是购买会员（购买代理）页面，如还 不清楚请咨询客服。</p>
 				<p class="kf_pp">3、客服热线是多少？</p>
 				<p class="kf_ppp">4006-685-611</p>
-				<img src="../../img/kefu.jpg" />
+				<img src="../../img/kefu.jpg" id='imgurl' />
 				<p>扫一扫，联系客服</p>
 			</div>
 			<div style="height:60px;"></div>
 		</div>
+		<script src="../../js/constant.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+					mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/customerService', {
+						type: 'POST',
+						data: {
+							token: localStorage.getItem(TOKEN)
+						},
+						success: function(result) {
+//							console.log(JSON.stringify(result));
+							if (result.status == -1) {
+								document.getElementById('imgurl').src = PREVIOUS_REQUEST_DOMAIN+result.data.imgurl;
+							} else {
+								plus.nativeUI.toast(result.message);
+							}
+						}
+					});
+			});
+		</script>
 	</body>
 </html>
