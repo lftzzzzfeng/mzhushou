@@ -322,6 +322,19 @@
 						scene: "WXSceneTimeline"
 					}
 				}, function() {
+					mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'ajaxArt.php', {
+			            type: 'POST',
+			            dataType: 'json',
+			            data: {
+			                aid: localStorage.getItem('articleId'),
+			                uid: JSON.parse(localStorage.getItem(USER_INFO))['id']
+			            },
+			            success: function() {},
+			            error: function(xhr, type, errorThrown) {
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						}
+			        });
+					
 					plus.nativeUI.toast("分享成功！");
 				}, function(e) {
 					plus.nativeUI.toast("分享失败：" + e.message);

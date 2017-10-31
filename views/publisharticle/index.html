@@ -91,7 +91,7 @@
 					error: function(xhr,type,errorThrown) {
 						if (type == 'timeout') {//超时
 							plus.nativeUI.toast('服务器超时，请稍后重试！');
-						} else {
+						} else { 
 							plus.nativeUI.toast('网络错误，请稍后重试！');
 						}
 					}
@@ -328,10 +328,11 @@
 			}
 			
 			function ajaxGetUserInfo() {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/personalData', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 		            type: 'POST',
 		            dataType: 'json',
 		            data: {
+		            	action: 'personalData',
 		                token: localStorage.getItem(TOKEN)
 		            },
 		            success: function(result) {

@@ -21,14 +21,14 @@
 			<p style="line-height:60px; padding:0 15px;">请选择充值金额</p>
 			<div class="tabPanels">
 			    <ul>
-			        <li id="month" class="hitc topUpType">5元<br><span style="font-size:10px;">（月会员/次）</span></li>
-			        <li id="year" class="topUpType">25元<br><span style="font-size:10px;">(年会员/次)</span></li>
-			        <li id="yeard" class="topUpType">88元<br><span style="font-size:10px;">（代理或企业主/次）</span></li>
+			        <li id="month" class="hitc topUpType" data-money="5">5元<br><span style="font-size:10px;">（月会员/次）</span></li>
+			        <li id="year" class="topUpType" data-money="25">25元<br><span style="font-size:10px;">(年会员/次)</span></li>
+			        <li id="yeard" class="topUpType" data-money="88">88元<br><span style="font-size:10px;">（代理或企业主/次）</span></li>
 			    </ul>
 			    <div class="panes">
 			        <div class="panec" style="display:block;">
 			            <div class="qt_je">
-			                <input type="text" name="money" id="money" placeholder="其他金额【最低充值1元】" />
+			                <input type="text" name="money" id="txtMoney" placeholder="其他金额【最低充值1元】" />
 			            </div>
 			            <p class="fangshi">支付方式</p>
 			            <div class="fukuang">
@@ -45,6 +45,7 @@
 			    </div>
 			</div>
 		</div>
+		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script type="text/javascript">
 			mui.plusReady(function() {
 				mui(document).on('tap', '.topUpType', function() {
@@ -52,11 +53,68 @@
 						this.className = 'topUpType';
 					});
 					
-					this.className = "hitc topUpType";
+					this.className = "hitc topUpType";					
 				});
 				
 				mui(document).on('tap', '#payBtn', function() {
-					console.log('feng');
+					var money = 0;
+					
+					var others = document.getElementById('txtMoney').value;
+					if (others) {
+						money = others;
+					} else {
+						var item = document.getElementsByClassName('hitc')[0];
+						money = item.getAttribute('data-money');
+			    	}
+					
+//					http://zs.meijiexia.cn
+//					console.log(REQUEST_DOMAIN + 'api/services/memberServices.php');
+					//http://zs.meijiexia.cn/api/services/memberServices.php
+					
+					mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
+			            type: 'POST',
+			            dataType: 'json',
+			            data: {
+			            	action: 'topup',
+			                money: money,
+			                token: localStorage.getItem(TOKEN)
+			            },
+			            
+			            success: function(result) {
+			            	if (result.status == -1) {
+			            		var target = mui.openWindow({
+				            		url: result.data.mweb_url,
+				            		styles: {
+										additionalHttpHeaders: {
+											referer:"http://zs.meijiexia.cn"
+										}
+									},
+									show: {
+										autoShow: false
+									},
+									waiting: {
+										autoShow: false
+									}
+			            		});
+			            		
+			            		target.addEventListener("loaded", function() {
+			            			var btnArray = ['是', '否'];
+					                mui.confirm('支付是否已完成?', '支付', btnArray, function(e) {
+					                    if (e.index == 0) {
+					                    	console.log('支付成功');
+					                    } else if (e.index == 1) {
+					                    	console.log('请从新支付');
+					                    }
+					                });
+			            		});
+			            	} else {
+			            		plus.nativeUI.toast(result.message);
+			            	}
+			            },
+			            error: function(xhr, type, errorThrown) {
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						}
+			        });
 				});
 			});
 		</script>

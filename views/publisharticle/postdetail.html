@@ -37,7 +37,6 @@
 	<script type="text/javascript" src="../../js/constant.js"></script>
 	<script type="text/javascript">
 		function addNumber(id, url) {
-//			window.location.href="http://"+url;
 			mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'u_detial.php', {
 				type: 'post',
 				data: {
@@ -45,7 +44,7 @@
 				},
 				cache: false,
 				success: function(data) {
-//					plus.nativeUI.toast('成功');
+					
 				}
 			});
 		}
@@ -340,8 +339,7 @@
 		}
 		
 		function shareSystem(articleTitle) {
-			plus.share.getServices(function(s){
-				shares = s;
+			plus.share.getServices(function(s) {
 				for (var i in s) {
 					if ('weixin' == s[i].id) {
 						sharewx = s[i];
@@ -354,9 +352,21 @@
 						'http://zs.meijiexia.cn/uploads/image/20171009/d8dd473226e9bdecdfede9b263c04e47.jpg'
 					],
 					extra: {
-						scene: "WXSceneTimeline"
+						
 					}
 				}, function() {
+					mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'ajaxuArt.php', {
+			            type: 'POST',
+			            dataType: 'json',
+			            data: {
+			                aid: localStorage.getItem('postArticleId')
+			            },
+			            success: function() {},
+			            error: function(xhr, type, errorThrown) {
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						}
+			        });
+					
 					plus.nativeUI.toast("分享成功！");
 				}, function(e) {
 					plus.nativeUI.toast("分享失败：" + e.message);
