@@ -160,8 +160,9 @@
           	} 
 			//获取会员服务用户信息
 			function ajaxLoadServices() {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/services', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					data: {
+						action:'services',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -179,7 +180,7 @@
 			}
 			
 			function renderServices(result) {
-//				console.log(JSON.stringify(result));
+				console.log(JSON.stringify(result));
 				if (result.status == -1) {
 					document.getElementById('imgs').src = PREVIOUS_REQUEST_DOMAIN+result.data.img;
 					if(result.data.realname != 0){
