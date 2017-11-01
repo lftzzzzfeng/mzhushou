@@ -34,9 +34,10 @@
 		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
 			mui.plusReady(function() {
-					mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/customerService', {
+					mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 						type: 'POST',
 						data: {
+							action:'customerService',
 							token: localStorage.getItem(TOKEN)
 						},
 						success: function(result) {

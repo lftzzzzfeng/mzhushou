@@ -135,8 +135,9 @@
           	
           	//获取会员服务用户信息
 			function ajaxLoadUserInfo() {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/personalData', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					data: {
+						action:'personalData',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -182,9 +183,10 @@
 			
 			//调用修改数据接口
 			function ajaxUser(realname, phone, qianming,company,jieshao,touxiang,erweima) {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/personalEdit', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					type: 'POST',
 					data: {
+						action:'personalEdit',
 						token: localStorage.getItem(TOKEN),
 						realname:realname,
 						phone:phone,

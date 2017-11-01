@@ -66,9 +66,10 @@
           	
           	//会员列表接口
 			function ajaxConsumptionDetails() {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/consumptionDetails', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					type: 'POST',
 					data: {
+						action:'consumptionDetails',
 						token: localStorage.getItem(TOKEN)
 					},
 					success: function(result) {

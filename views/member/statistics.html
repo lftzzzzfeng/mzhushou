@@ -89,9 +89,10 @@
 				if(!id){
 					id = 0;
 				}
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/dataStatistics', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					type: 'POST',
 					data: {
+						action:'dataStatistics',
 						token: localStorage.getItem(TOKEN),
 						id:id
 					},

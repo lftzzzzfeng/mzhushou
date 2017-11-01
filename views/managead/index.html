@@ -83,7 +83,7 @@
 							for (var i = 0; i < articles.length; i++) {	
 								_content += '<div class="gg_p" id="div237"><div class="gg_input"><input name="checkbox" value="'+articles[i].id+'" id="checkbox_237" type="checkbox"></div><div class="gg_li">';
 								_content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN+articles[i].img+'\" style="max-height: 100px;" /><div class="gg_lib">';
-								_content += '<p style="color:#fff;margin-left:2px;font-size:0.8rem;">'+articles[i].title+'</p><a href="ad_edit.php?id=237"><div class="xg"><img src="../../img/xg.png">修改</div></a></div></div></div>';
+								_content += '<p style="color:#fff;margin-left:2px;font-size:0.8rem;">'+articles[i].title+'</p><a href="ad_edit.php?id=237"><div class="xg" onclick="advertisementEdit('+articles[i].id+')"><img src="../../img/xg.png">修改</div></a></div></div></div>';
 							}
 							document.getElementById('gg_list').innerHTML = _content;
 						}else{
@@ -102,8 +102,7 @@
 			}
 		
 	        //删除广告
-			function ajaxAdvertisementDel(ids) {  
-				alert(123);
+			function ajaxAdvertisementDel(ids) { 
 				mui.ajax(REQUEST_DOMAIN + 'advertisement/advertisement.php', {
 					data: {
 						action:'advertisementDel',
@@ -131,17 +130,35 @@
 					}
 				});
 			}
+			
+			//广告管理编辑广告
+			function advertisementEdit(id){
+				mui.openWindow({
+					url: 'edit.html',
+					id:'edit.html',
+				    extras:{
+				        aid:id
+				    }
+				});
+			}
 	        
 	        mui.plusReady(function() {
 	        	mui(document).on('tap', '#del', function() {
-					var checkbox=document.getElementsByName("checkbox");
-					var arr = '';
-				    for(var i=0;i<checkbox.length;i++){
-				        if(checkbox[i].checked){
-				        	arr = arr+checkbox[i].value+',';
-				        }
-				    }
-				    ajaxAdvertisementDel(arr);
+	        		
+						var checkbox=document.getElementsByName("checkbox");
+						var arr = '';
+					    for(var i=0;i<checkbox.length;i++){
+					        if(checkbox[i].checked){
+					        	arr = arr+checkbox[i].value+',';
+					        }
+					    }
+					    if(arr){
+					    	if (confirm('确定要删除选中项吗？')){
+					    		ajaxAdvertisementDel(arr);
+					    	}
+					    }else{
+					    	plus.nativeUI.toast('请至少选中一条广告！');
+					    }
 				});
 	        	
 	        	mui(document).on('tap', '#add', function() {
@@ -149,13 +166,6 @@
 						url: 'add.html'
 					});
 				});
-	        	
-	        	mui(document).on('tap', '#edit', function() {
-					mui.openWindow({
-						url: 'edit.html'
-					});
-				});
-	        	
 	        	mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
 						url: '../publisharticle/index.html'

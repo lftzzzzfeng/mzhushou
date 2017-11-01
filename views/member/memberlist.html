@@ -68,9 +68,10 @@
 			
 			//会员列表接口
 			function ajaxmemberList() {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/memberList', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					type: 'POST',
 					data: {
+						action:'memberList',
 						token: localStorage.getItem(TOKEN)
 					},
 					success: function(result) {

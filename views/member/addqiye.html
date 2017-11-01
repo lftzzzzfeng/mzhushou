@@ -95,9 +95,10 @@
 	        }
 	        
 	        function addEmployees(realname,phone,pass,viptype) {
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/addEmployees', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					type: 'POST',
 					data: {
+						action:'addEmployees',
 						token: localStorage.getItem(TOKEN),
 						realname:realname,
 						phone:phone,

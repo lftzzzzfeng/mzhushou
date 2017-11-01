@@ -101,9 +101,10 @@
         } 
 			
 		function ajaxadvertisingPromotion() {
-			mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/advertisingPromotion', {
+			mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 				type: 'POST',
 				data: {
+					action:'advertisingPromotion',
 					token: localStorage.getItem(TOKEN)
 				},
 				success: function(result) {
@@ -124,9 +125,10 @@
 		//添加广告推广
 		function dvertisingPromotionadd(id,src,fileimg) {
 //				console.log('local: ' + fileimg);
-				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php/advertisingPromotionEdit', {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					type: 'POST',
 					data: {
+						action:'advertisingPromotionEdit',
 						token: localStorage.getItem(TOKEN),
 						id:id,
 						src:src,
