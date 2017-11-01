@@ -85,8 +85,8 @@
 	<body>
 		<div class="mui-content" id="divContent">
 			<div class="gr_top" style="height:100px;">
-			    <img src="../../img/1.png" style="margin-top: auto;"/>
-			    <p><b>用户名</b></p>
+			    <img id="imgUser" src="../../img/1.png" style="margin-top: auto; width: 50px; margin-top: 5px;"/>
+			    <p><b id="bName">用户名</b></p>
 			</div>
 			<div class="gr_con">
 				<ul>
@@ -96,14 +96,7 @@
 			    </ul>
 			    <div class="panes" id="loaddata">
         			<div class="pane" id="divArticles" style="display:block;margin-bottom:0;">
-        				<div class="gr_lista">
-	                        <p class="la_pp"><span>原创</span><a style="color:#333333;" href="u_detail.php?id=1678" target="_blank">给共享经济判个死刑</a></p>
-	                        <div class="la_d">
-	                            <p class="yd_p"><img src="../../img/zf.png" style="width:15px;height:15px;"><span>0</span></p>
-	                            <p class="yd_p"><img src="../../img/yd.png" style="width:15px;height:15px;"><span>0</span></p>
-	                            <a class="articleDel" href="javascript:void(0);" tid="1678">删除</a>
-	                        </div>
-	                    </div>
+    					
     				</div>
     			</div>
 			</div>
@@ -131,6 +124,34 @@
 		<script type="text/javascript" src="../../js/zepto.min.js"></script>
 		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			function initLoadUserInfo() {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
+					data:{
+						token: localStorage.getItem(TOKEN),
+						action: 'services'
+					},
+					dataType:'json',
+					type:'POST',
+					success: renderUserInfo,
+					error:function(xhr, type, errorThrown) {
+						console.log(JSON.stringify(errorThrown));
+					}
+				});
+			}
+			
+			function renderUserInfo(result) {
+				console.log(JSON.stringify(result));
+				if (result.status == -1) {
+					var name = result.data.realname;
+					var img = result.data.img;
+					
+					document.getElementById('bName').innerHTML = name;
+					document.getElementById('imgUser').src = PREVIOUS_REQUEST_DOMAIN + img;
+				} else {
+					plus.nativeUI.toast(result.message);
+				}
+			}
+			
 			function initLoad() {
 				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/articleList', {
 					data:{
@@ -172,6 +193,7 @@
 			}
 			
 			mui.plusReady(function() {
+				initLoadUserInfo();
 				initLoad();
 				
 				//打开发布文章
@@ -214,15 +236,23 @@
 				//删除文章
 				mui(document).on('tap', '.articleDel', function() {
 					var articleId = this.getAttribute('data-article-id');
-					mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'ajax.php', {
+					
+					mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/deleteArticle', {
 						data: {
 							id: articleId,
-							act: 'artDel'
+							token: localStorage.getItem(TOKEN)
 						},
+						beforeSend: function() {
+					        plus.nativeUI.showWaiting('玩命加载中...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+					    },
+					    complete: function() {
+					        plus.nativeUI.closeWaiting();
+					    },
 						dataType:'json',
 						type:'POST',
 						timeout:5000,
-						success: function(data) { 
+						success: function(data) {
+							console.log(data);
 							if (data == 1) {
 								plus.nativeUI.toast('删除成功');
 								plus.webview.currentWebview().reload();
@@ -231,6 +261,7 @@
 							}
 						},
 						error: function(xhr,type,errorThrown) {
+							plus.nativeUI.closeWaiting();
 							if (type == 'timeout') {//超时
 								plus.nativeUI.toast('服务器超时，请稍后重试！');
 							} else {

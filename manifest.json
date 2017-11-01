@@ -373,12 +373,15 @@
 					"img/duigou.png",
 					"img/8.png",
 					"img/5.png",
-					"img/gr_bg.gif"
+					"img/gr_bg.gif",
+					"js/mui.min.js",
+					"js/constant.js"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
 					"views/member/index.html",
-					"views/publisharticle/index.html"
+					"views/publisharticle/index.html",
+					"views/managead/add.html"
 				],
 				"priority": 0
 			},
@@ -397,7 +400,8 @@
 					"img/6.png",
 					"img/8.png",
 					"img/7.png",
-					"img/4.png"
+					"img/4.png",
+					"js/constant.js"
 				],
 				"refer": [
 					"views/managead/index.html",
@@ -413,7 +417,10 @@
 					"views/member/consumedetail.html",
 					"views/member/statistics.html",
 					"views/member/know.html",
-					"index.html"
+					"index.html",
+					"views/member/addqiye.html",
+					"views/member/about.html",
+					"views/member/advertisingPromotion.html"
 				],
 				"priority": 0
 			},
@@ -477,7 +484,8 @@
 					"js/findsms.js",
 					"img/close_a.gif",
 					"css/mui.css",
-					"js/constant.js"
+					"js/constant.js",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -518,7 +526,10 @@
 			"views/member/statistics.html": {
 				"resources": [
 					"css/mui.min.css",
-					"css/feng.css"
+					"css/feng.css",
+					"js/mui.min.js",
+					"css/newstyle.css",
+					"js/constant.js"
 				],
 				"refer": [
 					"views/managead/index.html"
@@ -570,6 +581,66 @@
 				"refer": [
 					"views/myzone/managearticle.html"
 				],
+				"priority": 0
+			},
+			"views/member/addqiye.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/constant.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/managead/add.html": {
+				"resources": [
+					"img/gr_1.gif",
+					"fonts/mui.ttf",
+					"css/newstyle.css",
+					"css/tx/js/jquery.min.js",
+					"css/mui.min.css",
+					"css/tx/css/style.css",
+					"css/feng.css",
+					"css/tx/js/jquery.photoClip.js",
+					"css/tx/js/hammer.js",
+					"css/tx/js/iscroll-zoom.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/about.html": {
+				"resources": [
+					"css/aboutimg/img09.png",
+					"css/aboutimg/img014.png",
+					"css/aboutimg/img03.png",
+					"css/aboutimg/img013.png",
+					"js/arteditor/js/jq.js",
+					"css/aboutimg/img01.png",
+					"css/aboutimg/img06.png",
+					"css/aboutimg/img011.png",
+					"css/aboutimg/img08.png",
+					"css/aboutimg/img02.png",
+					"css/aboutimg/img010.png",
+					"css/aboutimg/img05.png",
+					"css/aboutimg/style.css",
+					"css/aboutimg/img04.png",
+					"css/aboutimg/img07.png",
+					"css/aboutimg/arrow.png",
+					"css/aboutimg/img012.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"views/member/advertisingPromotion.html": {
+				"resources": [
+					"img/gr_1.gif",
+					"css/tx/js/jquery.min.js",
+					"css/feng.css",
+					"css/tx/js/jquery.photoClip.js",
+					"css/tx/js/hammer.js",
+					"js/constant.js",
+					"css/tx/js/iscroll-zoom.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

@@ -75,11 +75,6 @@
 			
 			//获取屏显示头部信息
 			function ajaxLoadTopInfo() {
-				var string = '<p class="img-center-box"><img src="./uploads/image/20171027/3439c5458fcdb47fe1bf0d8e5cfbeb4a.jpg" width="353" height="615" style="width: 353px; height: 615px;"></p>';
-				string += '<p class="img-center-box"><img src="./uploads/image/20171027/3439c5458fcdb47fe1bf0d8e5cfbeb4a.jpg" width="353" height="615" style="width: 353px; height: 615px;"></p>';
-				
-				string = string.replace(new RegExp('./uploads', 'g'), PREVIOUS_REQUEST_DOMAIN + 'uploads');
-				console.log(string);
 				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/indexUser', {
 					data: {
 						token: localStorage.getItem(TOKEN)
@@ -376,6 +371,7 @@
 				});
 				
 				mui(document).on('tap', '.index_n li', function() {
+					document.activeElement.blur();
 					localStorage.removeItem('isShowArticleType');
 					localStorage.removeItem('articleType');
 					
@@ -388,6 +384,7 @@
 				});
 				
 				mui(document).on('tap', '#divMore', function() {
+					document.activeElement.blur();
 					page++;
 					ajaxLoadMoreArticles(typeId, page);
 				});
