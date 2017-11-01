@@ -1,13 +1,15 @@
 //var REQUEST_DOMAIN = 'http://localhost/zhushou/api/';
 //var REQUEST_DOMAIN = 'http://192.168.199.192/zhushou/api/';
-var REQUEST_DOMAIN = 'http://192.168.0.130/zhushou/api/';
+//var REQUEST_DOMAIN = 'http://192.168.0.130/zhushou/api/';
 //var REQUEST_DOMAIN = 'http://192.168.0.113/zhushou/api/';
 //var REQUEST_DOMAIN = 'http://192.168.0.112/zhushou/api/';
+var REQUEST_DOMAIN = 'http://192.168.0.104/zhushou/api/';
 //var REQUEST_DOMAIN = 'http://zs.meijiexia.cn/api/';
 //var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.199.192/zhushou/';
-var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.0.130/zhushou/';
+//var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.0.130/zhushou/';
 //var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.0.113/zhushou/';
 //var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.0.112/zhushou/';
+var PREVIOUS_REQUEST_DOMAIN = 'http://192.168.0.104/zhushou/';
 //var PREVIOUS_REQUEST_DOMAIN = 'http://zs.meijiexia.cn/';
 
 var AD_TEMPLATE_ID = 0;

@@ -15,7 +15,7 @@ $(function () {
             if (result['code'] == '100') {
 //          	console.log(result['data']['url'].replace(/./, 'http://192.168.199.192/zhushou/'));
 //              return result['data']['url'];
-                return result['data']['url'].replace(/./, 'http://192.168.199.192/zhushou/');
+                return result['data']['url'].replace(/./, 'http://192.168.0.104/zhushou/');
             } else {
                 switch (result['code']) {
                     case '101': {
