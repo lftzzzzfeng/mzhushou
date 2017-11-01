@@ -145,6 +145,7 @@
 				success: function(result) {
 					console.log(JSON.stringify(result));
 					if(result.status == -1){
+                        plus.webview.close("../managead/index.html");
 						mui.openWindow({
 							url: 'index.html'
 						});

@@ -133,6 +133,9 @@
 			
 			//广告管理编辑广告
 			function advertisementEdit(id){
+//				var self=plus.webview.currentWebview();  
+//              console.log(JSON.stringify(self)) 
+				plus.webview.close("../managead/edit.html");
 				mui.openWindow({
 					url: 'edit.html',
 					id:'edit.html',
