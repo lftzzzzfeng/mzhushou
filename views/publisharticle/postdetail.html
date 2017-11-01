@@ -86,7 +86,7 @@
 						adsInfo['img'] = adsInfo['img'].replace('./', PREVIOUS_REQUEST_DOMAIN);
 						console.log(adsInfo['img']);
 						if (adsInfo['src']) {
-							content += '<a href=\"http://'+adsInfo['src']+'\" target=\"_blank\" onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
+							content += '<a id=\"topAd\" href=\"javascript:void(0);\" data-ad-src=\"http://'+adsInfo['src']+'\" target=\"_blank\" onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
 							content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%;\" title=\"'+adsInfo['title']+'\">';
 							content += '</a>';
 						} else {
@@ -264,7 +264,7 @@
 				if (adsInfo['bottom'] == 11) {
 					content += '<div style=\"bottom:-5px; position:fixed; width:100%; border-bottom:1px solid #e5e5e5; border-top:1px solid #e5e5e5;\">';
 					if (adsInfo['src']) {
-						content += '<a onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
+						content += '<a id=\"bottomAd\" data-ad-src=\"'+REQUEST_DOMAIN + adsInfo['src']+'\" href=\"javascript:void(0);\" onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
 						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo['title']+'\"/>';
 						content += '</a>';
 					} else {
@@ -430,6 +430,14 @@
 					url: '../myzone/managearticle.html',
 					createNew: true
 				});
+			});
+			
+			mui(document).on('tap', '#topAd', function() {
+				plus.runtime.openURL(this.getAttribute('data-ad-src'));
+			});
+			
+			mui(document).on('tap', '#bottomAd', function() {
+				plus.runtime.openURL(this.getAttribute('data-ad-src'));
 			});
 		});
 	</script>

@@ -233,6 +233,7 @@
 				});
 				
 				mui(document).on('tap', '#aSave', function() {
+					document.activeElement.blur();
 					var phone = document.getElementById('phone').value;
 					var erweima = document.getElementById('erweima').value;
 					console.log('local: ' + erweima);

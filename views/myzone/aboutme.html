@@ -132,6 +132,7 @@
 				});
 				
 				mui(document).on('tap', '#aSave', function() {
+					document.activeElement.blur();
 					var qianming = document.getElementById('qianming').value;
 					var jieshao = document.getElementById('jieshao').value;
 					

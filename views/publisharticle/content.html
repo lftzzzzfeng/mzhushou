@@ -71,7 +71,7 @@
 					adsInfo[0]['img'] = adsInfo[0]['img'].replace('./', PREVIOUS_REQUEST_DOMAIN);
 					
 					if (adsInfo[0]['src']) {
-						content += '<a href=\"http://'+adsInfo[0]['src']+'\" target="_blank">';
+						content += '<a id=\"topAd\" href=\"javascript:void(0);\" data-ad-src=\"http://'+adsInfo[0]['src']+'\" target="_blank">';
 						content += '<img src=\"'+adsInfo[0]['img']+'\" style=\"width:100%;\" title=\"'+adsInfo[0]['title']+'\">';
 						content += '</a>';
 					} else {
@@ -230,7 +230,7 @@
 				if (adsInfo[0]['bottom'] == 11 && adsShowCk == 1) {
 					content += '<div style=\"bottom:-5px; position:fixed; width:100%; border-bottom:1px solid #e5e5e5; border-top:1px solid #e5e5e5;\">';
 					if (adsInfo['src']) {
-						content += '<a href=\"'+REQUEST_DOMAIN + adsInfo[0]['src']+'\" target=\"_blank\">';
+						content += '<a id=\"bottomAd\" data-ad-src=\"'+REQUEST_DOMAIN + adsInfo[0]['src']+'\" href=\"javascript:void(0);\" target=\"_blank\">';
 						content += '<img src=\"'+adsInfo[0]['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo[0]['title']+'\"/>';
 						content += '</a>';
 					} else {
@@ -400,6 +400,14 @@
 				mui.openWindow({
 					url: 'index.html'
 				});
+			});
+			
+			mui(document).on('tap', '#topAd', function() {
+				plus.runtime.openURL(this.getAttribute('data-ad-src'));
+			});
+			
+			mui(document).on('tap', '#bottomAd', function() {
+				plus.runtime.openURL(this.getAttribute('data-ad-src'));
 			});
 		});
 	</script>

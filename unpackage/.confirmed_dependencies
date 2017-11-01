@@ -219,7 +219,9 @@
 			"css/mui.min.css",
 			"css/feng.css",
 			"img/duigou.png",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"js/constant.js"
 		],
 		"refer": []
 	},
@@ -376,7 +378,9 @@
 			"css/feng.css",
 			"css/tx/js/jquery.photoClip.js",
 			"css/tx/js/hammer.js",
-			"css/tx/js/iscroll-zoom.js"
+			"css/tx/js/iscroll-zoom.js",
+			"js/mui.min.js",
+			"js/constant.js"
 		]
 	},
 	"views/member/about.html": {
