@@ -17,7 +17,7 @@
 			    <div class="xq">
 			        <input name="checkbox_ok" id="checkbox_ok" value="0" type="checkbox" style="float:left;margin:22px 5px;"><p>全选</p>
 			    </div>
-			    <div class="del"><a href="javascript:void(0);">删除</a></div>
+			    <div class="del" id="del"><a href="javascript:void(0);">删除</a></div>
 			</div>
 			<div class="gg_list" id='gg_list'></div>
 			<div class="index_nav">
@@ -67,8 +67,9 @@
 			
 			//获取广告管理中的广告列表
 			function ajaxAdvertisementList() {
-				mui.ajax(REQUEST_DOMAIN + 'advertisement/advertisement.php/advertisementList', {
+				mui.ajax(REQUEST_DOMAIN + 'advertisement/advertisement.php', {
 					data: {
+						action:'advertisementList',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -100,8 +101,49 @@
 				});
 			}
 		
+	        //删除广告
+			function ajaxAdvertisementDel(ids) {  
+				alert(123);
+				mui.ajax(REQUEST_DOMAIN + 'advertisement/advertisement.php', {
+					data: {
+						action:'advertisementDel',
+						token: localStorage.getItem(TOKEN),
+						id:ids
+					},
+					dataType:'json',
+					type:'POST',
+					timeout:5000,
+					success: function(result) {
+						console.log(JSON.stringify(result));
+						if (result.status == -1) {
+							ajaxAdvertisementList();
+						}else{
+							plus.nativeUI.toast(result.message);
+						}
+					},
+					
+					error: function(xhr,type,errorThrown) {
+						if (type == 'timeout') {//超时
+							plus.nativeUI.toast('服务器超时，请稍后重试！');
+						} else {
+							plus.nativeUI.toast('网络错误，请稍后重试！');
+						}
+					}
+				});
+			}
 	        
 	        mui.plusReady(function() {
+	        	mui(document).on('tap', '#del', function() {
+					var checkbox=document.getElementsByName("checkbox");
+					var arr = '';
+				    for(var i=0;i<checkbox.length;i++){
+				        if(checkbox[i].checked){
+				        	arr = arr+checkbox[i].value+',';
+				        }
+				    }
+				    ajaxAdvertisementDel(arr);
+				});
+	        	
 	        	mui(document).on('tap', '#add', function() {
 					mui.openWindow({
 						url: 'add.html'
