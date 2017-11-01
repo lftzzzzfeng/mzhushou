@@ -47,6 +47,28 @@
 		</div>
 		<script type="text/javascript" src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			var paymentStatus = '';
+			
+			function checkPaymentStatus(orderId) {
+				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
+					type: 'POST',
+		            dataType: 'json',
+		            async: false,
+		            data: {
+		            	action: 'checkStatus',
+		                orderId: orderId,
+		                token: localStorage.getItem(TOKEN)
+		            },
+		            success: function(result) {
+		            	if (result.status == -1) {
+		            		paymentStatus = 'success';
+		            	} else {
+		            		paymentStatus = 'fail';
+		            	}
+		            }
+				});
+			}
+			
 			mui.plusReady(function() {
 				mui(document).on('tap', '.topUpType', function() {
 					mui('.topUpType').each(function() {
@@ -101,7 +123,12 @@
 			            			var btnArray = ['是', '否'];
 					                mui.confirm('支付是否已完成?', '支付', btnArray, function(e) {
 					                    if (e.index == 0) {
-					                    	console.log('支付成功');
+					                    	checkPaymentStatus();
+					                    	if (paymentStatus == 'success') {
+					                    		plus.nativeUI.toast('支付已成功');
+					                    	} else {
+					                    		plus.nativeUI.toast('您未支付成功');
+					                    	}
 					                    } else if (e.index == 1) {
 					                    	console.log('请从新支付');
 					                    }
