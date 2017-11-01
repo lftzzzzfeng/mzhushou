@@ -111,6 +111,12 @@
 							qianming: qianming,
 							jieshao: jieshao
 						},
+						beforeSend: function() {
+				        	plus.nativeUI.showWaiting('保存中...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+					    },
+					    complete: function() {
+					        plus.nativeUI.closeWaiting();
+					    },
 						dataType:'json',
 						type:'POST',
 						timeout:5000,

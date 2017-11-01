@@ -147,6 +147,12 @@
 					data: {
 						token: localStorage.getItem(TOKEN)
 					},
+					beforeSend: function() {
+				        plus.nativeUI.showWaiting('保存中...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+				    },
+				    complete: function() {
+				        plus.nativeUI.closeWaiting();
+				    },
 					dataType:'json',
 					type:'POST',
 					timeout:5000,
@@ -156,6 +162,7 @@
 							plus.nativeUI.toast('服务器超时，请稍后重试！');
 						} else {
 							plus.nativeUI.toast('网络错误，请稍后重试！');
+							plus.nativeUI.closeWaiting();
 						}
 					}
 				});

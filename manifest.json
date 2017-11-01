@@ -373,7 +373,8 @@
 					"img/duigou.png",
 					"img/8.png",
 					"img/5.png",
-					"img/gr_bg.gif"
+					"img/gr_bg.gif",
+					"js/mui.min.js"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
@@ -397,7 +398,8 @@
 					"img/6.png",
 					"img/8.png",
 					"img/7.png",
-					"img/4.png"
+					"img/4.png",
+					"js/constant.js"
 				],
 				"refer": [
 					"views/managead/index.html",
@@ -413,7 +415,8 @@
 					"views/member/consumedetail.html",
 					"views/member/statistics.html",
 					"views/member/know.html",
-					"index.html"
+					"index.html",
+					"views/member/addqiye.html"
 				],
 				"priority": 0
 			},
@@ -477,7 +480,8 @@
 					"js/findsms.js",
 					"img/close_a.gif",
 					"css/mui.css",
-					"js/constant.js"
+					"js/constant.js",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -570,6 +574,14 @@
 				"refer": [
 					"views/myzone/managearticle.html"
 				],
+				"priority": 0
+			},
+			"views/member/addqiye.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/constant.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

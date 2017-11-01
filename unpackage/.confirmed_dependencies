@@ -1,351 +1,361 @@
 {
-  "index.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/newstyle.css",
-      "js/public.js",
-      "js/codesms.js",
-      "css/app.css",
-      "img/password.gif",
-      "img/user.gif",
-      "js/alert.js",
-      "js/constant.js",
-      "js/mui.js",
-      "css/mui.css",
-      "fonts/mui.ttf",
-      "css/feng.css"
-    ],
-    "refer": [
-      "views/member/index.html",
-      "findpassword.html",
-      "register.html",
-      "views/publisharticle/index.html"
-    ]
-  },
-  "findpassword.html": {
-    "resources": [
-      "js/mui.min.js",
-      "js/findsms.js",
-      "img/close_a.gif",
-      "css/mui.css",
-      "css/newstyle.css",
-      "css/feng.css",
-      "fonts/mui.ttf"
-    ],
-    "refer": [
-      "views/member/index.html",
-      "index.html"
-    ]
-  },
-  "register.html": {
-    "resources": [
-      "js/regsms.js",
-      "css/newstyle.css",
-      "css/feng.css",
-      "css/mui.css",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "img/close_a.gif"
-    ],
-    "refer": [
-      "views/member/index.html"
-    ]
-  },
-  "views/publisharticle/index.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "img/yd.png",
-      "img/zf.png",
-      "img/1.png",
-      "img/6.png",
-      "img/7.png",
-      "img/8.png",
-      "views/publisharticle/index.html",
-      "img/select.gif",
-      "img/bg_a.gif",
-      "img/2.png",
-      "img/5.png",
-      "js/urlvalidate.js",
-      "img/ico_san.png",
-      "js/constant.js"
-    ],
-    "refer": [
-      "views/publisharticle/index.html",
-      "views/publisharticle/template.html",
-      "views/myzone/managearticle.html",
-      "views/managead/index.html",
-      "views/member/index.html",
-      "views/publisharticle/content.html"
-    ]
-  },
-  "views/publisharticle/template.html": {
-    "resources": [
-      "css/mui.min.css",
-      "css/style.css",
-      "js/jq.js",
-      "js/index.js",
-      "js/arteditor/js/jq.js",
-      "js/arteditor/js/index.js",
-      "js/arteditor/js/index.min.js",
-      "js/mui.min.js",
-      "js/constant.js"
-    ],
-    "refer": [
-      "views/publisharticle/postdetail.html"
-    ]
-  },
-  "views/myzone/managearticle.html": {
-    "resources": [
-      "js/mui.min.js",
-      "js/zepto.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "img/gr_bg.gif",
-      "img/1.png",
-      "img/6.png",
-      "img/8.png",
-      "img/7.png",
-      "img/2.png",
-      "img/5.png",
-      "img/zf.png",
-      "img/yd.png",
-      "js/constant.js"
-    ],
-    "refer": [
-      "views/publisharticle/index.html",
-      "views/myzone/aboutme.html",
-      "views/myzone/contactme.html",
-      "views/managead/index.html",
-      "views/member/index.html",
-      "views/publisharticle/postdetail.html"
-    ]
-  },
-  "views/myzone/aboutme.html": {
-    "resources": [
-      "css/mui.min.css",
-      "js/mui.min.js",
-      "css/style.css",
-      "js/constant.js"
-    ],
-    "refer": [
-      "views/myzone/managearticle.html",
-      "views/myzone/contactme.html"
-    ]
-  },
-  "views/myzone/contactme.html": {
-    "resources": [
-      "css/mui.min.css",
-      "css/tx/css/style.css",
-      "img/gr_1.gif",
-      "css/tx/js/jquery.min.js",
-      "css/tx/js/hammer.js",
-      "css/tx/js/iscroll-zoom.js",
-      "css/tx/js/jquery.photoClip.js",
-      "js/mui.min.js",
-      "js/constant.js",
-      "css/style.css"
-    ],
-    "refer": [
-      "views/myzone/managearticle.html",
-      "views/myzone/aboutme.html"
-    ]
-  },
-  "views/managead/index.html": {
-    "resources": [
-      "css/newstyle.css",
-      "css/mui.min.css",
-      "img/3.png",
-      "img/6.png",
-      "img/xg.png",
-      "img/duigou.png",
-      "img/8.png",
-      "img/5.png",
-      "img/gr_bg.gif"
-    ],
-    "refer": [
-      "views/myzone/managearticle.html",
-      "views/member/index.html",
-      "views/publisharticle/index.html"
-    ]
-  },
-  "views/member/index.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/newstyle.css",
-      "css/mui.min.css",
-      "css/tx/css/style.css",
-      "css/tx/images/userico.jpg",
-      "img/gr_bg.gif",
-      "img/gr_2.gif",
-      "img/help.gif",
-      "img/3.png",
-      "img/5.png",
-      "img/6.png",
-      "img/8.png",
-      "img/7.png",
-      "img/4.png"
-    ],
-    "refer": [
-      "views/managead/index.html",
-      "views/publisharticle/index.html",
-      "views/myzone/managearticle.html",
-      "views/member/balance.html",
-      "views/member/personalinfo.html",
-      "views/member/course.html",
-      "views/member/customeservice.html",
-      "views/member/editpassword.html",
-      "views/member/addvip.html",
-      "views/member/memberlist.html",
-      "views/member/consumedetail.html",
-      "views/member/statistics.html",
-      "views/member/know.html",
-      "index.html"
-    ]
-  },
-  "views/member/balance.html": {
-    "resources": [
-      "img/wx.png",
-      "css/newstyle.css",
-      "css/mui.min.css",
-      "css/feng.css",
-      "img/duigou.png",
-      "fonts/mui.ttf"
-    ],
-    "refer": []
-  },
-  "views/member/personalinfo.html": {
-    "resources": [
-      "img/gr_1.gif",
-      "css/tx/js/jquery.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "css/tx/css/style.css",
-      "css/feng.css",
-      "css/tx/js/jquery.photoClip.js",
-      "css/tx/js/hammer.js",
-      "css/tx/js/iscroll-zoom.js",
-      "fonts/mui.ttf"
-    ],
-    "refer": []
-  },
-  "views/member/course.html": {
-    "resources": [
-      "img/20170301141809_76469.jpg",
-      "css/style.css",
-      "css/mui.min.css",
-      "css/feng.css",
-      "img/light.png",
-      "js/layer.js",
-      "fonts/mui.ttf",
-      "js/jq.js",
-      "js/skin/default/layer.css",
-      "img/20170221184042_74059.jpg"
-    ],
-    "refer": []
-  },
-  "views/member/customeservice.html": {
-    "resources": [
-      "img/kefu.jpg",
-      "css/newstyle.css",
-      "css/mui.min.css",
-      "css/feng.css",
-      "fonts/mui.ttf"
-    ],
-    "refer": []
-  },
-  "views/member/editpassword.html": {
-    "resources": [
-      "js/findsms.js",
-      "img/close_a.gif",
-      "css/mui.css",
-      "js/constant.js"
-    ],
-    "refer": []
-  },
-  "views/member/addvip.html": {
-    "resources": [
-      "css/mui.min.css",
-      "css/feng.css",
-      "fonts/mui.ttf",
-      "css/newstyle.css",
-      "img/yhy.png"
-    ],
-    "refer": []
-  },
-  "views/member/memberlist.html": {
-    "resources": [
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "css/feng.css",
-      "css/newstyle.css"
-    ],
-    "refer": []
-  },
-  "views/member/consumedetail.html": {
-    "resources": [
-      "css/mui.min.css",
-      "css/feng.css",
-      "fonts/mui.ttf",
-      "css/newstyle.css"
-    ],
-    "refer": [
-      "views/managead/index.html"
-    ]
-  },
-  "views/member/statistics.html": {
-    "resources": [
-      "css/mui.min.css",
-      "css/feng.css"
-    ],
-    "refer": [
-      "views/managead/index.html"
-    ]
-  },
-  "views/member/know.html": {
-    "resources": [
-      "img/lj_7.jpg",
-      "img/lj_4.jpg",
-      "img/lj_8.jpg",
-      "img/lj_6.jpg",
-      "img/lj_9.jpg",
-      "img/lj_5.jpg",
-      "img/lj_2.jpg",
-      "css/feng.css",
-      "img/lj_3.jpg",
-      "img/lj_1.jpg",
-      "css/mui.min.css"
-    ],
-    "refer": []
-  },
-  "views/publisharticle/content.html": {
-    "resources": [
-      "css/mui.min.css",
-      "css/style.css",
-      "img/zan.png",
-      "js/mui.min.js",
-      "js/constant.js",
-      "img/light.png",
-      "css/feng.css"
-    ],
-    "refer": [
-      "views/publisharticle/index.html"
-    ]
-  },
-  "views/publisharticle/postdetail.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "css/feng.css",
-      "js/constant.js",
-      "img/light.png",
-      "img/zan.png"
-    ],
-    "refer": [
-      "views/myzone/managearticle.html"
-    ]
-  }
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/newstyle.css",
+			"js/public.js",
+			"js/codesms.js",
+			"css/app.css",
+			"img/password.gif",
+			"img/user.gif",
+			"js/alert.js",
+			"js/constant.js",
+			"js/mui.js",
+			"css/mui.css",
+			"fonts/mui.ttf",
+			"css/feng.css"
+		],
+		"refer": [
+			"views/member/index.html",
+			"findpassword.html",
+			"register.html",
+			"views/publisharticle/index.html"
+		]
+	},
+	"findpassword.html": {
+		"resources": [
+			"js/mui.min.js",
+			"js/findsms.js",
+			"img/close_a.gif",
+			"css/mui.css",
+			"css/newstyle.css",
+			"css/feng.css",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"views/member/index.html",
+			"index.html"
+		]
+	},
+	"register.html": {
+		"resources": [
+			"js/regsms.js",
+			"css/newstyle.css",
+			"css/feng.css",
+			"css/mui.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"img/close_a.gif"
+		],
+		"refer": [
+			"views/member/index.html"
+		]
+	},
+	"views/publisharticle/index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"img/yd.png",
+			"img/zf.png",
+			"img/1.png",
+			"img/6.png",
+			"img/7.png",
+			"img/8.png",
+			"views/publisharticle/index.html",
+			"img/select.gif",
+			"img/bg_a.gif",
+			"img/2.png",
+			"img/5.png",
+			"js/urlvalidate.js",
+			"img/ico_san.png",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/publisharticle/index.html",
+			"views/publisharticle/template.html",
+			"views/myzone/managearticle.html",
+			"views/managead/index.html",
+			"views/member/index.html",
+			"views/publisharticle/content.html"
+		]
+	},
+	"views/publisharticle/template.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"js/jq.js",
+			"js/index.js",
+			"js/arteditor/js/jq.js",
+			"js/arteditor/js/index.js",
+			"js/arteditor/js/index.min.js",
+			"js/mui.min.js",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/publisharticle/postdetail.html"
+		]
+	},
+	"views/myzone/managearticle.html": {
+		"resources": [
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"img/gr_bg.gif",
+			"img/1.png",
+			"img/6.png",
+			"img/8.png",
+			"img/7.png",
+			"img/2.png",
+			"img/5.png",
+			"img/zf.png",
+			"img/yd.png",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/publisharticle/index.html",
+			"views/myzone/aboutme.html",
+			"views/myzone/contactme.html",
+			"views/managead/index.html",
+			"views/member/index.html",
+			"views/publisharticle/postdetail.html"
+		]
+	},
+	"views/myzone/aboutme.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"css/style.css",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/myzone/managearticle.html",
+			"views/myzone/contactme.html"
+		]
+	},
+	"views/myzone/contactme.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/tx/css/style.css",
+			"img/gr_1.gif",
+			"css/tx/js/jquery.min.js",
+			"css/tx/js/hammer.js",
+			"css/tx/js/iscroll-zoom.js",
+			"css/tx/js/jquery.photoClip.js",
+			"js/mui.min.js",
+			"js/constant.js",
+			"css/style.css"
+		],
+		"refer": [
+			"views/myzone/managearticle.html",
+			"views/myzone/aboutme.html"
+		]
+	},
+	"views/managead/index.html": {
+		"resources": [
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"img/3.png",
+			"img/6.png",
+			"img/xg.png",
+			"img/duigou.png",
+			"img/8.png",
+			"img/5.png",
+			"img/gr_bg.gif",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"views/myzone/managearticle.html",
+			"views/member/index.html",
+			"views/publisharticle/index.html"
+		]
+	},
+	"views/member/index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/tx/css/style.css",
+			"css/tx/images/userico.jpg",
+			"img/gr_bg.gif",
+			"img/gr_2.gif",
+			"img/help.gif",
+			"img/3.png",
+			"img/5.png",
+			"img/6.png",
+			"img/8.png",
+			"img/7.png",
+			"img/4.png",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/managead/index.html",
+			"views/publisharticle/index.html",
+			"views/myzone/managearticle.html",
+			"views/member/balance.html",
+			"views/member/personalinfo.html",
+			"views/member/course.html",
+			"views/member/customeservice.html",
+			"views/member/editpassword.html",
+			"views/member/addvip.html",
+			"views/member/memberlist.html",
+			"views/member/consumedetail.html",
+			"views/member/statistics.html",
+			"views/member/know.html",
+			"index.html",
+			"views/member/addqiye.html"
+		]
+	},
+	"views/member/balance.html": {
+		"resources": [
+			"img/wx.png",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/feng.css",
+			"img/duigou.png",
+			"fonts/mui.ttf"
+		],
+		"refer": []
+	},
+	"views/member/personalinfo.html": {
+		"resources": [
+			"img/gr_1.gif",
+			"css/tx/js/jquery.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"css/tx/css/style.css",
+			"css/feng.css",
+			"css/tx/js/jquery.photoClip.js",
+			"css/tx/js/hammer.js",
+			"css/tx/js/iscroll-zoom.js",
+			"fonts/mui.ttf"
+		],
+		"refer": []
+	},
+	"views/member/course.html": {
+		"resources": [
+			"img/20170301141809_76469.jpg",
+			"css/style.css",
+			"css/mui.min.css",
+			"css/feng.css",
+			"img/light.png",
+			"js/layer.js",
+			"fonts/mui.ttf",
+			"js/jq.js",
+			"js/skin/default/layer.css",
+			"img/20170221184042_74059.jpg"
+		],
+		"refer": []
+	},
+	"views/member/customeservice.html": {
+		"resources": [
+			"img/kefu.jpg",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/feng.css",
+			"fonts/mui.ttf"
+		],
+		"refer": []
+	},
+	"views/member/editpassword.html": {
+		"resources": [
+			"js/findsms.js",
+			"img/close_a.gif",
+			"css/mui.css",
+			"js/constant.js",
+			"fonts/mui.ttf"
+		],
+		"refer": []
+	},
+	"views/member/addvip.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/feng.css",
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"img/yhy.png"
+		],
+		"refer": []
+	},
+	"views/member/memberlist.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/feng.css",
+			"css/newstyle.css"
+		],
+		"refer": []
+	},
+	"views/member/consumedetail.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/feng.css",
+			"fonts/mui.ttf",
+			"css/newstyle.css"
+		],
+		"refer": [
+			"views/managead/index.html"
+		]
+	},
+	"views/member/statistics.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/feng.css"
+		],
+		"refer": [
+			"views/managead/index.html"
+		]
+	},
+	"views/member/know.html": {
+		"resources": [
+			"img/lj_7.jpg",
+			"img/lj_4.jpg",
+			"img/lj_8.jpg",
+			"img/lj_6.jpg",
+			"img/lj_9.jpg",
+			"img/lj_5.jpg",
+			"img/lj_2.jpg",
+			"css/feng.css",
+			"img/lj_3.jpg",
+			"img/lj_1.jpg",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"views/publisharticle/content.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"img/zan.png",
+			"js/mui.min.js",
+			"js/constant.js",
+			"img/light.png",
+			"css/feng.css"
+		],
+		"refer": [
+			"views/publisharticle/index.html"
+		]
+	},
+	"views/publisharticle/postdetail.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"css/feng.css",
+			"js/constant.js",
+			"img/light.png",
+			"img/zan.png"
+		],
+		"refer": [
+			"views/myzone/managearticle.html"
+		]
+	},
+	"views/member/addqiye.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/constant.js"
+		]
+	}
 }
