@@ -15,20 +15,25 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
-		    <h1 class="mui-title main-color">充值</h1>
+		    <h1 class="mui-title main-color">购买会员</h1>
 		</header>
 		<div class="mui-content">
-			<p style="line-height:60px; padding:0 15px;">请选择充值金额</p>
+			<p style="line-height:60px; padding:0 15px;">请选择会员类型</p>
 			<div class="tabPanels">
 			    <ul>
-			        <li id="month" class="hitc topUpType" data-money="5">5元<br><span style="font-size:10px;">（月会员/次）</span></li>
-			        <li id="year" class="topUpType" data-money="25">25元<br><span style="font-size:10px;">(年会员/次)</span></li>
-			        <li id="yeard" class="topUpType" data-money="88">88元<br><span style="font-size:10px;">（代理或企业主/次）</span></li>
+			        <li id="month" class="hitc topUpType" data-vip="1" data-money="20" data-member="月会员">月会员<br><span style="font-size:10px;">（20元/月）</span></li>
+			        <li id="year" class="topUpType" data-vip="2" data-money="80" data-member="年会员">年会员<br><span style="font-size:10px;">(80元/年)</span></li>
+			        <li id="yeard" class="topUpType" data-vip="3" data-money="188" data-member="企业会员">企业会员<br><span style="font-size:10px;">（188元/年）</span></li>
 			    </ul>
+				<div class="tab_li">
+					<div class="t_li" id="details"><a>了解详情</a></div>
+					<div class="t_li" id="details"><a>了解详情</a></div>
+					<div class="t_li" id="details"><a>了解详情</a></div>
+				</div>
 			    <div class="panes">
 			        <div class="panec" style="display:block;">
-			            <div class="qt_je">
-			                <input type="text" name="money" id="txtMoney" placeholder="其他金额【最低充值1元】" />
+			            <div class="qt_je" style="color:#ff6c00;font-size:16px;width:62%;">
+			            	您正在购买 <span id='introduce'>月会员￥20.00</span>
 			            </div>
 			            <p class="fangshi">支付方式</p>
 			            <div class="fukuang">
@@ -70,37 +75,35 @@
 			}
 			
 			mui.plusReady(function() {
+				mui(document).on('tap', '#details', function() {
+					mui.openWindow({
+						url: 'know.html'
+					});					
+				});
+				
 				mui(document).on('tap', '.topUpType', function() {
 					mui('.topUpType').each(function() {
 						this.className = 'topUpType';
 					});
-					
-					this.className = "hitc topUpType";					
+					this.className = "hitc topUpType";
+					var money = this.getAttribute('data-money');
+					var member = this.getAttribute('data-member');
+					document.getElementById('introduce').innerText=member+'￥'+money;
 				});
 				
 				mui(document).on('tap', '#payBtn', function() {
 					var money = 0;
-					
-					var others = document.getElementById('txtMoney').value;
-					if (others) {
-						money = others;
-					} else {
-						var item = document.getElementsByClassName('hitc')[0];
-						money = item.getAttribute('data-money');
-			    	}
-					
-//					http://zs.meijiexia.cn
-//					console.log(REQUEST_DOMAIN + 'api/services/memberServices.php');
-					//http://zs.meijiexia.cn/api/services/memberServices.php
-					
+					var item = document.getElementsByClassName('hitc')[0];
+					money = item.getAttribute('data-money');
+					var vip = item.getAttribute('data-vip');
 					mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 			            type: 'POST',
 			            dataType: 'json',
 			            data: {
 			            	action: 'topup',
 			                money: money,
-			                vip: 5,
-			                content : '余额充值',
+			                vip: vip,
+			                content : '购买会员',
 			                token: localStorage.getItem(TOKEN)
 			            },
 			            

@@ -351,6 +351,20 @@
 					});
 				});
 				
+				//打开购买会员
+				mui(document).on('tap', '#buyingMembers', function() {
+					mui.openWindow({
+						url: 'buyingmembers.html'
+					});
+				});
+				
+				//打开购买代理
+				mui(document).on('tap', '#purchasingAgent', function() {
+					mui.openWindow({
+						url: 'purchasingagent.html'
+					});
+				});
+				
 				//退出登陆
 				mui(document).on('tap', '#divLogout', function() {
 					mui.ajax(REQUEST_DOMAIN + 'member/login.php', {

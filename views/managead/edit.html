@@ -148,6 +148,7 @@
 						document.getElementById('aid').value = result.data.id;
 						document.getElementById('title').value = result.data.title;
 						document.getElementById('src').value = result.data.src;
+						$("#image").empty();
 		        		$('#image').append('<img src="' + PREVIOUS_REQUEST_DOMAIN+result.data.img + '" align="absmiddle" style=" width:100%;margin-top:0;">');
 		        		$("input[type='radio'][value='"+result.data.top+"']").attr("checked",true);
 		        		$("input[type='radio'][value='"+result.data.bottom+"']").attr("checked",true);
@@ -188,6 +189,7 @@
 				success: function(result) {
 					console.log(JSON.stringify(result));
 					if(result.status == -1){
+						plus.webview.close("../managead/index.html");
 						mui.openWindow({
 							url: 'index.html'
 						});

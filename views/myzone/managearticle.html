@@ -15,10 +15,9 @@
 			  	pullRefresh: {
 				    container:'#loaddata',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
 				    up:{
-				      	height:30,
+				      	height:50,
 				      	auto:false,
-				      	contentrefresh: "",
-				      	contentnomore: '',
+				      	contentrefresh:"正在加载...",
 				      	callback: loadUserArticles
 				    }
 			  	}
@@ -76,7 +75,7 @@
 		</script>
 	</head>
 	<body>
-		<div class="mui-content" id="divContent">
+		<div class="mui-content" id="divContent" style="margin-bottom: 56px;">
 			<div class="gr_top" style="height:100px;">
 			    <img id="imgUser" src="../../img/1.png" style="margin-top: auto; width: 50px; margin-top: 5px;"/>
 			    <p><b id="bName">用户名</b></p>

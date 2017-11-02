@@ -36,8 +36,8 @@
 	</body>
 	<script type="text/javascript" src="../../js/constant.js"></script>
 	<script type="text/javascript">
-		function addNumber(id, url) {
-			mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'u_detial.php', {
+		function addNumber() {
+			mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'u_detail.php', {
 				type: 'post',
 				data: {
 					id: localStorage.getItem('postArticleId')
@@ -87,7 +87,7 @@
 						adsInfo['img'] = adsInfo['img'].replace('./', PREVIOUS_REQUEST_DOMAIN);
 						console.log(adsInfo['img']);
 						if (adsInfo['src']) {
-							content += '<a id=\"topAd\" href=\"javascript:void(0);\" data-ad-src=\"http://'+adsInfo['src']+'\" target=\"_blank\" onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
+							content += '<a id=\"topAd\" href=\"javascript:void(0);\" data-ad-src=\"http://'+adsInfo['src']+'\" target=\"_blank\" >';
 							content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%;\" title=\"'+adsInfo['title']+'\">';
 							content += '</a>';
 						} else {
@@ -206,11 +206,11 @@
 				if (advertisement) {
 					advertisement = advertisement[0];
 					if (advertisement['img']) {
-						content += '<p class=\"wzgg_p\" style=\"background:#f3f3f3 none repeat scroll 0 0;color:#929292;\">广告</p>';
-						content += '<div class=\"gg_img\" id=\"showImg\" style=\"background:#f3f3f3 none repeat scroll 0 0;\">';
-						content += '<a onclick=\"'+addNumber(localStorage.getItem('postArticleId'), advertisement[0]['src'])+'\">';
+						content += '<p class=\"wzgg_p\" style=\"background:#f3f3f3 none repeat scroll 0 0;color:#929292;margin-left:10px; mo\">广告</p>';
+						content += '<div class=\"gg_img\" id=\"showImg\" style=\"background:#f3f3f3 none repeat scroll 0 0;margin-left:10px;\">';
+						content += '<a id="qiye" data-url="http://'+advertisement['src']+'">';
 						adInfo['img'] = PREVIOUS_REQUEST_DOMAIN + adInfo['img'];
-						content += '<img src=\"'+advertisement[0]['img']+'\">';
+						content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN+advertisement['img']+'\">';
 						content += '</a>';
 						content += '</div>';
 					}	
@@ -263,7 +263,7 @@
 				if (adsInfo['bottom'] == 11) {
 					content += '<div style=\"bottom:-5px; position:fixed; width:100%; border-bottom:1px solid #e5e5e5; border-top:1px solid #e5e5e5;\">';
 					if (adsInfo['src']) {
-						content += '<a id=\"bottomAd\" data-ad-src=\"'+REQUEST_DOMAIN + adsInfo['src']+'\" href=\"javascript:void(0);\" onclick=\"'+addNumber(localStorage.getItem('postArticleId'), adsInfo['src'])+'\">';
+						content += '<a id=\"bottomAd\" data-ad-src=\"'+REQUEST_DOMAIN + adsInfo['src']+'\" href=\"javascript:void(0);\">';
 						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo['title']+'\"/>';
 						content += '</a>';
 					} else {
@@ -376,22 +376,27 @@
 		}
 		
 		mui.plusReady(function() {
+			var userInfo = JSON.parse(localStorage.getItem(USER_INFO));
 			ajaxInit();
 			
 			mui(document).on('tap', '.light', function() {
-				if (document.getElementById('tipsImg').style.display == 'none') {
-					document.getElementById('tipsImg').style.display = 'block';
-					document.getElementById('divContent').style.opacity = 0.2;
-				} else if (document.getElementById('tipsImg').style.display == 'block') {
-					document.getElementById('tipsImg').style.display = 'none';
-					document.getElementById('divContent').style.opacity = 1;
+				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
+					if (document.getElementById('tipsImg').style.display == 'none') {
+						document.getElementById('tipsImg').style.display = 'block';
+						document.getElementById('divContent').style.opacity = 0.2;
+					} else if (document.getElementById('tipsImg').style.display == 'block') {
+						document.getElementById('tipsImg').style.display = 'none';
+						document.getElementById('divContent').style.opacity = 1;
+					}
 				}
 			});
 			
 			mui(document).on('tap', '#divContent', function() {
-				if (document.getElementById('tipsImg').style.display == 'block') {
-					document.getElementById('tipsImg').style.display = 'none';
-					document.getElementById('divContent').style.opacity = 1;
+				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
+					if (document.getElementById('tipsImg').style.display == 'block') {
+						document.getElementById('tipsImg').style.display = 'none';
+						document.getElementById('divContent').style.opacity = 1;
+					}
 				}
 			});
 			
@@ -440,11 +445,18 @@
 			});
 			
 			mui(document).on('tap', '#topAd', function() {
+				addNumber();
 				plus.runtime.openURL(this.getAttribute('data-ad-src'));
 			});
 			
 			mui(document).on('tap', '#bottomAd', function() {
+				addNumber();
 				plus.runtime.openURL(this.getAttribute('data-ad-src'));
+			});
+			
+			mui(document).on('tap', '#qiye', function() {
+				addNumber();
+				plus.runtime.openURL(this.getAttribute('data-url'));
 			});
 		});
 	</script>
