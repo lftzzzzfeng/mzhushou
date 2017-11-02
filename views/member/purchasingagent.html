@@ -15,21 +15,15 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
-		    <h1 class="mui-title main-color">充值</h1>
+		    <h1 class="mui-title main-color">购买代理</h1>
 		</header>
 		<div class="mui-content">
-			<p style="line-height:60px; padding:0 15px;">请选择充值金额</p>
 			<div class="tabPanels">
-			    <ul>
-			        <li id="month" class="hitc topUpType" data-money="5">5元<br><span style="font-size:10px;">（月会员/次）</span></li>
-			        <li id="year" class="topUpType" data-money="25">25元<br><span style="font-size:10px;">(年会员/次)</span></li>
-			        <li id="yeard" class="topUpType" data-money="88">88元<br><span style="font-size:10px;">（代理或企业主/次）</span></li>
-			    </ul>
 			    <div class="panes">
 			        <div class="panec" style="display:block;">
-			            <div class="qt_je">
-			                <input type="text" name="money" id="txtMoney" placeholder="其他金额【最低充值1元】" />
-			            </div>
+			        	<p class="gm_p" style="font-size:18px;">您正在购买年度代理</p>
+			        	<p class="gm_pp" style="font-size:16px; color:#ff6c00;margin-top:5px;">¥188.00</p>
+			        	<p class="gm_ppp" style="font-size:14px;margin-top:5px;" id="details">（了解详情）</p>
 			            <p class="fangshi">支付方式</p>
 			            <div class="fukuang">
 			                <img src="../../img/wx.png" style="height:50px;width:50px;"/>
@@ -70,37 +64,21 @@
 			}
 			
 			mui.plusReady(function() {
-				mui(document).on('tap', '.topUpType', function() {
-					mui('.topUpType').each(function() {
-						this.className = 'topUpType';
-					});
-					
-					this.className = "hitc topUpType";					
+				mui(document).on('tap', '#details', function() {
+					mui.openWindow({
+						url: 'know.html'
+					});					
 				});
 				
 				mui(document).on('tap', '#payBtn', function() {
-					var money = 0;
-					
-					var others = document.getElementById('txtMoney').value;
-					if (others) {
-						money = others;
-					} else {
-						var item = document.getElementsByClassName('hitc')[0];
-						money = item.getAttribute('data-money');
-			    	}
-					
-//					http://zs.meijiexia.cn
-//					console.log(REQUEST_DOMAIN + 'api/services/memberServices.php');
-					//http://zs.meijiexia.cn/api/services/memberServices.php
-					
 					mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 			            type: 'POST',
 			            dataType: 'json',
 			            data: {
 			            	action: 'topup',
-			                money: money,
-			                vip: 5,
-			                content : '余额充值',
+			                money: 188,
+			                vip: 4,
+			                content : '购买代理',
 			                token: localStorage.getItem(TOKEN)
 			            },
 			            

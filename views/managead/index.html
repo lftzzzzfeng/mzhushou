@@ -156,9 +156,12 @@
 					        }
 					    }
 					    if(arr){
-					    	if (confirm('确定要删除选中项吗？')){
-					    		ajaxAdvertisementDel(arr);
-					    	}
+					    	var btnArray = ['是', '否'];
+					    	mui.confirm('确定要删除选中项吗？', '删除', btnArray, function(e) {
+					    		if (e.index == 0) {
+					    			ajaxAdvertisementDel(arr);
+					    		}
+					    	});
 					    }else{
 					    	plus.nativeUI.toast('请至少选中一条广告！');
 					    }
