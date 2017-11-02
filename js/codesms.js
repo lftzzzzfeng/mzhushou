@@ -35,12 +35,10 @@ function sendMessage() {
 			   			plus.nativeUI.toast('发送成功 ');
 			   		}
 				},
-				error: function(xhr,type,errorThrown) {
+				error: function(xhr, type, errorThrown) {
 					if (type == 'timeout') {//超时
-						console.log(JSON.stringify(type));
 						plus.nativeUI.toast('服务器超时，请稍后重试！');
 					} else {
-						console.log(JSON.stringify(errorThrown));
 						plus.nativeUI.toast('网络错误，请稍后重试！');
 					}
 				}

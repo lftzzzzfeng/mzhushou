@@ -15,9 +15,10 @@
 			  	pullRefresh: {
 				    container:'#loaddata',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
 				    up:{
-				      	height:50,
+				      	height:30,
 				      	auto:false,
-				      	contentrefresh:"正在加载...",
+				      	contentrefresh: "",
+				      	contentnomore: '',
 				      	callback: loadUserArticles
 				    }
 			  	}
@@ -26,8 +27,9 @@
 			function loadUserArticles() {
 				page++;
 				
-				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/articleMore', {
+				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
 					data:{
+						action: 'articleMore',
 						token: localStorage.getItem(TOKEN),
 						page: page
 					},
@@ -38,41 +40,32 @@
 						console.log(JSON.stringify(errorThrown));
 					}
 				});
-//				
-//				setTimeout(function() {
-//					console.log(page);
-//					
-//					mui('#loaddata').pullRefresh().endPullup();
-//					if (page > 2) {
-////						mui('#loaddata').pullRefresh().disablePullupToRefresh();
-//						mui('#loaddata').pullRefresh().contentnomore = '没有更多了';
-//					}
-//    			}, 300);
 			}
 			
 			function renderLoadMore(result) {
 				if (result.status == -1) {
-					if (result.data.nums == 1) {
-						var userArticles = result.data.articles;
-						
-						for (var i = 0; i < userArticles.length; i++) {
-							content += '<div class=\"gr_lista\">';
-							content += '<p class=\"la_pp\">';
-							content += '<span>原创</span>';
-							content += '<a class=\"articles\" style="color:#333333;" href="javascript:void(0);" data-article-id=\"'+userArticles[i].id+'\">';
-							content += userArticles[i].title;
-							content += '</a>';
-							content += '</p>';
-							content += '<div class=\"la_d\">';
-							content += '<p class=\"yd_p\"><img src=\"../../img/zf.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].share+'</span></p>';
-							content += '<p class=\"yd_p\"><img src=\"../../img/yd.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].pv+'</span></p>';
-							content += '<a class=\"articleDel\" href=\"javascript:void(0);\" data-article-id=\"'+userArticles[i].id+'\">删除</a>';
-							content += '</div>';
-							content += '</div>';
-						}
-						
-						document.getElementById('divArticles').innerHTML = content;
-						mui('#loaddata').pullRefresh().endPullup();
+					var userArticles = result.data.articles;
+					
+					for (var i = 0; i < userArticles.length; i++) {
+						content += '<div class=\"gr_lista\">';
+						content += '<p class=\"la_pp\">';
+						content += '<span>原创</span>';
+						content += '<a class=\"articles\" style="color:#333333;" href="javascript:void(0);" data-article-id=\"'+userArticles[i].id+'\">';
+						content += userArticles[i].title;
+						content += '</a>';
+						content += '</p>';
+						content += '<div class=\"la_d\">';
+						content += '<p class=\"yd_p\"><img src=\"../../img/zf.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].share+'</span></p>';
+						content += '<p class=\"yd_p\"><img src=\"../../img/yd.png\" style=\"width:15px;height:15px;\"><span>'+userArticles[i].pv+'</span></p>';
+						content += '<a class=\"articleDel\" href=\"javascript:void(0);\" data-article-id=\"'+userArticles[i].id+'\">删除</a>';
+						content += '</div>';
+						content += '</div>';
+					}
+					
+					document.getElementById('divArticles').innerHTML = content;
+					
+					if (result.data.nums == 1) {	
+						mui('#loaddata').pullRefresh().endPullup();	
 					} else if (result.data.nums == 2) {
 						mui('#loaddata').pullRefresh().disablePullupToRefresh();
 					}
@@ -95,7 +88,7 @@
 			        <li id="liThird"><a href="javascript:void(0);" style="color:#333;">联系我</a></li>
 			    </ul>
 			    <div class="panes" id="loaddata">
-        			<div class="pane" id="divArticles" style="display:block;margin-bottom:0;">
+        			<div class="pane" id="divArticles" style="display:block;margin-bottom:0px;">
     					
     				</div>
     			</div>
@@ -153,8 +146,9 @@
 			}
 			
 			function initLoad() {
-				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/articleList', {
+				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
 					data:{
+						action: 'articleList',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -187,6 +181,12 @@
 					}
 					
 					document.getElementById('divArticles').innerHTML = content;
+					
+					if (result.data.nums == 1) {	
+						mui('#loaddata').pullRefresh().endPullup();	
+					} else if (result.data.nums == 2) {
+						mui('#loaddata').pullRefresh().disablePullupToRefresh();
+					}
 				} else {
 					plus.nativeUI.toast(result.message);
 				}
@@ -199,21 +199,45 @@
 				//打开发布文章
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
-						url: '../publisharticle/index.html'
+						url: '../publisharticle/index.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开广告管理
 				mui(document).on('tap', '#liManagedAd', function() {
 					mui.openWindow({
-						url: '../managead/index.html'
+						url: '../managead/index.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开会员服务
 				mui(document).on('tap', '#liMember', function() {
 					mui.openWindow({
-						url: '../member/index.html'
+						url: '../member/index.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
@@ -221,7 +245,14 @@
 				mui(document).on('tap', '#liSecond', function() {
 					mui.openWindow({
 						url: '../myzone/aboutme.html',
-						id: 'myZoneAboutMe'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-right'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
@@ -229,7 +260,14 @@
 				mui(document).on('tap', '#liThird', function() {
 					mui.openWindow({
 						url: '../myzone/contactme.html',
-						id: 'myZoneContactMe'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-right'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
@@ -237,38 +275,44 @@
 				mui(document).on('tap', '.articleDel', function() {
 					var articleId = this.getAttribute('data-article-id');
 					
-					mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/deleteArticle', {
-						data: {
-							id: articleId,
-							token: localStorage.getItem(TOKEN)
-						},
-						beforeSend: function() {
-					        plus.nativeUI.showWaiting('玩命加载中...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
-					    },
-					    complete: function() {
-					        plus.nativeUI.closeWaiting();
-					    },
-						dataType:'json',
-						type:'POST',
-						timeout:5000,
-						success: function(data) {
-							console.log(data);
-							if (data == 1) {
-								plus.nativeUI.toast('删除成功');
-								plus.webview.currentWebview().reload();
-							} else {
-								plus.nativeUI.toast('删除失败');
-							}
-						},
-						error: function(xhr,type,errorThrown) {
-							plus.nativeUI.closeWaiting();
-							if (type == 'timeout') {//超时
-								plus.nativeUI.toast('服务器超时，请稍后重试！');
-							} else {
-								plus.nativeUI.toast('网络错误，请稍后重试！');
-							}
-						}
-					});
+					var btnArray = ['是', '否'];
+	                mui.confirm('是否确定删除?', '删除', btnArray, function(e) {
+	                	if (e.index == 0) {
+	                		mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
+								data: {
+									action: 'deleteArticle',
+									id: articleId,
+									token: localStorage.getItem(TOKEN)
+								},
+								beforeSend: function() {
+							        plus.nativeUI.showWaiting('玩命加载中...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+							    },
+							    complete: function() {
+							        plus.nativeUI.closeWaiting();
+							    },
+								dataType:'json',
+								type:'POST',
+								timeout:5000,
+								success: function(data) {
+									console.log(data);
+									if (data == 1) {
+										plus.nativeUI.toast('删除成功');
+										plus.webview.currentWebview().reload();
+									} else {
+										plus.nativeUI.toast('删除失败');
+									}
+								},
+								error: function(xhr,type,errorThrown) {
+									plus.nativeUI.closeWaiting();
+									if (type == 'timeout') {//超时
+										plus.nativeUI.toast('服务器超时，请稍后重试！');
+									} else {
+										plus.nativeUI.toast('网络错误，请稍后重试！');
+									}
+								}
+							});		
+	                    }
+	                });
 				});
 				
 				//显示文章
@@ -277,7 +321,14 @@
 					localStorage.setItem('postArticleId', articleId);
 					mui.openWindow({
 						url: '../publisharticle/postdetail.html',
-						createNew:true
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-right'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 			});

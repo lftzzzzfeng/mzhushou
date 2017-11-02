@@ -253,7 +253,8 @@
 					"img/close_a.gif"
 				],
 				"refer": [
-					"views/member/index.html"
+					"views/member/index.html",
+					"views/publisharticle/index.html"
 				],
 				"priority": 0
 			},
@@ -487,7 +488,8 @@
 					"img/close_a.gif",
 					"css/mui.css",
 					"js/constant.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/newstyle.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -606,7 +608,8 @@
 					"css/tx/js/hammer.js",
 					"css/tx/js/iscroll-zoom.js",
 					"js/mui.min.js",
-					"js/constant.js"
+					"js/constant.js",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -642,7 +645,12 @@
 					"css/tx/js/jquery.photoClip.js",
 					"css/tx/js/hammer.js",
 					"js/constant.js",
-					"css/tx/js/iscroll-zoom.js"
+					"css/tx/js/iscroll-zoom.js",
+					"fonts/mui.ttf",
+					"css/newstyle.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"css/tx/css/style.css"
 				],
 				"refer": [],
 				"priority": 0

@@ -23,6 +23,7 @@ function sendMessage() {
 			   		act: 'regcode'
 		   		},
 			   	success:function(data) {
+			   		console.log(data);
 			   		if (data == 2) {
 						plus.nativeUI.toast('发送太频繁，请稍后');
 			   		} else if (data == 3) {
@@ -34,9 +35,16 @@ function sendMessage() {
 			   		} else {
 			   			plus.nativeUI.toast('发送成功');
 			   		}
-			   }
-		   });
-	   }
+			   	},
+			   	error: function(xhr,type,errorThrown) {
+					if (type == 'timeout') {//超时
+						plus.nativeUI.toast('服务器超时，请稍后重试！');
+					} else {
+						plus.nativeUI.toast('网络错误，请稍后重试！');
+					}
+				}
+		   	});
+	   	}
 	} else {
 		plus.nativeUI.toast('请输入手机号');
 	}
