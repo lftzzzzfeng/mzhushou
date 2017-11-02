@@ -50,10 +50,11 @@
 		}
 		
 		function ajaxInit() {
-			mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/articleInfo', {
+			mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
 	            type: 'POST',
 	            dataType: 'json',
 	            data: {
+	            	action: 'articleInfo',
 	                id: localStorage.getItem('postArticleId'),
 	                token: localStorage.getItem(TOKEN)
 	            },
@@ -134,7 +135,6 @@
 					}
 				}
 				
-				
 				content += '<div class=\"article\" id="divArticleTop">';
 				content += '<h1>'+data['title']+'</h1>';
 				content += '<p style=\"color:#8c8c8c; margin-left:5%; font-size:16px; padding-bottom:18px;\">';
@@ -183,26 +183,25 @@
 				if (adsInfo.length > 0) {
 					adsInfo = adsInfo[0];
 					if (adsInfo['bottom'] == 13) {
-						content += '<div class=\"wz_gg\" style=\"margin-bottom:0px;\">';
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:85px;\">';
 					} else if (adsInfo['bottom'] == 11) {
-						content += '<div class=\"wz_gg\" style=\"margin-bottom:80px;\">';
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:85px;\">';
 					} else if (adsInfo['bottom'] == 12) {
-						content += '<div class=\"wz_gg\">';
-					} else {
-						content += '<div class=\"wz_gg\" style=\"margin-bottom:0px;\">';
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:85px;\">';
 					}
-					
-					if ((adInfo['img'] && userInfo['vip']==0) || userInfo['state'] == 1) {
-						content += '<p class=\"wzgg_p\" style=\"background:#f3f3f3 none repeat scroll 0 0;color:#929292;\">广告</p>';
-						content += '<div class=\"gg_img\" id=\"showImg\" style=\"background:#f3f3f3 none repeat scroll 0 0;\">';
-						content += '<a href=\"'+adInfo['url']+'\">';
-						adInfo['img'] = PREVIOUS_REQUEST_DOMAIN + adInfo['img'];
-						content += '<img src=\"'+adInfo['img']+'\" title=\"'+adInfo['title']+'\">';
-						content += '</a>';
-						content += '</div>';
-					}	
+				} else {
+					content += '<div class=\"wz_gg\" style=\"margin-bottom:0px;\">';
 				}
-				
+					
+				if ((adInfo['img'] && userInfo['vip']==0) || userInfo['state'] == 1) {
+					content += '<p class=\"wzgg_p\" style=\"background:#f3f3f3 none repeat scroll 0 0;color:#929292;\">广告</p>';
+					content += '<div class=\"gg_img\" id=\"showImg\" style=\"background:#f3f3f3 none repeat scroll 0 0;\">';
+					content += '<a href=\"'+adInfo['url']+'\">';
+					adInfo['img'] = PREVIOUS_REQUEST_DOMAIN + adInfo['img'];
+					content += '<img src=\"'+adInfo['img']+'\" title=\"'+adInfo['title']+'\">';
+					content += '</a>';
+					content += '</div>';
+				}	
 				
 				if (advertisement) {
 					advertisement = advertisement[0];
@@ -216,8 +215,6 @@
 						content += '</div>';
 					}	
 				}
-				
-				content += '</div>';
 				
 				if (contentlist) {
 					content += '<p class=\"wzgg_pp\" style=\"background:#f3f3f3 none repeat scroll 0 0;line-height:38px;\">';
@@ -260,6 +257,8 @@
 					content += '<p><a href=\"javascript:void(0);\" id=\"aLookMore\">查看更多>></a></p>';
 					content += '</div>';
 				}
+				
+				content += '</div>';
 				
 				if (adsInfo['bottom'] == 11) {
 					content += '<div style=\"bottom:-5px; position:fixed; width:100%; border-bottom:1px solid #e5e5e5; border-top:1px solid #e5e5e5;\">';
@@ -433,7 +432,15 @@
 			mui(document).on('tap', '#aLookMore', function() {
 				mui.openWindow({
 					url: '../myzone/managearticle.html',
-					createNew: true
+					createNew: true,
+					waiting: {
+				      	autoShow: false
+				   	},
+				   	show: {
+			      		autoShow:true,
+			      		aniShow: 'slide-in-right',
+			      		duration: 300
+			    	}
 				});
 			});
 			

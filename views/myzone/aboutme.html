@@ -79,8 +79,9 @@
 			
 			
 			function ajaxLoadAboutMe() {
-				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/about', {
+				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
 					data: {
+						action: 'about',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -113,21 +114,42 @@
 				mui(document).on('tap', '#liFirst', function() {
 					mui.openWindow({
 						url: '../myzone/managearticle.html',
-						id: 'myZoneManagedArticle'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-left'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				mui(document).on('tap', '#liThird', function() {
 					mui.openWindow({
 						url: '../myzone/contactme.html',
-						id: 'myZoneContactMe'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-right'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				mui(document).on('tap', '#aFirst', function() {
 					mui.openWindow({
 						url: '../myzone/managearticle.html',
-						id: 'myZoneManageArticle'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-left'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
@@ -136,8 +158,9 @@
 					var qianming = document.getElementById('qianming').value;
 					var jieshao = document.getElementById('jieshao').value;
 					
-					mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/aboutEdit', {
+					mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
 						data: {
+							action: 'aboutEdit',
 							token: localStorage.getItem(TOKEN),
 							qianming: qianming,
 							jieshao: jieshao

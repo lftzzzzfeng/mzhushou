@@ -80,14 +80,23 @@
 			
 			if (localStorage.getItem(TOKEN)) {
 				mui.openWindow({
-					url:'views/publisharticle/index.html'
+					url: 'views/publisharticle/index.html',
+					show: {
+				      	autoShow:true,
+				      	aniShow: 'slide-in-right',
+				      	duration: 500
+				    },
+				    waiting: {
+				    	autoShow: false,
+				    }
 				});
 			}
 		}
 		
 		function ajaxNormalLogin(phone, password) {
-			mui.ajax(REQUEST_DOMAIN + 'member/login.php/login', {
+			mui.ajax(REQUEST_DOMAIN + 'member/login.php', {
 				data: {
+					action: 'login',
 					loginType: 1,
 					phone: phone,
 					password: password
@@ -102,14 +111,21 @@
 			        plus.nativeUI.closeWaiting();
 			    },
 				success: function(data) {
-					console.log(JSON.stringify(data));
 					var result = data;
 					
 					if (result.status == -1) {
 						plus.nativeUI.toast('登陆成功');
 						localStorage.setItem(TOKEN, result.data.token);
 						mui.openWindow({
-							url:'views/publisharticle/index.html'
+							url:'views/publisharticle/index.html',
+							show: {
+						      	autoShow: true,
+						      	aniShow: 'slide-in-right',
+						      	duration: 500
+						    },
+						    waiting: {
+						    	autoShow: false,
+						    }
 						});
 					} else {
 						plus.nativeUI.toast(result.message);
@@ -118,11 +134,9 @@
 				},
 				error: function(xhr,type,errorThrown) {
 					if (type == 'timeout') {//超时
-						console.log(JSON.stringify(type));
 						plus.nativeUI.toast('服务器超时，请稍后重试！');
 						plus.nativeUI.closeWaiting();
 					} else {
-						console.log(JSON.stringify(errorThrown));
 						plus.nativeUI.toast('网络错误，请稍后重试！');
 						plus.nativeUI.closeWaiting();
 					}
@@ -131,9 +145,10 @@
 		}
 		
 		function ajaxMobileLogin(tel, code) {
-			mui.ajax(REQUEST_DOMAIN + 'member/login.php/login', {
+			mui.ajax(REQUEST_DOMAIN + 'member/login.php', {
 				type: 'POST',
 				data: {
+					action: 'login',
 					loginType: 2,
 					phone: tel,
 					code: code
@@ -144,7 +159,15 @@
 						plus.nativeUI.toast('登陆成功');
 						localStorage.setItem(TOKEN, result.data.token);
 						mui.openWindow({
-							url:'views/member/index.html'
+							url:'views/publisharticle/index.html',
+							show: {
+						      	autoShow:true,
+						      	aniShow: 'slide-in-right',
+						      	duration: 500
+						    },
+						    waiting: {
+						    	autoShow: false,
+						    }
 						});
 					} else {
 						plus.nativeUI.toast(result.message);
@@ -209,7 +232,13 @@
 			document.getElementById('linkFindPassword').addEventListener('tap', function() {
 				mui.openWindow({
 					url: 'findpassword.html', 
-					id: 'findPassword'
+					show: {
+				      	autoShow:true,
+				      	aniShow: 'slide-in-right',
+				    },
+				    waiting: {
+				    	autoShow: false,
+				    }
 				});
 			});
 			
@@ -217,7 +246,13 @@
 			document.getElementById('linkRegister').addEventListener('tap', function() {
 				mui.openWindow({
 					url: 'register.html', 
-					id: 'register'
+					show: {
+				      	autoShow:true,
+				      	aniShow: 'slide-in-right',
+				    },
+				    waiting: {
+				    	autoShow: false,
+				    }
 				});
 			});
    		});

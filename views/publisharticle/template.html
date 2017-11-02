@@ -93,7 +93,6 @@
 		    }
 			
 		    function crawlingSuccess(result) {
-		    	console.log(JSON.stringify(result))
 		    	if (result.status == -1) {
 		            var title = result.data.title;
 		            var date = result.data.date;
@@ -114,6 +113,14 @@
 		    
 		    mui.plusReady(function() {
 		    	crawling();
+				
+				document.getElementById('txtTitle').addEventListener('tap', function() {
+					document.activeElement.focus();
+				});
+				
+				document.getElementById('content').addEventListener('tap', function() {
+					document.activeElement.focus();
+				});
 				
 				document.getElementById('pSubmitForm').addEventListener('tap', function() {
 					var title = document.getElementById('txtTitle').value;

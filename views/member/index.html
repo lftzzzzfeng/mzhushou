@@ -180,7 +180,6 @@
 			}
 			
 			function renderServices(result) {
-				console.log(JSON.stringify(result));
 				if (result.status == -1) {
 					document.getElementById('imgs').src = PREVIOUS_REQUEST_DOMAIN+result.data.img;
 					if(result.data.realname != 0){
@@ -368,9 +367,12 @@
 				
 				//退出登陆
 				mui(document).on('tap', '#divLogout', function() {
-					mui.ajax(REQUEST_DOMAIN + 'member/login.php/logout', {
+					mui.ajax(REQUEST_DOMAIN + 'member/login.php', {
 						type:'POST',
 						timeout:5000,
+						data: {
+							action: 'logout'
+						},
 						beforeSend: function() {
 					        plus.nativeUI.showWaiting('登出...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
 					    },

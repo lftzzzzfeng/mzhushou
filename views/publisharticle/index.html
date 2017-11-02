@@ -75,8 +75,9 @@
 			
 			//获取屏显示头部信息
 			function ajaxLoadTopInfo() {
-				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/indexUser', {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php', {
 					data: {
+						action: 'indexUser',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -104,8 +105,9 @@
 			
 			//获取并显示广告模板
 			function ajaxLoadAds() {
-				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/indexTop', {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php', {
 					data: {
+						action: 'indexTop',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -142,8 +144,9 @@
 			
 			//获取文章分类
 			function ajaxLoadArticleTypes() {
-				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/articleType', {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php', {
 					data: {
+						action: 'articleType',
 						token: localStorage.getItem(TOKEN)
 					},
 					dataType:'json',
@@ -193,8 +196,9 @@
 					var articleType = typeId;
 				}
 				
-				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/article', {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php', {
 					data: {
+						action: 'article',
 						id: articleType
 					},
 					dataType:'json',
@@ -258,8 +262,9 @@
 			}
 			
 			function ajaxLoadMoreArticles(typeId, page) {
-				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/articleMore', {
+				mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php', {
 					data: {
+						action: 'articleMore',
 						id: typeId,
 						page: page
 					},
@@ -354,19 +359,43 @@
 				
 				mui(document).on('tap', '#liMyZone', function() {
 					mui.openWindow({
-						url: '../myzone/managearticle.html'
+						url: '../myzone/managearticle.html',
+						createNew: true,
+						waiting: {
+					      	autoShow: false
+					   	},
+					   	show: {
+				      		autoShow:true,
+				      		aniShow: ''
+				    	}
 					});
 				});
 				
 				mui(document).on('tap', '#liManagedAd', function() {
 					mui.openWindow({
-						url: '../managead/index.html'
+						url: '../managead/index.html',
+						createNew: true,
+						waiting: {
+					      	autoShow: false
+					   	},
+					   	show: {
+				      		autoShow:true,
+				      		aniShow: ''
+				    	}
 					});
 				});
 				
 				mui(document).on('tap', '#liMember', function() {
 					mui.openWindow({
-						url: '../member/index.html'
+						url: '../member/index.html',
+						createNew: true,
+						waiting: {
+					      	autoShow: false
+					   	},
+					   	show: {
+				      		autoShow:true,
+				      		aniShow: ''
+				    	}
 					});
 				});
 				
@@ -394,7 +423,16 @@
 					localStorage.setItem('articleId', articleId);
 					
 					mui.openWindow({
-						url: 'content.html'	
+						url: 'content.html',
+						createNew: true,
+						waiting: {
+					      	autoShow: false
+					   	},
+					   	show: {
+				      		autoShow:true,
+				      		aniShow: 'slide-in-right',
+				      		duration: 350
+				    	}
 					});
 				});
 				
@@ -427,7 +465,15 @@
 			        localStorage.setItem(CRAWLING_URL, conUrl);
 		            
 		            mui.openWindow({
-		            	url: '../../views/publisharticle/template.html'
+		            	url: '../../views/publisharticle/template.html',
+		            	createNew: true,
+						waiting: {
+					      	autoShow: false
+					   	},
+					   	show: {
+				      		autoShow:true,
+				      		aniShow: 'slide-in-right'
+				    	}
 		            });
 				});
 			});

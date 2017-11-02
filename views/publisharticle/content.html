@@ -39,10 +39,11 @@
 		var mask = mui.createMask();
 		
 		function ajaxInit() {
-			mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php/articleInfo', {
+			mui.ajax(REQUEST_DOMAIN + 'article/articleRelease.php', {
 	            type: 'POST',
 	            dataType: 'json',
 	            data: {
+	            	action: 'articleInfo',
 	                id: localStorage.getItem('articleId'),
 	                token: localStorage.getItem(TOKEN)
 	            },
@@ -66,19 +67,19 @@
 				var content = '';
 				content += '<div id=\"divContent\">';
 				
-				if (adsInfo[0]['top'] == 1 && adsShowCk == 1) {
+				if (adsInfo['top'] == 1 && adsShowCk == 1) {
 					content += '<div style=\"width:100%\" id=\"divTopAd\">';
-					adsInfo[0]['img'] = adsInfo[0]['img'].replace('./', PREVIOUS_REQUEST_DOMAIN);
+					adsInfo['img'] = adsInfo['img'].replace('./', PREVIOUS_REQUEST_DOMAIN);
 					
-					if (adsInfo[0]['src']) {
-						content += '<a id=\"topAd\" href=\"javascript:void(0);\" data-ad-src=\"http://'+adsInfo[0]['src']+'\" target="_blank">';
-						content += '<img src=\"'+adsInfo[0]['img']+'\" style=\"width:100%;\" title=\"'+adsInfo[0]['title']+'\">';
+					if (adsInfo['src']) {
+						content += '<a id=\"topAd\" href=\"javascript:void(0);\" data-ad-src=\"http://'+adsInfo['src']+'\" target="_blank">';
+						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%;\" title=\"'+adsInfo['title']+'\">';
 						content += '</a>';
 					} else {
-						content += '<img src=\"'+adsInfo[0]['img']+'\" style=\"width:100%;\" title=\"'+adsInfo[0]['title']+'\">';
+						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%;\" title=\"'+adsInfo['title']+'\">';
 					}
 					content += '</div>';
-				} else if (adsInfo[0]['top'] == 2 && adsShowCk == 1) {
+				} else if (adsInfo['top'] == 2 && adsShowCk == 1) {
 					userInfo['img'] = PREVIOUS_REQUEST_DOMAIN + userInfo['img'];
 					content += '<div class="wz_top" id=\"divTopAd\">';
 					
@@ -163,14 +164,16 @@
 				content += '</div>';
 				content += '</div>';
 				
-				if (adsInfo['0']['bottom'] == 13) {
-					content += '<div class=\"wz_gg\" style=\"margin-bottom:0px;\">';
-				} else if (adsInfo['0']['bottom'] == 11) {
-					content += '<div class=\"wz_gg\" style=\"margin-bottom:80px;\">';
-				} else if (adsInfo['0']['bottom'] == 12) {
-					content += '<div class=\"wz_gg\">';
+				if (adsInfo.length > 0) {
+					if (adsInfo['bottom'] == 13) {
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:85px;\">';
+					} else if (adsInfo['bottom'] == 11) {
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:85px;\">';
+					} else if (adsInfo['bottom'] == 12) {
+						content += '<div class=\"wz_gg\" style=\"margin-bottom:85px;\">';
+					}	
 				} else {
-					content += '<div class=\"wz_gg\" style=\"margin-bottom:0px;\">';
+					content += '<div class=\"wz_gg\" style=\"margin-bottom:85px;\">';
 				}
 				
 				if ((adInfo['img'] && userInfo['vip']==0) || userInfo['state'] == 1) {
@@ -227,14 +230,14 @@
 					content += '</div>';
 				}
 				
-				if (adsInfo[0]['bottom'] == 11 && adsShowCk == 1) {
+				if (adsInfo['bottom'] == 11 && adsShowCk == 1) {
 					content += '<div style=\"bottom:-5px; position:fixed; width:100%; border-bottom:1px solid #e5e5e5; border-top:1px solid #e5e5e5;\">';
 					if (adsInfo['src']) {
-						content += '<a id=\"bottomAd\" data-ad-src=\"'+REQUEST_DOMAIN + adsInfo[0]['src']+'\" href=\"javascript:void(0);\" target=\"_blank\">';
-						content += '<img src=\"'+adsInfo[0]['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo[0]['title']+'\"/>';
+						content += '<a id=\"bottomAd\" data-ad-src=\"'+REQUEST_DOMAIN + adsInfo['src']+'\" href=\"javascript:void(0);\" target=\"_blank\">';
+						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo['title']+'\"/>';
 						content += '</a>';
 					} else {
-						content += '<img src=\"'+adsInfo[0]['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo[0]['title']+'\"/>';
+						content += '<img src=\"'+adsInfo['img']+'\" style=\"width:100%; max-height:200px;\" title=\"'+adsInfo['title']+'\"/>';
 					}
 					content += '</div>';
 				} else if (adsInfo['bottom'] == 12 && adsShowCk == 1) {
@@ -398,7 +401,15 @@
 				localStorage.setItem('isShowArticleType', true);
 				localStorage.setItem('articleType', articleType);
 				mui.openWindow({
-					url: 'index.html'
+					url: 'index.html',
+					show: {
+				      	autoShow:true,
+				      	aniShow: 'slide-in-left',
+				      	duration: 500
+				    },
+				    waiting: {
+				    	autoShow: false,
+				    }
 				});
 			});
 			

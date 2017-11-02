@@ -171,8 +171,9 @@
 			}
 			
 			function initLoad() {
-				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/contact', {
+				mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
 					data: {
+						action: 'contact',
 						token: localStorage.getItem(TOKEN)
 					},
 					beforeSend: function() {
@@ -214,21 +215,42 @@
 				mui(document).on('tap', '#liFirst', function() {
 					mui.openWindow({
 						url: '../myzone/managearticle.html',
-						id: 'myZoneManagedArticle'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-left'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				mui(document).on('tap', '#liSecond', function() {
 					mui.openWindow({
 						url: '../myzone/aboutme.html',
-						id: 'myZoneAboutMe'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-left'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				mui(document).on('tap', '#aFirst', function() {
 					mui.openWindow({
 						url: '../myzone/managearticle.html',
-						id: 'myZoneManageArticle'
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: 'slide-in-left'
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
@@ -237,17 +259,24 @@
 					var phone = document.getElementById('phone').value;
 					var erweima = document.getElementById('erweima').value;
 					console.log('local: ' + erweima);
-					mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php/contactEdit', {
+					mui.ajax(REQUEST_DOMAIN + 'center/personalCenter.php', {
 						data: {
+							action: 'contactEdit',
 							token: localStorage.getItem(TOKEN),
 							phone: phone,
-							erweima: ''+erweima
+							erweima: erweima
 						},
 						dataType:'json',
+						beforeSend: function() {
+				        	plus.nativeUI.showWaiting('保存中...',{background:'#8f8f94',back:'none',loading:{display:'inline'}});
+					    },
+					    complete: function() {
+					        plus.nativeUI.closeWaiting();
+					    },
 						type:'POST',
 						timeout:10000,
 						success: function(result) {
-							console.log(JSON.stringify(result));
+							plus.nativeUI.closeWaiting();
 							if (result.status == -1) {
 								plus.nativeUI.toast('修改成功');
 								plus.webview.currentWebview().reload();
@@ -256,6 +285,7 @@
 							}
 						},
 						error: function(xhr,type,errorThrown) {
+							plus.nativeUI.closeWaiting();
 							if (type == 'timeout') {//超时
 								plus.nativeUI.toast('服务器超时，请稍后重试！');
 							} else {
