@@ -138,6 +138,14 @@
 				plus.webview.close("../managead/edit.html");
 				mui.openWindow({
 					url: './edit.html',
+					createNew: true,
+					show:{
+						autoShow: true,
+						aniShow: ''
+					},
+					waiting: {
+						autoShow: false
+					},
 					id:'./edit.html',
 				    extras:{
 				        aid:id
@@ -169,24 +177,56 @@
 	        	
 	        	mui(document).on('tap', '#add', function() {
 					mui.openWindow({
-						url: 'add.html'
+						url: 'add.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						}
 					});
 				});
 	        	mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
-						url: '../publisharticle/index.html'
+						url: '../publisharticle/index.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						}
 					});
 				});
 				
 				mui(document).on('tap', '#liMyZone', function() {
 					mui.openWindow({
-						url: '../myzone/managearticle.html'
+						url: '../myzone/managearticle.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						}
 					});
 				});
 				
 				mui(document).on('tap', '#liMember', function() {
 					mui.openWindow({
-						url: '../member/index.html'
+						url: '../member/index.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						}
 					});
 				});
 	        });

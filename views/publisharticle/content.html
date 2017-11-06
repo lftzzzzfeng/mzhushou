@@ -154,12 +154,12 @@
 				content += '<p style=\"margin-right:10px;\"><span>阅读  '+(data['pv'])+'</span></p>';
 				if (data['zan']) {
 					if (zan == 1) {
-						content += '<i class=\"zzh\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉</p></a>';
+						content += '<i class=\"zzh\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉1</p></a>';
 					} else {
-						content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href="javascript:void(0);" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉</p></a>';
+						content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href="javascript:void(0);" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉2</p></a>';
 					}
 				} else {
-					content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">赞</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉</p></a>';
+					content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">赞</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉3</p></a>';
 				}
 				content += '</div>';
 				content += '</div>';
@@ -402,6 +402,7 @@
 				localStorage.setItem('articleType', articleType);
 				mui.openWindow({
 					url: 'index.html',
+					createNew: true,
 					show: {
 				      	autoShow:true,
 				      	aniShow: 'slide-in-left',
@@ -424,6 +425,14 @@
 			mui(document).on('tap', '#tousu', function() {
 				mui.openWindow({
 					url: './tousu.html',
+					createNew: true,
+					show:{
+						autoShow: true,
+						aniShow: ''
+					},
+					waiting: {
+						autoShow: false
+					}
 				});
 			});
 		});

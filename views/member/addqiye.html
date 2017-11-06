@@ -109,7 +109,15 @@
 						console.log(JSON.stringify(result));
 						if (result.status == -1) {
 							mui.openWindow({
-								url: 'memberlist.html'
+								url: 'memberlist.html',
+								createNew: true,
+								show:{
+									autoShow: true,
+									aniShow: ''
+								},
+								waiting: {
+									autoShow: false
+								}
 							});
 						}else{
 							plus.nativeUI.toast(result.message);

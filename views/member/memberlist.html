@@ -111,6 +111,14 @@
 			function statistics(id){
 				mui.openWindow({
 					url: 'statistics.html',
+					createNew: true,
+					show:{
+						autoShow: true,
+						aniShow: ''
+					},
+					waiting: {
+						autoShow: false
+					},
 					id:'statistics.html',
 				    extras:{
 				        mid:id
@@ -129,6 +137,14 @@
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
 						url: '../publisharticle/index.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						},
 						id: 'publishArticleIndex'
 					});
 				});
@@ -137,6 +153,14 @@
 				mui(document).on('tap', '#liMyZone', function() {
 					mui.openWindow({
 						url: '../myzone/managearticle.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						},
 						id: 'myZoneManageArticle'
 					});
 				});
@@ -145,6 +169,14 @@
 				mui(document).on('tap', '#liManagedAd', function() {
 					mui.openWindow({
 						url: '../managead/index.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						},
 						id: 'managedadIndex'
 					});
 				});

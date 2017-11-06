@@ -236,91 +236,195 @@
 				//打开发布文章页面
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({
-						url: '../publisharticle/index.html'
+						url: '../publisharticle/index.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开个人空间页面	
 				mui(document).on('tap', '#liMyZone', function() {
 					mui.openWindow({
-						url: '../myzone/managearticle.html'
+						url: '../myzone/managearticle.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开广告管理页面
 				mui(document).on('tap', '#liManagedAd', function() {
 					mui.openWindow({
-						url: '../managead/index.html'
+						url: '../managead/index.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开当前余额
 				mui(document).on('tap', '#divBalance', function() {
 					mui.openWindow({
-						url: 'balance.html'
+						url: 'balance.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开个人信息
 				mui(document).on('tap', '#divPersonalInfo', function() {
 					mui.openWindow({
-						url: 'personalinfo.html'
+						url: 'personalinfo.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开使用教程
 				mui(document).on('tap', '#divCourse', function() {
 					mui.openWindow({
-						url: 'course.html'
+						url: 'course.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开联系客服
 				mui(document).on('tap', '#liCustomService', function() {
 					mui.openWindow({
-						url: 'customeservice.html'
+						url: 'customeservice.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开修改密码
 				mui(document).on('tap', '#liChangePassword', function() {
 					mui.openWindow({
-						url: 'editpassword.html'
+						url: 'editpassword.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开添加会员与代理商
 				mui(document).on('tap', '#liPurchaseMember', function() {
 					mui.openWindow({
-						url: 'addvip.html'
+						url: 'addvip.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开会员列表
 				mui(document).on('tap', '#liMemberList', function() {
 					mui.openWindow({
-						url: 'memberlist.html'
+						url: 'memberlist.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开消费明细
 				mui(document).on('tap', '#liConsumeDetail', function() {
 					mui.openWindow({
-						url: 'consumedetail.html'
+						url: 'consumedetail.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开数据统计页面
 				mui(document).on('tap', '#liStatistic', function() {
 					mui.openWindow({
-						url: 'statistics.html'
+						url: 'statistics.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开了解会员/代理
 				mui(document).on('tap', '#liKnowMember', function() {
 					mui.openWindow({
-						url: 'know.html'
+						url: 'know.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
@@ -329,6 +433,14 @@
 					money = document.getElementById('money').innerText;
 					mui.openWindow({
 						url: 'addqiye.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	},
 						money:'addqiye.html',
 					    extras:{
 					        money:money
@@ -340,28 +452,60 @@
 				mui(document).on('tap', '#advertisingPromotion', function() {
 					money = document.getElementById('money').innerText;
 					mui.openWindow({
-						url: 'advertisingPromotion.html'
+						url: 'advertisingPromotion.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开关于我们
 				mui(document).on('tap', '#liAboutUs', function() {
 					mui.openWindow({
-						url: 'about.html'
+						url: 'about.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开购买会员
 				mui(document).on('tap', '#buyingMembers', function() {
 					mui.openWindow({
-						url: 'buyingmembers.html'
+						url: 'buyingmembers.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
 				//打开购买代理
 				mui(document).on('tap', '#purchasingAgent', function() {
 					mui.openWindow({
-						url: 'purchasingagent.html'
+						url: 'purchasingagent.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
 				});
 				
@@ -381,14 +525,26 @@
 					    },
 						success: function(data) {
 							var result = data;
-							var old_back = mui.back;
 							if (result.status == -1) {
 								localStorage.removeItem(TOKEN);
 								localStorage.removeItem('isShowArticleType');
 								localStorage.removeItem('articleType');
-								old_back();
+								var wvs = plus.webview.all();
+								for(var i = 0, len = wvs.length; i < len; i++) {
+									if(wvs[i].id !== 'HBuilder'){
+										wvs[i].close('none');
+									}
+								};
 								mui.openWindow({
-									url:'../../index.html'
+									url:'../../index.html',
+									createNew: true,
+									show:{
+							      		autoShow: true,
+								      	aniShow: ''
+								    },
+								    waiting: {
+								      	autoShow: false
+								   	}
 								});
 							} else {
 								plus.nativeUI.toast(result.data.message);

@@ -202,6 +202,14 @@
 							plus.nativeUI.toast('保存成功');
 							mui.openWindow({
 								url:'index.html',
+								createNew: true,
+								show:{
+									autoShow: true,
+									aniShow: ''
+								},
+								waiting: {
+									autoShow: false
+								}
 							});
 						} else {
 							plus.nativeUI.toast(result.message);
@@ -236,7 +244,15 @@
 				//取消修改个人信息
 				mui(document).on('tap', '#cancel', function() {
 					mui.openWindow({
-						url: 'index.html'
+						url: 'index.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						}
 					});
 				});
 			});

@@ -56,7 +56,7 @@
 		<!------------------------------3开始------------------------------------------>
 		<div id="div_3" style="display: none; background:rgb(241, 240, 245)">
 			<div id="report_success">
-				<img src="resources/images/report_success.png" class="img-responsive">
+				<img src="../../img/report_success.png" class="img-responsive">
 				<h3>举报成功</h3>
 				<span>感谢您的参与，我们坚决反对色情、暴力、欺诈等文章内容，我们会认真处理你的举报，维护绿色、健康的阅读环境。</span>
 				<div class="link_Report" id="queding">确定</div>
@@ -64,12 +64,14 @@
 		</div>
 	</div>
 	<script type="text/javascript">	
+		var old_back = mui.back;
 		mui.init()
 		mui.plusReady(function() {
 			mui(document).on('tap', '#queding', function() {
-				mui.openWindow({
-					url: 'index.html'
-				});
+				old_back();
+//				mui.openWindow({
+//					url: 'index.html'
+//				});
 			});
 		});
 	</script>

@@ -103,7 +103,15 @@
 //						console.log(JSON.stringify(result));
 						if (result.status == -1) {
 							mui.openWindow({
-								url: 'index.html'
+								url: 'index.html',
+								createNew: true,
+								show:{
+									autoShow: true,
+									aniShow: ''
+								},
+								waiting: {
+									autoShow: false
+								}
 							});
 						}else{
 							plus.nativeUI.toast(result.message);

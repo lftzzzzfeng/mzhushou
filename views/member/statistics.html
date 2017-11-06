@@ -3,12 +3,79 @@
 <head>
     <meta charset='UTF-8'>
     <title>数据统计</title>
+    <link href="../../css/mui.min.css" rel="stylesheet" />
+	<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+	<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
+	<script src="../../js/mui.min.js"></script>
     <script src='http://www.ichartjs.com/ichart.latest.min.js'></script>
-    <script type='text/javascript'>
-        $(function(){
+    <script type="text/javascript" src="../../js/constant.js"></script>
+	<script type="text/javascript">
+		var artNum = 0;
+		var article_number = 0;
+		var pv_number = 0;
+		var share_number = 0;
+		var zan_number = 0;
+		var advertisement_number = 0;
+		mui.init({				
+			pullRefresh: {  
+                container: '#pullrefresh',  
+                down: { 
+                  	style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
+					height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                    callback: pulldownRefresh  
+                },
+            }  
+		})
+			
+		function pulldownRefresh() {  
+        	setTimeout(function () {  
+                  ajaxdataStatistics();  
+            	mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+        	}, 1500);  
+        } 
+			
+		function ajaxdataStatistics() {
+			var self = plus.webview.currentWebview();
+			var id = self.mid;
+			if(!id){
+				id = 0;
+			}
+			mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
+				type: 'POST',
+				data: {
+					action:'dataStatistics',
+					token: localStorage.getItem(TOKEN),
+					id:id
+				},
+				success: function(result) {
+					console.log(JSON.stringify(result));
+					if(result.status == -1){
+						artNum = result.data.artNum;
+						article_number = result.data.article_number;
+						pv_number = result.data.pv_number;
+						share_number = result.data.share_number;
+						zan_number = result.data.zan_number;
+						advertisement_number = result.data.advertisement_number;
+						piechart();
+						histogram();
+					}else{
+						plus.nativeUI.toast(result.message);
+					}
+				}
+			});
+		}
+		mui.plusReady(function() {
+			ajaxdataStatistics();
+		});
+			
+        function piechart(){
             var chart = iChart.create({
                 render:"ichart-render",
-                width:500,
+                width:370,
                 height:300,
                 background_color:"#fff",
                 gradient:false,
@@ -26,7 +93,7 @@
                         width:1
                     },
                     label:{
-                        fontweight:500,
+                        fontweight:370,
                         fontsize:12,
                         color:"#333",
                         sign:"square",
@@ -44,7 +111,7 @@
                 showpercent:false,
                 column_width:"70%",
                 bar_height:"70%",
-                radius:"90%",
+                radius:"70%",
                 title:{
                     text:"数据统计饼状图",
                     color:"#111111",
@@ -93,39 +160,39 @@
                 type:"pie2d",
                 data:[
                     {
-                        name:"总发布文章数",
-                        value:5,
+                        name:"发布文章数",
+                        value:artNum,
                         color:"#8B0000"
                     },{
                         name:"现有文章数",
-                        value:25,
+                        value:article_number,
                         color:"#800080"
                     },{
-                        name:"总阅读数",
-                        value:10,
+                        name:"阅读数",
+                        value:pv_number,
                         color:"#00FF00"
                     },{
-                        name:"总分享数",
-                        value:15,
+                        name:"分享数",
+                        value:share_number,
                         color:"#FFA500"
                     },{
-                        name:"总点赞数",
-                        value:25,
+                        name:"点赞数",
+                        value:zan_number,
                         color:"#d92eae"
                     },{
-                        name:"总广告点击数",
-                        value:20,
+                        name:"广告点击数",
+                        value:advertisement_number,
                         color:"#1E90FF"
                     }
                 ]
             });
             chart.draw();
-        });
+        }
 
-        $(function(){
+        function histogram(){
             var chart = iChart.create({
                 render:"zhuzhuangtu",
-                width:500,
+                width:370,
                 height:300,
                 background_color:"#fefefe",
                 gradient:false,
@@ -230,39 +297,47 @@
                 type:"column2d",
                 data:[
                     {
-                        name:"总发布文章数",
-                        value:10,
+                        name:"发布数",
+                        value:artNum,
                         color:"#8B0000"
                     },{
-                        name:"现有文章数",
-                        value:20,
+                        name:"现有数",
+                        value:article_number,
                         color:"#800080"
                     },{
-                        name:"总阅读数",
-                        value:30,
+                        name:"阅读数",
+                        value:pv_number,
                         color:"#00FF00"
                     },{
-                        name:"总分享数",
-                        value:12,
+                        name:"分享数",
+                        value:share_number,
                         color:"#FFA500"
                     },{
-                        name:"总点赞数",
-                        value:16,
+                        name:"点赞数",
+                        value:zan_number,
                         color:"#d92eae"
                     },{
-                        name:"总广告点击数",
-                        value:19,
+                        name:"广告点击",
+                        value:advertisement_number,
                         color:"#1E90FF"
                     }
                 ]
             });
             chart.draw();
-        });
+        }
     </script>
-    <style>body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }  body, button, input, select, textarea { font-family:Microsoft YaHei,"微软雅黑";}</style>
+    <style>
+    	body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; } 
+    	 body, button, input, select, textarea { font-family:Microsoft YaHei,"微软雅黑";} 
+    	 #ichart-render canvas{position: absolute;left: -10px;}
+    </style>
 </head>
-<body style='background-color:#fff;'>
-<div id='ichart-render'></div>
-<div id='zhuzhuangtu'></div>
+<body style='background-color:#fff;' id="pullrefresh">
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+		<h1 class="mui-title main-color">数据统计</h1>
+	</header>
+	<div id='ichart-render' style="margin-top:40px;"></div>
+	<div id='zhuzhuangtu'></div>
 </body>
 </html>

@@ -106,7 +106,6 @@
 	<script src="../../css/tx/js/hammer.js"></script>
 	<script src="../../css/tx/js/jquery.photoClip.js?123"></script>
 	<script type="text/javascript">
-		var old_back = mui.back;	
 		mui.init({				
 			pullRefresh: {  
                 container: '#pullrefresh',  
@@ -146,11 +145,16 @@
 				success: function(result) {
 					console.log(JSON.stringify(result));
 					if(result.status == -1){
-                        plus.webview.close("../managead/index.html");
-                        old_back();
-                        plus.webview.getWebviewById('../managead/index.html').reload();
 						mui.openWindow({
-							url: './index.html'
+							url: './index.html',
+								createNew: true,
+							show:{
+					      		autoShow: true,
+						      	aniShow: ''
+						    },
+						    waiting: {
+						      	autoShow: false
+						   	}
 						});
 					}else{
 						plus.nativeUI.toast(result.message);
@@ -184,25 +188,57 @@
         	
 	        mui(document).on('tap', '#list', function() {
 				mui.openWindow({
-					url: 'index.html'
+					url: 'index.html',
+					createNew: true,
+					show:{
+				      	autoShow: true,
+					    aniShow: ''
+					},
+					waiting: {
+					    autoShow: false
+					}
 				});
 			});
 
 	        mui(document).on('tap', '#liPublishArticle', function() {
 				mui.openWindow({
-					url: '../publisharticle/index.html'
+					url: '../publisharticle/index.html',
+					createNew: true,
+					show:{
+				      	autoShow: true,
+					    aniShow: ''
+					},
+					waiting: {
+					    autoShow: false
+					}
 				});
 			});
 				
 			mui(document).on('tap', '#liMyZone', function() {
 				mui.openWindow({
-					url: '../myzone/managearticle.html'
+					url: '../myzone/managearticle.html',
+					createNew: true,
+					show:{
+				      	autoShow: true,
+					    aniShow: ''
+					},
+					waiting: {
+					    autoShow: false
+					}
 				});
 			});
 				
 			mui(document).on('tap', '#liMember', function() {
 				mui.openWindow({
-					url: '../member/index.html'
+					url: '../member/index.html',
+					createNew: true,
+					show:{
+				      	autoShow: true,
+					    aniShow: ''
+					},
+					waiting: {
+					    autoShow: false
+					}
 				});
 			});
 	    });

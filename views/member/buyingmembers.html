@@ -77,7 +77,15 @@
 			mui.plusReady(function() {
 				mui(document).on('tap', '#details', function() {
 					mui.openWindow({
-						url: 'know.html'
+						url: 'know.html',
+						createNew: true,
+						show:{
+							autoShow: true,
+							aniShow: ''
+						},
+						waiting: {
+							autoShow: false
+						}
 					});					
 				});
 				

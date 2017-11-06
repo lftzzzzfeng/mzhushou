@@ -36,6 +36,7 @@
 	</body>
 	<script type="text/javascript" src="../../js/constant.js"></script>
 	<script type="text/javascript">
+		mui('body').on('tap','a',function(){document.location.href=this.href;});
 		function addNumber() {
 			mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'u_detail.php', {
 				type: 'post',
@@ -170,12 +171,12 @@
 				content += '<p style=\"margin-right:10px;\"><span>阅读  '+(data['pv'])+'</span></p>';
 				if (data['zan']) {
 					if (zan == 1) {
-						content += '<i class=\"zzh\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\"><p style=\"float:right;\">投诉</p></a>';
+						content += '<i class=\"zzh\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉</p></a>';
 					} else {
-						content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href="javascript:void(0);" style=\"color:#8c8c8c;\"><p style=\"float:right;\">投诉</p></a>';
+						content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">'+data['zan']+'</span> <a class=\"jb\" href="javascript:void(0);" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉</p></a>';
 					}
 				} else {
-					content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">赞</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\"><p style=\"float:right;\">投诉</p></a>';
+					content += '<i class=\"zz\" id=\"zanShow\"></i><span id=\"zanChange\">赞</span> <a class=\"jb\" href=\"javascript:void(0);\" style=\"color:#8c8c8c;\" id="tousu"><p style=\"float:right;\">投诉</p></a>';
 				}
 				content += '</div>';
 				content += '</div>';
@@ -274,7 +275,7 @@
 					content += '<div class="gg_fiexd">';
 					
 					content += '<div class=\"gg_fiexdleft\">';
-					content += '<img src=\"'+userInfo['img']+'\" style=\"width:50px; border-radius:50px;\"/>';
+					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN+userInfo['img']+'\" style=\"width:50px; border-radius:50px;\"/>';
 					content += '<div class=\"f_left\">';
 					content += '<p class=\"fiexd_p\">'+userInfo['realname']+'</p>';
 					if (userInfo['qianming']) {
@@ -296,13 +297,13 @@
 					content += '</a>';
 					content += '</li>';
 					content += '<li id=\"meimg\">';
-					content += '<a href=\"javascript:void(0);\">';
+					content += '<a href=\"javascript:void(0);\" id="reweima">';
 					content += '<img src=\"../../img/nav_weixin.gif\" style=\"height:25px;margin-bottom:2px;margin-top:2px;\" /><br>';
 					content += '加我微信';
 					content += '</a>';
 					content += '</li>';
 					content += '<li>';
-					content += '<a href=\"javascript:void(0);\">';
+					content += '<a href=\"javascript:void(0);\" id="weizhan">';
 					content += '<img src=\"../../img/nav_home.gif\" style=\"height:25px;margin-bottom:2px;margin-top:2px;\" /><br>';
 					content += '我的微站';
 					content += '</a>';
@@ -457,6 +458,36 @@
 			mui(document).on('tap', '#qiye', function() {
 				addNumber();
 				plus.runtime.openURL(this.getAttribute('data-url'));
+			});
+			
+			mui(document).on('tap', '#weizhan', function() {
+				mui.openWindow({
+					url: '../myzone/managearticle.html',
+					createNew: true,
+					waiting: {
+					    autoShow: false
+					},
+					show: {
+				      	autoShow:true,
+				      	aniShow: 'slide-in-right',
+				      	duration: 350
+				    }
+				});
+			});
+			
+			mui(document).on('tap', '#tousu', function() {
+				mui.openWindow({
+					url: './tousu.html',
+					createNew: true,
+					waiting: {
+					    autoShow: false
+					},
+					show: {
+				      	autoShow:true,
+				      	aniShow: 'slide-in-right',
+				      	duration: 350
+				    }
+				});
 			});
 		});
 	</script>
