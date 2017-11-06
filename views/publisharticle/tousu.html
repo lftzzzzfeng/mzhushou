@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/tx/css/style.css" rel="stylesheet" type="text/css">
+		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/jubao.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js"></script>
+	</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
+		<h1 class="mui-title main-color">投诉</h1>
+	</header>
+	<div class="hd_main" style="margin-top:50px;">
+		<div id="div_1">
+			<div id="report">
+				<h2>请选择投诉原因</h2>
+				<div class="ReportReason">
+					<ul>
+						<li>欺诈 <span class="sel"><input name="show" id="show" style="height:20px;width:20px;" value="欺诈" type="checkbox"></span></li>
+						<li>色情<span class=""><input name="show" id="show" style="height:20px;width:20px;" value="色情" type="checkbox"></span></li>
+						<li>政治谣言<span class=""><input name="show" id="show" style="height:20px;width:20px;" value="政治谣言" type="checkbox"></span></li>
+						<li>常识性谣言<span><input name="show" id="show" style="height:20px;width:20px;" value="常识性谣言" type="checkbox"></span></li>
+						<li>诱导分享<span><input name="show" id="show" style="height:20px;width:20px;" value="诱导分享" type="checkbox"></span></li>
+						<li>恶意营销<span><input name="show" id="show" style="height:20px;width:20px;" value="恶意营销" type="checkbox"></span></li>
+						<li>隐私信息收集<span><input name="show" id="show" style="height:20px;width:20px;" value="隐私信息收集" type="checkbox"></span></li>
+						<li>抄袭公众号文章<span><input name="show" id="show" style="height:20px;width:20px;" value="抄袭公众号文章" type="checkbox"></span></li>
+						<li>其他侵权类（冒名、诽谤、抄袭）<span><input name="show" id="show" style="height:20px;width:20px;" value="其他侵权类（冒名、诽谤、抄袭）" type="checkbox"></span></li>
+						<li>违规声明原创<span><input name="show" id="show" style="height:20px;width:20px;" value="违规声明原创" type="checkbox"></span></li>
+					</ul>
+				</div>
+				<div class="Report_sub">
+					<div class="next_Report" onclick="document.getElementById('div_1').style.display='none';document.getElementById('div_2').style.display='block'">下一步</div>
+				</div>
+			</div>
+		</div>
+		<!-----------------------------2开始---------------------------------------------------->
+		<div id="div_2" style="display: none;">
+			<div id="report" class="report-2">
+				<h2>举报描述</h2>
+				<div class="ReportText">
+					<textarea id="fb_des_content" class="fb-des-content" data-exclude="true" name="issuedesc" maxlength="400" placeholder="请出入举报描述（50字以内）"></textarea>
+				</div>
+				<div class="Report_sub">
+					<div class="next_Report" id="tijiao" onclick="document.getElementById('div_2').style.display='none';document.getElementById('div_3').style.display='block'">提交</div>
+					<div class="pre_Report" onclick="document.getElementById('div_2').style.display='none';document.getElementById('div_1').style.display='block'">上一步</div>
+				</div>
+			</div>
+		</div>
+		<!------------------------------3开始------------------------------------------>
+		<div id="div_3" style="display: none; background:rgb(241, 240, 245)">
+			<div id="report_success">
+				<img src="resources/images/report_success.png" class="img-responsive">
+				<h3>举报成功</h3>
+				<span>感谢您的参与，我们坚决反对色情、暴力、欺诈等文章内容，我们会认真处理你的举报，维护绿色、健康的阅读环境。</span>
+				<div class="link_Report" id="queding">确定</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">	
+		mui.init()
+		mui.plusReady(function() {
+			mui(document).on('tap', '#queding', function() {
+				mui.openWindow({
+					url: 'index.html'
+				});
+			});
+		});
+	</script>
+</body>
+</html>

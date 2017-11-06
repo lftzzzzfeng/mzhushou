@@ -381,12 +381,12 @@
 					    },
 						success: function(data) {
 							var result = data;
-							
+							var old_back = mui.back;
 							if (result.status == -1) {
 								localStorage.removeItem(TOKEN);
 								localStorage.removeItem('isShowArticleType');
 								localStorage.removeItem('articleType');
-								
+								old_back();
 								mui.openWindow({
 									url:'../../index.html'
 								});

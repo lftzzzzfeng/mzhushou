@@ -1,26 +1,43 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
 		<link href="../../css/newstyle.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/feng.css" rel="stylesheet" type="text/css" />
 		<script src="../../js/mui.min.js"></script>
 	</head>
-
 	<body id="pullrefresh">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-pull-left main-color"><</a>
-		    <h1 class="mui-title main-color">会员列表</h1>
+		    <h1 class="mui-title main-color">数据统计</h1>
 		</header>
 		<div class="mui-content">
-			<div class="huiyuan_list">
-			    <ul id="index_list"></ul>
+			<div class="xf_list">
+			    <ul id="index_list">
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总发布文章数</span><span style="float: right;" id="artNum">0</span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">现有文章数</span><span style="float: right;" id="article_number">0</span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总阅读数</span><span style="float: right;" id="pv_number">0</span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总分享数</span><span style="float: right;" id="share_number">0</span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总点赞数</span><span style="float: right;" id="zan_number">0</span></div>
+			        </li>
+			        <li>
+			            <div style="margin-top:2%;"><span style="float: left;">总广告点击数</span><span style="float: right;" id="advertisement_number">0</span></div>
+			        </li>
+			    </ul>
 			</div>
-			<div class="jzgd" data-type="pc_0" id="divMore"><a href="javascript:void(0);" id="look-more" uigs="load_more"><span id="spnMore">点击加载更多</span></a></div>
+			<div style="height: 100px;"></div>
 			<div class="index_nav">
 			    <ul>
 			        <li id="liPublishArticle">
@@ -61,70 +78,41 @@
 			
 			function pulldownRefresh() {  
               setTimeout(function () {  
-                  ajaxmemberList();  
+                  ajaxdataStatistics();  
                   mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
               }, 1500);  
           	} 
 			
-			//会员列表接口
-			function ajaxmemberList() {
+			function ajaxdataStatistics() {
+				var self = plus.webview.currentWebview();
+				var id = self.mid;
+				if(!id){
+					id = 0;
+				}
 				mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
 					type: 'POST',
 					data: {
-						action:'memberList',
-						token: localStorage.getItem(TOKEN)
+						action:'dataStatistics',
+						token: localStorage.getItem(TOKEN),
+						id:id
 					},
 					success: function(result) {
 						console.log(JSON.stringify(result));
-						if (result.status == -1) {
-							var _content = '';
-							var articles = result.data.userList; 
-							for (var i = 0; i < articles.length; i++) {
-								_content +='<a href="javascript:void(0);" onclick="statistics('+articles[i].id+')"><li><img style="width:60px;" src=\"'+PREVIOUS_REQUEST_DOMAIN+articles[i].img+'\" /><p class="li_ps">'+articles[i].realname+'<br><span>'+articles[i].phone+'</span></p><p class="li_d">';
-								if(articles[i].vip == 1){
-									_content += '月会员</p></li></a>';
-								}else if(articles[i].vip == 2){
-									_content += '年会员</p></li></a>';
-								}else if(articles[i].vip == 3){
-									_content += '企业主</p></li></a>';
-								}else if(articles[i].vip == 4){
-									_content += '代理商</p></li></a>';
-								}
-								
-							}
-							document.getElementById('index_list').innerHTML = _content;
-							if (result.data.num == 2) {
-								document.getElementById('spnMore').innerText = '没有更多信息';
-								document.getElementById('divMore').disabled = true;
-							} else {
-								document.getElementById('spnMore').innerText = '点击加载更多';
-								document.getElementById('divMore').disabled = false;
-							}
+						if(result.status == -1){
+							document.getElementById('artNum').innerText = result.data.artNum;
+							document.getElementById('article_number').innerText = result.data.article_number;
+							document.getElementById('pv_number').innerText = result.data.pv_number;
+							document.getElementById('share_number').innerText = result.data.share_number;
+							document.getElementById('zan_number').innerText = result.data.zan_number;
+							document.getElementById('advertisement_number').innerText = result.data.advertisement_number;
 						}else{
 							plus.nativeUI.toast(result.message);
 						}
 					}
 				});
 			}
-			
-			//会员数据统计
-			function statistics(id){
-				mui.openWindow({
-					url: 'statistics.html',
-					id:'statistics.html',
-				    extras:{
-				        mid:id
-				    }
-				});
-			}
-			
 			mui.plusReady(function() {
-				ajaxmemberList();
-				mui(document).on('tap', '#divMore', function() {
-					document.activeElement.blur();
-					page++;
-					ajaxLoadMoreArticles(typeId, page);
-				});
+				ajaxdataStatistics();
 				//打开发布文章页面
 				mui(document).on('tap', '#liPublishArticle', function() {
 					mui.openWindow({

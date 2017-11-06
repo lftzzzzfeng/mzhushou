@@ -59,14 +59,14 @@
 			})
 			
 			function pulldownRefresh() {  
-              setTimeout(function () {  
-                  ajaxAdvertisementList();  
-                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
-              }, 1500);  
+              	setTimeout(function () { 
+                	ajaxAdvertisementList();  
+                  	mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              	}, 1500);  
           	} 
-			
 			//获取广告管理中的广告列表
 			function ajaxAdvertisementList() {
+//				plus.webview.getWebviewById('../managead/index.html').reload();
 				mui.ajax(REQUEST_DOMAIN + 'advertisement/advertisement.php', {
 					data: {
 						action:'advertisementList',
@@ -137,8 +137,8 @@
 //              console.log(JSON.stringify(self)) 
 				plus.webview.close("../managead/edit.html");
 				mui.openWindow({
-					url: 'edit.html',
-					id:'edit.html',
+					url: './edit.html',
+					id:'./edit.html',
 				    extras:{
 				        aid:id
 				    }
@@ -206,7 +206,6 @@
                    }  
                 }  
             }  
-            
 	    </script>
 	</body>
 </html>

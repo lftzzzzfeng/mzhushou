@@ -107,7 +107,8 @@
 	<script src="../../css/tx/js/hammer.js"></script>
 	<script src="../../css/tx/js/jquery.photoClip.js?123"></script>
 	<script type="text/javascript">
-		mui.init({				
+		var old_back = mui.back;
+		mui.init({
 			pullRefresh: {  
                 container: '#pullrefresh',  
                 down: { 
@@ -189,9 +190,9 @@
 				success: function(result) {
 					console.log(JSON.stringify(result));
 					if(result.status == -1){
-						plus.webview.close("../managead/index.html");
+  						old_back();
 						mui.openWindow({
-							url: 'index.html'
+							url: './index.html'
 						});
 					}else{
 						plus.nativeUI.toast(result.message);

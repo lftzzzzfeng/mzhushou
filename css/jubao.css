@@ -1,0 +1,27 @@
+a,body,dd,div,dl,dt,em,form,h1,h2,h3,h4,h5,h6,html,img,input,label,li,ol,p,select,span,ul{margin:0;padding:0}
+body{font-family:"微软雅黑",'Microsoft YaHei',sans-serif;color:#666;font-size:16px}
+a{color:#607fa6;text-decoration:none}
+a:hover{text-decoration:none;color:#ff4a00}
+li,ol,ul{list-style:none}
+em,i{font-style:normal}
+img{border:none}
+/* 以上可以不要 */
+
+
+
+body,html{height:100%;background:#e7e8eb}
+html{font-size:10px;}
+.hd_main{min-width:320px;margin:0 auto;max-width:640px;background-color:#fff;overflow:hidden}
+#report h2{color:#8a898e;font-size:1.6rem;margin:0 0 0 18px;padding:12px 0;font-weight:400}
+.ReportReason{background:#fff}
+.ReportReason ul li{padding:12px 0;border-bottom:1px solid #ddd;margin-left:18px;color:#000;font-size:1.4rem}
+.ReportReason ul li span{width:30px;height:25px;display:inline-block;vertical-align:bottom;float:right;margin-right:10px}
+.ReportReason ul li span.sel{background:url(../resources/images/correct.png) no-repeat 6px 4px}
+.ReportText textarea{margin:0 auto;background:#fff;border:none;width:100%;height:100px;padding:6px 0 6px 18px}
+.next_Report{background:#04be02;border:none;border-radius:3px;color:#fff;cursor:pointer;font-weight:700;padding:8px 0;height:100%;transition:all .3s ease 0s;width:90%;text-align:center;margin:20px auto}
+.pre_Report{background:#d1d1d1;border:medium none;border-radius:3px;color:#fff;cursor:pointer;font-weight:700;padding:8px 0;height:100%;transition:all .3s ease 0s;width:90%;text-align:center;margin:20px auto}
+#report_success{text-align:center}
+#report_success img{padding-top:55px;width:35.3%;margin:0 auto}
+#report_success h3{color:#000;font-size:2.2rem;margin-top:25px;margin-bottom:15px}
+#report_success span{width:90%;color:#888;display:block;margin:20px auto}
+.link_Report{background:#04be02;border:medium none;border-radius:3px;color:#fff;cursor:pointer;font-weight:700;padding:8px 0;height:100%;transition:all .3s ease 0s;width:90%;text-align:center;margin:20px auto}
