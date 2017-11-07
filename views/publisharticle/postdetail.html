@@ -318,19 +318,12 @@
 				}
 				
 				content += '</div>';
-				
-				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
-					content += '<div class=\"light_e\">';
-					content += '<div class=\"light\"><img src="../../img/light.png" /></div>';
-					content += '</div>';
-					content += '<div class=\"share_e\" id="divShare" data-article-title=\"'+data['title']+'\">';
-					content += '<div class=\"share\">分享</div>';
-					content += '</div>';
-					content += '<div id=\"tipsImg\" style=\"display:none; position:fixed; top:26%; left:10%; width:300px; height:300px;\">';
-//					console.log(PREVIOUS_REQUEST_DOMAIN + WEIXIN_BJ);
-					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN + WEIXIN_BJ+'\" style=\"width:100%;\"/>';
-					content += '</div>';
-				}
+				content += '<div class=\"share_e\" id="divShare" data-article-title=\"'+data['title']+'\">';
+				content += '<div class=\"light\"><img src="../../img/pyq.jpg" /></div>';
+				content += '</div>';
+//					content += '<div id=\"tipsImg\" style=\"display:none; position:fixed; top:26%; left:10%; width:300px; height:300px;\">';
+//					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN + WEIXIN_BJ+'\" style=\"width:100%;\"/>';
+//					content += '</div>';
 				
 				document.getElementById('bodyContent').innerHTML = content;
 			} else {
@@ -380,17 +373,17 @@
 			var userInfo = JSON.parse(localStorage.getItem(USER_INFO));
 			ajaxInit();
 			
-			mui(document).on('tap', '.light', function() {
-				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
-					if (document.getElementById('tipsImg').style.display == 'none') {
-						document.getElementById('tipsImg').style.display = 'block';
-						document.getElementById('divContent').style.opacity = 0.2;
-					} else if (document.getElementById('tipsImg').style.display == 'block') {
-						document.getElementById('tipsImg').style.display = 'none';
-						document.getElementById('divContent').style.opacity = 1;
-					}
-				}
-			});
+//			mui(document).on('tap', '.light', function() {
+//				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
+//					if (document.getElementById('tipsImg').style.display == 'none') {
+//						document.getElementById('tipsImg').style.display = 'block';
+//						document.getElementById('divContent').style.opacity = 0.2;
+//					} else if (document.getElementById('tipsImg').style.display == 'block') {
+//						document.getElementById('tipsImg').style.display = 'none';
+//						document.getElementById('divContent').style.opacity = 1;
+//					}
+//				}
+//			});
 			
 			mui(document).on('tap', '#divContent', function() {
 				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
