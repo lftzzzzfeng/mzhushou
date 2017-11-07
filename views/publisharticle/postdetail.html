@@ -27,8 +27,8 @@
 			i.zza{background:url(../../img/zan.png) 0 0px no-repeat; width:14px; height:14px; float:left; background-size:100%; margin:0 2px;margin-top:3px;}
 		</style>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
+		<script>
+			mui.init();
 		</script>
 	</head>
 	<body style="background:#fff;" id="bodyContent">
@@ -69,7 +69,7 @@
 		function rendorInit(result) {
 			console.log(JSON.stringify(result));
 			if (result.status == -1) {
-				var userInfo = JSON.parse(localStorage.getItem(USER_INFO));
+				var userInfo = result.data.userinfo;
 				var adsShowCk = result.data.adsShowCk;
 				var adsInfo = result.data.adsInfo;
 				var data = result.data;
