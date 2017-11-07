@@ -79,7 +79,7 @@
 				var advertisement = result.data.advertisement;
 				
 				var content = '';
-				content += '<div id=\"divContent\">';
+				content += '<div id=\"divContent\" style="margin-bottom: 50px;">';
 				
 				if (adsInfo.length > 0) {
 					adsInfo = adsInfo[0];
@@ -101,7 +101,7 @@
 						
 						content += '<div class=\"wz_topleft\">';
 						content += '<div class=\"wz_img\">';
-						content += '<img src=\"'+userInfo['img']+'\" style=\"width:50px;border-radius:50px;\"/>';
+						content += '<img src=\"'+userInfo['img']+'\" style=\"width:45px;border-radius:50px;\"/>';
 						content += '</div>';
 						content += '<div class=\"wz_ir\">';
 						content += '<p style=\"color:#fff;height: 25px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;\">';
@@ -223,8 +223,7 @@
 					content += '</p>';
 					
 					for (var i = 0; i < contentlist.length; i++) {
-						var row_pic = contentlist[i]['pic'].replace('[weixin]', IMG_URL + '?url=');
-						
+						var row_pic = contentlist[i]['pic'].replace('[weixin]', IMG_URL + '?url=').substr(3);
 						if (i == 0) {
 							content += '<div class=\"gr_list gg_left relateArticles\" data-article-id=\"'+contentlist[i]['id']+'\" style=\"border-top:1px solid #e5e5e5;\">';
 						} else {
@@ -247,16 +246,15 @@
 						
 						content += '<div class=\"index_listr\">';
 						content += '<a href=\"javascript:void(0)\">';
-						content += '<img src=\"'+row_pic+'" style=\"max-height:80px;max-width:150px;\"/>';
+						content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN+row_pic+'" style=\"max-height:80px;max-width:150px;\"/>';
 						content += '</a>';
 						content += '</div>';
 						
 						content += '</div>';
 					}
-					
-					content += '<div data-article-type=\"'+data['type']+'\" class=\"wz_more\" style=\"width:98%; height:40px; text-align:center;margin-left:1%;margin-top:5px;\">';
-					content += '<p><a href=\"javascript:void(0);\" id=\"aLookMore\">查看更多>></a></p>';
-					content += '</div>';
+						content += '<div data-article-type=\"'+data['type']+'\" class=\"wz_more\" style=\"width:98%; height:40px; text-align:center;margin-left:1%;margin-top:5px;\">';
+						content += '<p><a href=\"javascript:void(0);\" id=\"aLookMore\">查看更多>></a></p>';
+						content += '</div>';
 				}
 				
 				content += '</div>';
@@ -275,7 +273,7 @@
 					content += '<div class="gg_fiexd">';
 					
 					content += '<div class=\"gg_fiexdleft\">';
-					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN+userInfo['img']+'\" style=\"width:50px; border-radius:50px;\"/>';
+					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN+userInfo['img']+'\" style=\"width:45px; border-radius:50px;\"/>';
 					content += '<div class=\"f_left\">';
 					content += '<p class=\"fiexd_p\">'+userInfo['realname']+'</p>';
 					if (userInfo['qianming']) {
@@ -287,24 +285,27 @@
 					content += '<div class=\"gg_fiexdright\" style=\"position:relative;\">';
 					content += '<ul>';
 					content += '<li>';
+					content += '<div class="we" id=\"tipsImg\" style=\"display:none;">';
+					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN + userInfo['erweima']+'\" style=\"width:120px;\"/>';
+					content += '</div>';
 					if (userInfo['tel']) {
 						content += '<a href=\"tel:'+userInfo['tel']+'\">';
 					} else {
 						content += '<a href=\"tel:'+userInfo['phone']+'\">';
 					}
-					content += '<img src=\"../../img/nav_phone.gif\" style=\"height:25px; margin-bottom:2px; margin-top:2px;\"/><br>';
+					content += '<img src=\"../../img/nav_phone.gif\" style=\"height:25px; margin-bottom:-5px; margin-top:2px;\"/><br>';
 					content += '联系我';
 					content += '</a>';
 					content += '</li>';
 					content += '<li id=\"meimg\">';
-					content += '<a href=\"javascript:void(0);\" id="reweima">';
-					content += '<img src=\"../../img/nav_weixin.gif\" style=\"height:25px;margin-bottom:2px;margin-top:2px;\" /><br>';
+					content += '<a href=\"javascript:void(0);\" id="erweima">';
+					content += '<img src=\"../../img/nav_weixin.gif\" style=\"height:25px;margin-bottom:-5px;margin-top:2px;\" /><br>';
 					content += '加我微信';
 					content += '</a>';
 					content += '</li>';
 					content += '<li>';
 					content += '<a href=\"javascript:void(0);\" id="weizhan">';
-					content += '<img src=\"../../img/nav_home.gif\" style=\"height:25px;margin-bottom:2px;margin-top:2px;\" /><br>';
+					content += '<img src=\"../../img/nav_home.gif\" style=\"height:25px;margin-bottom:-5px;margin-top:2px;\" /><br>';
 					content += '我的微站';
 					content += '</a>';
 					content += '</li>';
@@ -321,9 +322,6 @@
 				content += '<div class=\"share_e\" id="divShare" data-article-title=\"'+data['title']+'\">';
 				content += '<div class=\"light\"><img src="../../img/pyq.jpg" /></div>';
 				content += '</div>';
-//					content += '<div id=\"tipsImg\" style=\"display:none; position:fixed; top:26%; left:10%; width:300px; height:300px;\">';
-//					content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN + WEIXIN_BJ+'\" style=\"width:100%;\"/>';
-//					content += '</div>';
 				
 				document.getElementById('bodyContent').innerHTML = content;
 			} else {
@@ -373,17 +371,13 @@
 			var userInfo = JSON.parse(localStorage.getItem(USER_INFO));
 			ajaxInit();
 			
-//			mui(document).on('tap', '.light', function() {
-//				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {
-//					if (document.getElementById('tipsImg').style.display == 'none') {
-//						document.getElementById('tipsImg').style.display = 'block';
-//						document.getElementById('divContent').style.opacity = 0.2;
-//					} else if (document.getElementById('tipsImg').style.display == 'block') {
-//						document.getElementById('tipsImg').style.display = 'none';
-//						document.getElementById('divContent').style.opacity = 1;
-//					}
-//				}
-//			});
+			mui(document).on('tap', '#erweima', function() {
+					if (document.getElementById('tipsImg').style.display == 'none') {
+						document.getElementById('tipsImg').style.display = 'block';
+					} else if (document.getElementById('tipsImg').style.display == 'block') {
+						document.getElementById('tipsImg').style.display = 'none';
+					}
+			});
 			
 			mui(document).on('tap', '#divContent', function() {
 				if (userInfo['vip'] == 0 || userInfo['state'] == 1) {

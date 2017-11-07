@@ -23,5 +23,6 @@ var TOKEN = 'token';
 var USER_INFO = 'userInfo';
 
 var IMG_URL = 'http://192.168.0.113/zhanyezhushou/img0.php';
+//var IMG_URL = 'http://zs.meijiexia.cn/img0.php';
 var QIAN_QUAN_SHOW = 1;
 var WEIXIN_BJ = '/editor/attached/image/20170221/20170221175856_40586.jpg';
