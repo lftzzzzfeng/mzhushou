@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html style="overflow: hidden; height: 100%;">
 	<head>
+		<!--<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />-->
 		<link rel="stylesheet" href="../../css/aboutimg/style.css">
-		<script type="text/javascript" src="../../js/arteditor/js/jq.js"></script>
+		<script type="text/javascript" src="../../js/jq.js"></script>
+		<script src="../../js/mui.min.js"></script>
 		<style charset="utf-8" type="text/css" class="firebugResetStyles">/* See license.txt for terms of usage */
 			/** reset styling **/
 			.firebugResetStyles {
@@ -138,7 +140,7 @@
 			}
 		</style>
 	</head>
-	<body style="overflow: hidden; height: 100%; font-size: 83.39%;" class="fp-viewing-page1">
+	<body style="overflow: hidden; height: 100%; font-size: 83.39%;" class="fp-viewing-page1" id="pullrefresh">
 		<div class="mui-content">
 			<div class="layout fullpage-wrapper" style="min-height: 688px; height: 100%; position: relative; transform: translate3d(0px, 0px, 0px); transition: all 700ms ease 0s;">
 				<div class="section section1 fp-section fp-table active" style="background: transparent url(&quot;images/bg.png&quot;) no-repeat scroll 0% 0%; height: 688px;" data-anchor="page1">
@@ -288,5 +290,43 @@
 				</li>
 			</ul>
 		</div>
+		<script type="text/javascript">
+			mui.init({				
+				pullRefresh: {  
+                	container: '#pullrefresh',  
+                  	down: { 
+                  		style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					    color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
+					    height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					    range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					    offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					    auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                      	callback: pulldownRefresh  
+                  	},
+              	}  
+			})
+			
+			function pulldownRefresh() {  
+              setTimeout(function () {  
+                    ajaxLoadServices();  
+                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              }, 1500);  
+          	} 
+          	
+          	//获取会员服务用户信息
+			function ajaxLoadServices() {
+				mui.openWindow({
+						url: 'http://zs.meijiexia.cn/about.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
+					});
+			}
+        </script>
 	</body>
 </html>

@@ -29,7 +29,7 @@
 			    </a>
 			</div>
 			<div id="divCourse" class="num_gr">
-			    <a href="javascript:void(0);" target="_blank">
+			    <a href="javascript:void(0);">
 			        <p>使用教程</p>
 			        <img src="../../img/help.gif" />
 			    </a>
@@ -95,13 +95,13 @@
 			            </a>
 			        </li>
 			        <li id="liKnowMember" class="kf_li">
-			            <a href="javascript:void(0);" target="_blank">
+			            <a href="javascript:void(0);">
 			                <p>了解会员/代理</p>
 			                <img src="../../img/gr_2.gif" />
 			            </a>
 			        </li>
 			        <li id="liAboutUs" class="kf_li">
-			            <a href="../about.html" target="_blank">
+			            <a href="javascript:void(0);">
 			                <p>关于我们</p>
 			                <img src="../../img/gr_2.gif" />
 			            </a>
@@ -137,6 +137,7 @@
 		</div>
 		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
+			mui('body').on('tap','a',function(){document.location.href=this.href;});
 			mui.init({				
 				pullRefresh: {  
                 	container: '#pullrefresh',  
@@ -463,20 +464,45 @@
 					   	}
 					});
 				});
-				
+				window.addEventListener('refreshPage', function() {
+					location.reload();
+				});
+				//文章公共action
+		        var publicTemplate = mui.preload({
+				    url:'views/public.html',
+				    id:'templatePublic.html',
+				    styles:{
+				        popGesture:"hide"
+				    }
+				});
+				var subPublicWebview = mui.preload({
+				    url:'',
+				    id:'subPublicWebview',
+				    styles:{
+				        top: '0px',
+				    		bottom: '0px'
+				    }
+				});
+		        publicTemplate.append(subPublicWebview);
 				//打开关于我们
 				mui(document).on('tap', '#liAboutUs', function() {
-					mui.openWindow({
-						url: 'about.html',
-						createNew: true,
-						show:{
-				      		autoShow: true,
-					      	aniShow: ''
-					    },
-					    waiting: {
-					      	autoShow: false
-					   	}
+					alert('ok');
+					var zixunHref = 'http://zs.meijiexia.cn/about.html';
+					mui.fire(publicTemplate, 'updateHeader', {
+						href: zixunHref
 					});
+					if (subPublicWebview.getURL() == zixunHref) {
+					    subPublicWebview.show();
+					} else {
+					    subPublicWebview.loadURL(zixunHref);
+						subPublicWebview.addEventListener('loaded', function() {
+						    setTimeout(function(){
+						        subPublicWebview.show();
+						    },50);
+						});
+					}
+					publicTemplate.show('slide-in-right', 150);
+					alert('pp');
 				});
 				
 				//打开购买会员
@@ -530,12 +556,12 @@
 								localStorage.removeItem(TOKEN);
 								localStorage.removeItem('isShowArticleType');
 								localStorage.removeItem('articleType');
-								var wvs = plus.webview.all();
-								for(var i = 0, len = wvs.length; i < len; i++) {
-									if(wvs[i].id !== 'HBuilder'){
-										wvs[i].close('none');
-									}
-								};
+//								var wvs = plus.webview.all();
+//								for(var i = 0, len = wvs.length; i < len; i++) {
+//									if(wvs[i].id !== '../../index.html' || wvs[i].id !== 'HBuilder'){
+//										wvs[i].close('none');
+//									}
+//								};
 								mui.openWindow({
 									url:'../../index.html',
 									createNew: true,

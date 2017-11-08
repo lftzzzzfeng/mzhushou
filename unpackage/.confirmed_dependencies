@@ -1,0 +1,179 @@
+{
+	"index.html": {
+		"resources": [
+			"js/codesms.js",
+			"css/newstyle.css",
+			"img/password.gif",
+			"css/feng.css",
+			"js/mui.js",
+			"css/mui.css",
+			"img/user.gif",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/member/index.html",
+			"views/publisharticle/index.html"
+		]
+	},
+	"views/member/index.html": {
+		"resources": [
+			"img/5.png",
+			"js/mui.min.js",
+			"img/6.png",
+			"img/help.gif",
+			"css/mui.min.css",
+			"img/gr_2.gif",
+			"css/tx/css/style.css",
+			"img/7.png",
+			"css/tx/images/userico.jpg",
+			"img/gr_bg.gif",
+			"img/4.png",
+			"css/newstyle.css",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/member/statistics.html",
+			"views/member/about.html",
+			"index.html",
+			"views/member/addvip.html",
+			"views/member/advertisingPromotion.html",
+			"views/member/memberlist.html",
+			"views/managead/index.html",
+			"views/member/course.html",
+			"views/member/customeservice.html",
+			"views/member/balance.html"
+		]
+	},
+	"views/member/statistics.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/feng.css"
+		]
+	},
+	"views/member/about.html": {
+		"resources": [
+			"css/aboutimg/img09.png",
+			"css/aboutimg/img014.png",
+			"css/aboutimg/img03.png",
+			"css/aboutimg/img013.png",
+			"js/arteditor/js/jq.js",
+			"css/aboutimg/img01.png",
+			"css/aboutimg/img06.png",
+			"css/aboutimg/img011.png",
+			"css/aboutimg/img08.png",
+			"css/aboutimg/img02.png",
+			"css/aboutimg/img010.png",
+			"css/aboutimg/img05.png",
+			"css/aboutimg/style.css",
+			"css/aboutimg/img04.png",
+			"css/aboutimg/img07.png",
+			"css/aboutimg/arrow.png",
+			"css/aboutimg/img012.png",
+			"js/mui.min.js"
+		]
+	},
+	"views/publisharticle/index.html": {
+		"resources": [
+			"img/bg_a.gif",
+			"img/yd.png",
+			"img/8.png",
+			"css/style.css",
+			"img/7.png",
+			"js/urlvalidate.js",
+			"js/mui.min.js",
+			"img/1.png",
+			"img/6.png",
+			"img/ico_san.png",
+			"css/mui.min.css",
+			"img/zf.png",
+			"img/select.gif"
+		],
+		"refer": [
+			"views/member/index.html"
+		]
+	},
+	"views/member/addvip.html": {
+		"resources": [
+			"fonts/mui.ttf"
+		]
+	},
+	"views/member/advertisingPromotion.html": {
+		"resources": [
+			"img/gr_1.gif",
+			"fonts/mui.ttf",
+			"css/tx/js/jquery.min.js",
+			"css/style.css",
+			"css/feng.css",
+			"css/tx/js/jquery.photoClip.js",
+			"css/tx/js/hammer.js",
+			"css/tx/js/iscroll-zoom.js",
+			"css/newstyle.css",
+			"css/tx/css/style.css",
+			"img/7.png",
+			"js/constant.js",
+			"js/mui.min.js",
+			"img/5.png",
+			"img/6.png",
+			"css/mui.min.css",
+			"img/4.png"
+		]
+	},
+	"views/member/memberlist.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/feng.css"
+		]
+	},
+	"views/managead/index.html": {
+		"resources": [
+			"img/3.png",
+			"img/xg.png",
+			"img/8.png",
+			"css/newstyle.css",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"views/member/index.html"
+		]
+	},
+	"views/member/course.html": {
+		"resources": [
+			"img/light.png",
+			"img/20170221184042_74059.jpg",
+			"img/20170301141809_76469.jpg",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"css/feng.css",
+			"js/constant.js"
+		]
+	},
+	"views/member/customeservice.html": {
+		"resources": [
+			"img/kefu.jpg",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/feng.css",
+			"js/constant.js"
+		]
+	},
+	"views/member/balance.html": {
+		"resources": [
+			"img/wx.png",
+			"img/duigou.png",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/feng.css",
+			"js/constant.js"
+		]
+	}
+}
