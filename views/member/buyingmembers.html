@@ -65,10 +65,22 @@
 		                token: localStorage.getItem(TOKEN)
 		            },
 		            success: function(result) {
+		            	console.log(JSON.stringify(result));
 		            	if (result.status == -1) {
-		            		paymentStatus = 'success';
+					        plus.nativeUI.toast('支付已成功');
+					        mui.openWindow({
+								url:'./index.html',
+								show: {
+							      	autoShow:true,
+							      	aniShow: 'slide-in-right',
+							      	duration: 500
+							    },
+							    waiting: {
+							    	autoShow: false,
+							    }
+							});
 		            	} else {
-		            		paymentStatus = 'fail';
+		            		plus.nativeUI.toast('您未支付成功');
 		            	}
 		            }
 				});
@@ -136,12 +148,8 @@
 			            			var btnArray = ['是', '否'];
 					                mui.confirm('支付是否已完成?', '支付', btnArray, function(e) {
 					                    if (e.index == 0) {
-					                    	checkPaymentStatus();
-					                    	if (paymentStatus == 'success') {
-					                    		plus.nativeUI.toast('支付已成功');
-					                    	} else {
-					                    		plus.nativeUI.toast('您未支付成功');
-					                    	}
+					                    	checkPaymentStatus(result.data.orderId);
+					                    	
 					                    } else if (e.index == 1) {
 					                    	console.log('请从新支付');
 					                    }

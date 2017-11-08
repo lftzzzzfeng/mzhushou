@@ -511,7 +511,7 @@
 				
 				//退出登陆
 				mui(document).on('tap', '#divLogout', function() {
-					mui.ajax(REQUEST_DOMAIN + 'member/login.php', {
+					mui.ajax(REQUEST_DOMAIN + 'member/Login.php', {
 						type:'POST',
 						timeout:5000,
 						data: {
@@ -524,6 +524,7 @@
 					        plus.nativeUI.closeWaiting();
 					    },
 						success: function(data) {
+							console.log(JSON.stringify(result));
 							var result = data;
 							if (result.status == -1) {
 								localStorage.removeItem(TOKEN);
