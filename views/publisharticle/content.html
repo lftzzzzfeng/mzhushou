@@ -195,7 +195,7 @@
 					
 					for (var i = 0; i < contentlist.length; i++) {
 						var row_pic = contentlist[i]['pic'].replace('[weixin]', IMG_URL + '?url=');
-						
+						alert(PREVIOUS_REQUEST_DOMAIN+row_pic);
 						if (i == 0) {
 							content += '<div class=\"gr_list gg_left relateArticles\" data-article-id=\"'+contentlist[i]['id']+'\" style=\"border-top:1px solid #e5e5e5;\">';
 						} else {
@@ -218,7 +218,7 @@
 						
 						content += '<div class=\"index_listr\">';
 						content += '<a href=\"javascript:void(0)\">';
-						content += '<img src=\"'+row_pic+'" style=\"max-height:80px;max-width:150px;\"/>';
+						content += '<img src=\"'+PREVIOUS_REQUEST_DOMAIN+row_pic+'" style=\"max-height:80px;max-width:150px;\"/>';
 						content += '</a>';
 						content += '</div>';
 						

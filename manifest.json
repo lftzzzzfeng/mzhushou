@@ -27,9 +27,7 @@
 		"Audio": {
 			"description": "访问麦克风"
 		},
-		"Messaging": {
-			"description": "短彩邮件插件"
-		},
+		
 		"Cache": {
 			"description": "管理应用缓存"
 		},
@@ -55,9 +53,7 @@
 		"Gallery": {
 			"description": "访问系统相册"
 		},
-		"Geolocation": {
-			"description": "访问位置信息"
-		},
+		
 		"Invocation": {
 			"description": "使用Native.js能力"
 		},
@@ -83,9 +79,7 @@
 		"Zip": {
 			"description": "文件压缩与解压缩"
 		},
-		"Barcode": {
-			"description": "管理二维码扫描插件"
-		},
+		
 		"Maps": {
 			"description": "管理地图插件"
 		},
@@ -109,7 +103,7 @@
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true
+			"waiting": true,"delay":"300"
 		},
 		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
 		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
@@ -231,9 +225,9 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/Administrator/Desktop/Startup1.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/Administrator/Desktop/Startup2.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/Administrator/Desktop/Startup3.png"
+					"hdpi": "C:/Users/Administrator/Desktop/day/展业助手/图标/Startup1.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/Administrator/Desktop/day/展业助手/图标/Startup2.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/Administrator/Desktop/day/展业助手/图标/Startup3.png"
 				}
 			}
 		}
