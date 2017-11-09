@@ -12,7 +12,9 @@
 		],
 		"refer": [
 			"views/member/index.html",
-			"views/publisharticle/index.html"
+			"views/publisharticle/index.html",
+			"register.html",
+			"findpassword.html"
 		]
 	},
 	"views/member/index.html": {
@@ -41,7 +43,8 @@
 			"views/managead/index.html",
 			"views/member/course.html",
 			"views/member/customeservice.html",
-			"views/member/balance.html"
+			"views/member/balance.html",
+			"views/member/editpassword.html"
 		]
 	},
 	"views/member/statistics.html": {
@@ -71,7 +74,11 @@
 			"css/aboutimg/img07.png",
 			"css/aboutimg/arrow.png",
 			"css/aboutimg/img012.png",
-			"js/mui.min.js"
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"css/mui.min.css",
+			"css/feng.css"
 		]
 	},
 	"views/publisharticle/index.html": {
@@ -91,7 +98,10 @@
 			"img/select.gif"
 		],
 		"refer": [
-			"views/member/index.html"
+			"views/member/index.html",
+			"views/managead/index.html",
+			"views/publisharticle/content.html",
+			"views/myzone/managearticle.html"
 		]
 	},
 	"views/member/addvip.html": {
@@ -134,10 +144,15 @@
 			"img/xg.png",
 			"img/8.png",
 			"css/newstyle.css",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"img/5.png",
+			"js/mui.min.js",
+			"img/6.png",
+			"js/constant.js"
 		],
 		"refer": [
-			"views/member/index.html"
+			"views/member/index.html",
+			"views/myzone/managearticle.html"
 		]
 	},
 	"views/member/course.html": {
@@ -151,6 +166,10 @@
 			"css/style.css",
 			"css/feng.css",
 			"js/constant.js"
+		],
+		"refer": [
+			"views/member/about.html",
+			"views/member/customeservice.html"
 		]
 	},
 	"views/member/customeservice.html": {
@@ -173,6 +192,108 @@
 			"css/newstyle.css",
 			"css/mui.min.css",
 			"css/feng.css",
+			"js/constant.js"
+		]
+	},
+	"views/member/editpassword.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"js/findsms.js",
+			"img/close_a.gif",
+			"css/feng.css",
+			"css/mui.css",
+			"js/constant.js"
+		]
+	},
+	"views/myzone/contactme.html": {
+		"resources": [
+			"img/gr_1.gif",
+			"css/tx/js/jquery.min.js",
+			"css/tx/css/style.css",
+			"css/tx/js/jquery.photoClip.js",
+			"css/tx/js/hammer.js",
+			"css/tx/js/iscroll-zoom.js",
+			"img/1.png"
+		],
+		"refer": [
+			"views/myzone/aboutme.html",
+			"views/myzone/managearticle.html"
+		]
+	},
+	"views/myzone/aboutme.html": {
+		"refer": [
+			"views/myzone/managearticle.html",
+			"views/myzone/contactme.html"
+		],
+		"resources": [
+			"js/mui.min.js",
+			"img/1.png",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/constant.js",
+			"img/gr_bg.gif"
+		]
+	},
+	"views/myzone/managearticle.html": {
+		"resources": [
+			"img/2.png",
+			"js/zepto.min.js",
+			"img/gr_bg.gif",
+			"img/5.png",
+			"img/1.png",
+			"js/mui.min.js",
+			"img/ico_san.png",
+			"img/8.png",
+			"css/mui.min.css",
+			"css/style.css",
+			"img/7.png",
+			"js/constant.js"
+		],
+		"refer": [
+			"views/myzone/contactme.html",
+			"views/publisharticle/index.html",
+			"views/myzone/aboutme.html",
+			"views/publisharticle/postdetail.html",
+			"views/managead/index.html"
+		]
+	},
+	"views/publisharticle/content.html": {
+		"resources": [
+			"img/zan.png",
+			"img/yd.png",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"img/zf.png",
+			"css/style.css",
+			"css/feng.css",
+			"js/constant.js"
+		]
+	},
+	"views/publisharticle/postdetail.html": {
+		"resources": [
+			"img/zan.png",
+			"css/feng.css",
+			"img/pyq.png"
+		]
+	},
+	"register.html": {
+		"resources": [
+			"js/regsms.js",
+			"fonts/mui.ttf",
+			"img/close_a.gif"
+		]
+	},
+	"findpassword.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/newstyle.css",
+			"js/findsms.js",
+			"img/close_a.gif",
+			"css/feng.css",
+			"css/mui.css",
 			"js/constant.js"
 		]
 	}

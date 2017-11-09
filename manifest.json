@@ -273,7 +273,8 @@
 					"css/mui.css",
 					"css/newstyle.css",
 					"css/feng.css",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/constant.js"
 				],
 				"refer": [
 					"views/member/index.html",
@@ -359,7 +360,8 @@
 					"img/5.png",
 					"img/zf.png",
 					"img/yd.png",
-					"js/constant.js"
+					"js/constant.js",
+					"img/ico_san.png"
 				],
 				"refer": [
 					"views/publisharticle/index.html",
@@ -376,7 +378,9 @@
 					"css/mui.min.css",
 					"js/mui.min.js",
 					"css/style.css",
-					"js/constant.js"
+					"js/constant.js",
+					"img/1.png",
+					"img/gr_bg.gif"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
@@ -395,7 +399,8 @@
 					"css/tx/js/jquery.photoClip.js",
 					"js/mui.min.js",
 					"js/constant.js",
-					"css/style.css"
+					"css/style.css",
+					"img/1.png"
 				],
 				"refer": [
 					"views/myzone/managearticle.html",
@@ -509,7 +514,10 @@
 					"js/mui.min.js",
 					"js/constant.js"
 				],
-				"refer": [],
+				"refer": [
+					"views/member/about.html",
+					"views/member/customeservice.html"
+				],
 				"priority": 0
 			},
 			"views/member/customeservice.html": {
@@ -532,7 +540,9 @@
 					"css/mui.css",
 					"js/constant.js",
 					"fonts/mui.ttf",
-					"css/newstyle.css"
+					"css/newstyle.css",
+					"js/mui.min.js",
+					"css/feng.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -609,7 +619,9 @@
 					"js/mui.min.js",
 					"js/constant.js",
 					"img/light.png",
-					"css/feng.css"
+					"css/feng.css",
+					"img/yd.png",
+					"img/zf.png"
 				],
 				"refer": [
 					"views/publisharticle/index.html"
@@ -624,7 +636,8 @@
 					"css/feng.css",
 					"js/constant.js",
 					"img/light.png",
-					"img/zan.png"
+					"img/zan.png",
+					"img/pyq.png"
 				],
 				"refer": [
 					"views/myzone/managearticle.html"
@@ -677,7 +690,11 @@
 					"css/aboutimg/img07.png",
 					"css/aboutimg/arrow.png",
 					"css/aboutimg/img012.png",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/newstyle.css",
+					"css/mui.min.css",
+					"css/feng.css"
 				],
 				"refer": [],
 				"priority": 0

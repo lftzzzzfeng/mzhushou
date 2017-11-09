@@ -137,8 +137,7 @@
 		</div>
 		<script src="../../js/constant.js"></script>
 		<script type="text/javascript">
-			mui('body').on('tap','a',function(){document.location.href=this.href;});
-			mui.init({				
+			mui.init({		
 				pullRefresh: {  
                 	container: '#pullrefresh',  
                   	down: { 
@@ -464,45 +463,20 @@
 					   	}
 					});
 				});
-				window.addEventListener('refreshPage', function() {
-					location.reload();
-				});
-				//文章公共action
-		        var publicTemplate = mui.preload({
-				    url:'views/public.html',
-				    id:'templatePublic.html',
-				    styles:{
-				        popGesture:"hide"
-				    }
-				});
-				var subPublicWebview = mui.preload({
-				    url:'',
-				    id:'subPublicWebview',
-				    styles:{
-				        top: '0px',
-				    		bottom: '0px'
-				    }
-				});
-		        publicTemplate.append(subPublicWebview);
 				//打开关于我们
 				mui(document).on('tap', '#liAboutUs', function() {
-					alert('ok');
-					var zixunHref = 'http://zs.meijiexia.cn/about.html';
-					mui.fire(publicTemplate, 'updateHeader', {
-						href: zixunHref
+					//plus.runtime.openURL('http://zs.meijiexia.cn/about.html');
+					mui.openWindow({
+						url: './about.html',
+						createNew: true,
+						show:{
+				      		autoShow: true,
+					      	aniShow: ''
+					    },
+					    waiting: {
+					      	autoShow: false
+					   	}
 					});
-					if (subPublicWebview.getURL() == zixunHref) {
-					    subPublicWebview.show();
-					} else {
-					    subPublicWebview.loadURL(zixunHref);
-						subPublicWebview.addEventListener('loaded', function() {
-						    setTimeout(function(){
-						        subPublicWebview.show();
-						    },50);
-						});
-					}
-					publicTemplate.show('slide-in-right', 150);
-					alert('pp');
 				});
 				
 				//打开购买会员
