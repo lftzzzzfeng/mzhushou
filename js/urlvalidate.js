@@ -2,7 +2,7 @@ function urlValidate(url) {
     var requestUrl = '';
 
     if (url.match(/^http:\/\/mp.weixin.qq.com\/[\w\W]*$/)) {
-        requestUrl = 'wx_upload.php';
+        requestUrl = 'wx_uploadApi.php';
     } else if (url.match(/^http:\/\/www.jiemian.com\/article\/[0-9]+.html$/)) {
         requestUrl = 'jiemian.php';
     } else if (url.match(/^https:\/\/www.huxiu.com\/article\/[A-Za-z0-9_.\/]+.html$/)) {

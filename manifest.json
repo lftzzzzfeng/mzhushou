@@ -112,8 +112,8 @@
 			"plugins": {
 				"share": {
 					"weixin": {
-						"appid": "wx5ae5be7ae8e3111f",
-						"appsecret": "0fb89e6279a500c09420b0a1b2c7c262",
+						"appid": "wx78a4aa94670c58d4",
+						"appsecret": "981a66e35e414e356c06d9e50476cb1f",
 						"description": "可选，微信分享"
 					}
 				},
