@@ -74,7 +74,7 @@
 				var adsInfo = result.data.adsInfo;
 				var data = result.data;
 				var zan = result.data.zan;
-				var adInfo = result.data.adInfo;
+				var adInfo = result.data.adInfo[0];
 				var contentlist = result.data.contenlist;
 				var advertisement = result.data.advertisement;
 				
@@ -331,7 +331,7 @@
 		}
 		
 		function shareSystem(articleTitle) {
-			alert(document.getElementById('imgpic').value);
+//			alert(document.getElementById('imgpic').value);
 			plus.share.getServices(function(s) {
 				for (var i in s) {
 					if ('weixin' == s[i].id) {
