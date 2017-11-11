@@ -67,7 +67,7 @@
 		}
 		
 		function rendorInit(result) {
-//			console.log(JSON.stringify(result));
+			console.log(JSON.stringify(PREVIOUS_REQUEST_DOMAIN+result.data.imgPic.substring(3)));
 			if (result.status == -1) {
 				var userInfo = result.data.userinfo;
 				var adsShowCk = result.data.adsShowCk;
@@ -79,6 +79,7 @@
 				var advertisement = result.data.advertisement;
 				
 				var content = '';
+				content += '<input type="hidden" name="imgpic" id="imgpic" value="'+PREVIOUS_REQUEST_DOMAIN+result.data.imgPic.substring(3)+'"> ';
 				content += '<div id=\"divContent\" style="margin-bottom: 50px;">';
 				
 				if (adsInfo.length > 0) {
@@ -330,6 +331,7 @@
 		}
 		
 		function shareSystem(articleTitle) {
+			alert(document.getElementById('imgpic').value);
 			plus.share.getServices(function(s) {
 				for (var i in s) {
 					if ('weixin' == s[i].id) {
@@ -340,7 +342,7 @@
 					content: articleTitle,
 					href: PREVIOUS_REQUEST_DOMAIN + 'u_detail.php?id=' + localStorage.getItem('postArticleId'),
 					thumbs: [
-						'http://zs.meijiexia.cn/uploads/image/20171009/d8dd473226e9bdecdfede9b263c04e47.jpg'
+						document.getElementById('imgpic').value
 					],
 					extra: {
 						
