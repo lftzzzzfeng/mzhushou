@@ -152,11 +152,14 @@
               	}  
 			})
 			
-			function pulldownRefresh() {  
-              setTimeout(function () {  
-                  ajaxLoadServices();  
-                  mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
-              }, 1500);  
+			function pulldownRefresh() { 
+              	setTimeout(function () { 
+              		plus.webview.close('HBuilder');
+              		plus.webview.close('../../index.html');
+              		plus.webview.close('H5D649177');
+                	ajaxLoadServices();  
+                  	mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
+              	}, 1500);  
           	} 
 			//获取会员服务用户信息
 			function ajaxLoadServices() {
@@ -530,12 +533,6 @@
 								localStorage.removeItem(TOKEN);
 								localStorage.removeItem('isShowArticleType');
 								localStorage.removeItem('articleType');
-//								var wvs = plus.webview.all();
-//								for(var i = 0, len = wvs.length; i < len; i++) {
-//									if(wvs[i].id !== '../../index.html' || wvs[i].id !== 'HBuilder'){
-//										wvs[i].close('none');
-//									}
-//								};
 								mui.openWindow({
 									url:'../../index.html',
 									createNew: true,

@@ -77,8 +77,15 @@
 		function checkLoginStatus() {
 			document.getElementById('phone').value = '';
 			document.getElementById('password').value = '';
-			
+			var id = plus.webview.currentWebview().id;
+			var wvs = plus.webview.all();
+			for(var i = 0, len = wvs.length; i < len; i++) {
+				if(wvs[i].id != id){
+					wvs[i].close('none');
+				}
+			};
 			if (localStorage.getItem(TOKEN)) {
+				closelogin();
 				mui.openWindow({
 					url: 'views/publisharticle/index.html',
 					show: {
@@ -94,6 +101,7 @@
 		}
 		
 		function ajaxNormalLogin(phone, password) {
+//			alert(plus.webview.currentWebview().id);
 			mui.ajax(REQUEST_DOMAIN + 'member/Login.php', {
 				data: {
 					action: 'login',
@@ -113,7 +121,6 @@
 				success: function(data) {
 					console.log(JSON.stringify(data));
 					var result = data;
-					
 					if (result.status == -1) {
 						plus.nativeUI.toast('登陆成功');
 						localStorage.setItem(TOKEN, result.data.token);
@@ -178,9 +185,18 @@
 			});
 		}
 		
+		function closelogin(){
+			setTimeout(function(){
+	   			if (localStorage.getItem(TOKEN)) {
+			   		var ws=plus.webview.currentWebview();
+					plus.webview.close(ws);
+		//				mui.currentWebview.hide('none');
+				}
+			},300);
+		}
+		
    		mui.plusReady(function() {
    			checkLoginStatus();
-   			
    			//登陆界面转换
 			document.getElementById('liNormalLogin').addEventListener('tap', function() {
   				document.getElementById('liNormalLogin').className = 'hita';
