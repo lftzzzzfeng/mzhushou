@@ -70,6 +70,7 @@
 			var mask = mui.createMask();
 			
 			function crawling() {
+//				alert(PREVIOUS_REQUEST_DOMAIN + localStorage.getItem(REQUEST_PATH));
 				mui.ajax(PREVIOUS_REQUEST_DOMAIN + localStorage.getItem(REQUEST_PATH), {
 		            type: 'POST',
 		            dataType: 'json',
@@ -93,6 +94,7 @@
 		    }
 			
 		    function crawlingSuccess(result) {
+//		    	console.log(JSON.stringify(result));
 		    	if (result.status == -1) {
 		            var title = result.data.title;
 		            var date = result.data.date;
@@ -138,6 +140,7 @@
 		                mui.ajax(PREVIOUS_REQUEST_DOMAIN + 'ajax.php', {
 		                    type: 'POST',
 		                    data: {
+		                    	token: localStorage.getItem(TOKEN),
 		                        title: title,
 		                        content: content,
 		                        putdate: putdate,

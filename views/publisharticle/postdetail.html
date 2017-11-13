@@ -67,7 +67,7 @@
 		}
 		
 		function rendorInit(result) {
-			console.log(JSON.stringify(PREVIOUS_REQUEST_DOMAIN+result.data.imgPic.substring(3)));
+			console.log(JSON.stringify(result.data));
 			if (result.status == -1) {
 				var userInfo = result.data.userinfo;
 				var adsShowCk = result.data.adsShowCk;
