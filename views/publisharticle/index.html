@@ -499,6 +499,57 @@
 				    	}
 		            });
 				});
+				
+				//检查版本升级
+				var version = plus.runtime.version;
+		      	mui.ajax(REQUEST_DOMAIN + 'services/memberServices.php', {
+					data: {
+						action:'edition',
+						version:version
+					},
+					dataType: 'json',
+					type: 'post',
+					timeout: 10000,
+					success: function(data) {
+						if(data.status == 2){//需要升级 
+							var btnArray = ['否', '是'];  
+				            mui.confirm('您的应用程序需要升级，是否立即升级？', '版本提示:'+version, btnArray, function(e) {  
+					            if (e.index == 1) {  
+					                var url=data.data; // 下载文件地址
+									var dtask = plus.downloader.createDownload( url, {}, function ( d, status ) {
+										if ( status == 200 ) { // 下载成功
+											var path = d.filename;
+											console.log(d.filename);
+										} else {//下载失败
+											alert( "Download failed: " + status ); 
+										}  
+									});
+									dtask.start(); 
+					            }else{
+					           		localStorage.removeItem(TOKEN);
+									localStorage.removeItem('isShowArticleType');
+									localStorage.removeItem('articleType');
+									mui.openWindow({
+										url:'../../index.html',
+										createNew: true,
+										show:{
+								      		autoShow: true,
+									      	aniShow: ''
+									    },
+									    waiting: {
+									      	autoShow: false
+									   	}
+									});
+					            }
+				            })
+						}
+					},
+					error:function(xhr,type,errorThrown) {
+						plus.nativeUI.toast('服务器超时，请稍后重试！');
+						plus.nativeUI.closeWaiting();
+					}
+				});
+				
 			});
 		</script>
 	</body>

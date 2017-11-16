@@ -420,7 +420,8 @@
 					"views/myzone/managearticle.html",
 					"views/member/index.html",
 					"views/publisharticle/index.html",
-					"views/managead/add.html"
+					"views/managead/add.html",
+					"views/managead/edit.html"
 				],
 				"priority": 0
 			},
@@ -714,6 +715,13 @@
 					"img/4.png"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"views/managead/edit.html": {
+				"resources": [],
+				"refer": [
+					"views/publisharticle/index.html"
+				],
 				"priority": 0
 			}
 		},

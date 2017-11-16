@@ -26,6 +26,7 @@
 	    <div class="tj_input">
 	        <input type="text" name="src" id="src" placeholder="http://" />
 	    </div>
+	    <p class="tj_pp">广告图片：<span>（尺寸：1000像素*200像素）</span></p>
 	    <div class="weiera" style="margin-left:2px;" id="logoBox">
 	    	<input type="hidden" id="imgdata" name="imgdata" value="">
 		    <img src="../../img/gr_1.gif" id="bgl" style="width:60px; height:60px;" />
@@ -107,27 +108,7 @@
 	<script src="../../css/tx/js/hammer.js"></script>
 	<script src="../../css/tx/js/jquery.photoClip.js?123"></script>
 	<script type="text/javascript">
-		mui.init({
-			pullRefresh: {  
-                container: '#pullrefresh',  
-                down: { 
-                  	style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-					color:'#ff6c00', //可选，默认“#2BD009” 下拉刷新控件颜色
-					height:'50px',//可选,默认50px.下拉刷新控件的高度,
-					range:'100px', //可选 默认100px,控件可下拉拖拽的范围
-					offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
-					auto: false,//可选,默认false.首次加载自动上拉刷新一次
-                    callback: pulldownRefresh  
-                },
-            }  
-		})
-			
-		function pulldownRefresh() {  
-            setTimeout(function () {
-            	ajaxAdvertisementId();
-                mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed  
-            }, 1500);  
-        } 
+		mui.init();
         
         //获取广告管理中的广告数据
 		function ajaxAdvertisementId() {
